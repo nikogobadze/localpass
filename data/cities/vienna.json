@@ -1,0 +1,955 @@
+{
+  "slug": "vienna",
+  "name": "Vienna",
+  "localName": "Wien",
+  "country": "Austria",
+  "verified": "July 2026",
+  "currency": {
+    "code": "EUR",
+    "symbol": "€",
+    "name": "Euro"
+  },
+  "theme": {
+    "accent": "#A5294A",
+    "accent2": "#2E6E58",
+    "pop": "#33538F",
+    "gold": "#EEB135",
+    "wash": "#FDF4E8"
+  },
+  "hero": {
+    "eyebrow": "Austria · Central Europe · UTC+2",
+    "title": "Wien",
+    "sub": "Everything you need to know before you put your bag down.<br>Written for the person who just landed — and doesn't want to pay imperial prices for a coffee."
+  },
+  "art": {
+    "skyline": "<g class=\"sky-far\"><path d=\"M1140 240 L1176 176 L1200 240 Z\"/><g class=\"lattice\"><circle cx=\"1085\" cy=\"112\" r=\"56\"/><path d=\"M1085 56 v112 M1029 112 h112 M1045 72 l80 80 M1125 72 l-80 80\"/><path d=\"M1043 240 L1085 118 L1127 240\"/></g><circle cx=\"1085\" cy=\"112\" r=\"5\"/></g><g class=\"sky-mid\"><rect x=\"150\" y=\"196\" width=\"60\" height=\"44\"/><rect x=\"250\" y=\"196\" width=\"60\" height=\"44\"/><path d=\"M144 198 L180 174 L216 198 Z\"/><path d=\"M244 198 L280 174 L316 198 Z\"/><rect x=\"212\" y=\"128\" width=\"36\" height=\"112\"/><path d=\"M206 130 L230 62 L254 130 Z\"/><rect x=\"227\" y=\"44\" width=\"6\" height=\"20\"/><circle cx=\"230\" cy=\"40\" r=\"4\"/><rect x=\"340\" y=\"190\" width=\"70\" height=\"50\"/><path d=\"M334 192 L375 166 L416 192 Z\"/></g><g class=\"sky-near\"><rect x=\"0\" y=\"186\" width=\"56\" height=\"54\"/><path d=\"M-6 188 L28 162 L62 188 Z\"/><rect x=\"66\" y=\"200\" width=\"44\" height=\"40\"/><path d=\"M60 202 L88 180 L116 202 Z\"/><rect x=\"300\" y=\"206\" width=\"130\" height=\"34\"/><rect x=\"440\" y=\"198\" width=\"60\" height=\"42\"/><path d=\"M434 200 L470 176 L506 200 Z\"/><rect x=\"560\" y=\"152\" width=\"160\" height=\"88\"/><path d=\"M552 154 L640 110 L728 154 Z\"/><rect x=\"726\" y=\"150\" width=\"34\" height=\"90\"/><path d=\"M726 152 L743 18 L760 152 Z\"/><rect x=\"740\" y=\"8\" width=\"6\" height=\"12\"/><circle cx=\"743\" cy=\"6\" r=\"3.5\"/><rect x=\"524\" y=\"112\" width=\"32\" height=\"128\"/><path d=\"M524 114 a16 17 0 0 1 32 0 z\"/><rect x=\"537\" y=\"84\" width=\"6\" height=\"14\"/><circle cx=\"540\" cy=\"82\" r=\"3\"/><rect x=\"826\" y=\"156\" width=\"14\" height=\"84\"/><rect x=\"822\" y=\"150\" width=\"22\" height=\"8\"/><rect x=\"940\" y=\"156\" width=\"14\" height=\"84\"/><rect x=\"936\" y=\"150\" width=\"22\" height=\"8\"/><rect x=\"856\" y=\"198\" width=\"68\" height=\"42\"/><path d=\"M850 200 L890 176 L930 200 Z\"/><path d=\"M862 198 a28 30 0 0 1 56 0 z\"/><rect x=\"886\" y=\"150\" width=\"8\" height=\"18\"/><path d=\"M882 168 a8 9 0 0 1 16 0 z\"/><circle cx=\"890\" cy=\"146\" r=\"3.5\"/><rect x=\"968\" y=\"192\" width=\"50\" height=\"48\"/><path d=\"M962 194 L993 170 L1024 194 Z\"/><rect x=\"1026\" y=\"204\" width=\"36\" height=\"36\"/><path d=\"M1020 206 L1044 186 L1068 206 Z\"/></g>"
+  },
+  "orient": {
+    "title": "Orient yourself in sixty seconds",
+    "lede": "Vienna is a set of rings. A medieval core, a boulevard where the walls used to be, and twenty-two districts spiralling outward from it. Learn the ring and you have learned the city — including, almost exactly, where the prices change.",
+    "map": {
+      "ring": {
+        "cx": 200,
+        "cy": 140,
+        "r": 78,
+        "label": "THE RING",
+        "labelX": 200,
+        "labelY": 48
+      },
+      "districts": [
+        {
+          "x": 200,
+          "y": 140,
+          "r": 54,
+          "name": "INNERE STADT",
+          "note": "the 1st — priced for you"
+        },
+        {
+          "x": 330,
+          "y": 68,
+          "r": 40,
+          "name": "LEOPOLDSTADT",
+          "note": "the 2nd"
+        },
+        {
+          "x": 78,
+          "y": 222,
+          "r": 44,
+          "name": "NEUBAU",
+          "note": "the 7th — best value"
+        },
+        {
+          "x": 196,
+          "y": 290,
+          "r": 38,
+          "name": "MARIAHILF",
+          "note": "shops, food"
+        }
+      ],
+      "caption": "Not to scale. Districts spiral outward from the 1st. The Ring traces the old city walls — and, near enough, the edge of tourist pricing."
+    },
+    "facts": [
+      {
+        "term": "Currency",
+        "def": "The euro. There is no exchange-booth industry preying on you here, which removes the single biggest trap in this part of Europe. Enjoy that."
+      },
+      {
+        "term": "The district number is the address",
+        "def": "Postcode <strong>1070</strong> means the <strong>7th</strong> district. Middle two digits, every time. Locals navigate by number, not by name — learn this and you can read any address in the city."
+      },
+      {
+        "term": "Language",
+        "def": "German. In Austria you greet people with <em>Grüß Gott</em>, not <em>Guten Tag</em>. English is near-universal in the centre."
+      },
+      {
+        "term": "Tap water",
+        "def": "Piped from the Alps and genuinely among the best in Europe. Ask for <em>ein Leitungswasser</em>. Some cafés charge a token amount for the glass; that is normal, not a scam."
+      },
+      {
+        "term": "Emergency",
+        "def": "<strong>112</strong> from any phone, any language. Police 133 · Ambulance 144 · Fire 122."
+      },
+      {
+        "term": "The one rule",
+        "def": "Cross the Ring before you eat. Inside it you are paying for the postcode. Outside it, five minutes' walk away, the same schnitzel is served to people who live here."
+      }
+    ]
+  },
+  "arrive": {
+    "title": "From the airport, without being robbed",
+    "lede": "Vienna International sits 18 km south-east of the centre. Unlike most cities, the cheap option here is also fast, comfortable and frequent — which makes the expensive options genuinely hard to justify.",
+    "options": [
+      {
+        "tone": "best",
+        "tag": "Best value",
+        "title": "S7 S-Bahn",
+        "price": "5.40",
+        "unit": "€",
+        "priceNote": "child 6–14: €2.70",
+        "time": "≈ 20 min to Wien Mitte · every 30 min",
+        "body": "An ordinary suburban train from beneath the terminal to Wien Mitte / Landstraße, then Praterstern. It runs all day and it is not a tourist product.",
+        "note": "<strong>The ticket includes your onward journey</strong> on the Vienna network. The CAT's does not. That difference alone closes most of the gap."
+      },
+      {
+        "tone": "normal",
+        "tag": "Direct bus",
+        "title": "Vienna Airport Lines",
+        "price": "10.50",
+        "unit": "€",
+        "priceNote": "€17.00 return",
+        "time": "varies by route",
+        "body": "Coaches to several points in the city with proper luggage racks. Useful if your hotel sits near one of the stops and awkward if it doesn't.",
+        "note": "Check the route map before you buy. It beats the train only for specific destinations."
+      },
+      {
+        "tone": "normal",
+        "tag": "Fastest",
+        "title": "City Airport Train (CAT)",
+        "price": "14.90",
+        "unit": "€",
+        "priceNote": "under 15s free",
+        "time": "16 min, non-stop",
+        "body": "Nine minutes faster than the S7, for €9.50 more, and it drops you at Wien Mitte just the same. Under-15s travel free, which is the one scenario where the maths turns.",
+        "note": "A perfectly good train that is difficult to recommend over the one running on the platform beside it."
+      },
+      {
+        "tone": "avoid",
+        "tag": "Avoid",
+        "title": "The curbside taxi rank",
+        "price": "€50–70",
+        "unit": "",
+        "priceNote": "for a €33–39 journey",
+        "time": "≈ 30 min, traffic depending",
+        "body": "Drivers quote an off-meter \"fixed\" fare to people fresh off a plane. Hailing at the rank is the single most expensive way to leave this airport.",
+        "note": "<strong>If you want a car, pre-book it</strong> — taxi40100 and Bolt both quote a fixed price in advance, and both land in the €33–39 range."
+      }
+    ],
+    "transit": {
+      "title": "Public transport, decoded",
+      "lede": "U-Bahn, tram, bus and S-Bahn share one ticket and one honour system. There are no barriers. There are, frequently, plain-clothed inspectors.",
+      "columns": [
+        "Ticket",
+        "Machine / paper",
+        "Online shop"
+      ],
+      "rows": [
+        {
+          "label": "Single journey",
+          "values": [
+            "€3.20",
+            "€3.00"
+          ],
+          "best": 1
+        },
+        {
+          "label": "Single, child 6–14",
+          "values": [
+            "€1.60",
+            "€1.50"
+          ],
+          "best": 1
+        },
+        {
+          "label": "24 hours",
+          "values": [
+            "€10.20",
+            "—"
+          ]
+        },
+        {
+          "label": "7 days",
+          "values": [
+            "€28.90",
+            "—"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "tone": "warn",
+          "title": "The 48- and 72-hour tickets are gone",
+          "body": "Discontinued on 1 January 2026. Any guide still listing them was written before that date — which tells you something about the rest of its prices. Staying three nights? Three 24-hour tickets cost <strong>€30.60</strong>. The 7-day ticket costs <strong>€28.90</strong>. Buy the week."
+        },
+        {
+          "tone": "good",
+          "title": "Buy online, save about 5%",
+          "body": "Single and short-term tickets cost roughly 5% less in the Wiener Linien online shop than the printed version from the machine."
+        },
+        {
+          "tone": "warn",
+          "title": "Nobody checks — until they do",
+          "body": "There are no gates on the U-Bahn. Inspectors are frequent, plain-clothed, and unmoved by the argument that you couldn't find a machine. Validate before you board."
+        }
+      ]
+    }
+  },
+  "money": {
+    "title": "Money: you're in the euro, so relax — then read this",
+    "lede": "Vienna spares you the currency-exchange racket entirely. What it has instead is a quieter, more civilised way of separating you from your money, and a cash culture that catches visitors out.",
+    "rules": [
+      {
+        "title": "Carry cash. Vienna is not as card-first as it looks",
+        "body": "Traditional <em>Beisl</em>, sausage stands, market butchers and some of the grand old coffee houses either prefer cash or set a card minimum. A modern bar will take your phone; a hundred-year-old one may look at you with pity. <strong>Keep €30–50 on you</strong> and you will never think about it again."
+      },
+      {
+        "title": "When the terminal offers you your own currency, say no",
+        "body": "If your card isn't euro-denominated, the machine will offer to charge you in pounds or dollars \"for convenience\". That is dynamic currency conversion, and the rate is the merchant's invention. <strong>Always choose EUR</strong> and let your own bank convert."
+      },
+      {
+        "title": "Tip by telling, not by leaving",
+        "body": "Round up, or add roughly 5–10% for good service. Say the total you want to pay <em>as you hand the money over</em> — \"Fünfzehn, bitte\" for a €13.40 bill. Coins left on the table read as forgotten, not generous."
+      }
+    ],
+    "foot": "That is the entire money section. Vienna's real expense is not being cheated; it is that the city is genuinely, unapologetically expensive inside the Ring.",
+    "converter": {
+      "title": "Quick sanity check",
+      "lede": "For visitors arriving from outside the eurozone.",
+      "baseLabel": "Amount in €",
+      "baseDefault": 20,
+      "targets": [
+        {
+          "key": "usd",
+          "symbol": "$",
+          "label": "US dollar",
+          "rate": 0.92,
+          "rateLabel": "€ per $"
+        },
+        {
+          "key": "gbp",
+          "symbol": "£",
+          "label": "pound",
+          "rate": 1.18,
+          "rateLabel": "€ per £"
+        }
+      ],
+      "tip": "<strong>Your yardstick is a beer.</strong> A half-litre is €3.50–4.90 in a normal bar. €6.90 means you are sitting in a famous café. Above €7, you are paying rent on the address."
+    }
+  },
+  "sleep": {
+    "title": "Where to sleep",
+    "lede": "We recommend neighbourhoods, not hotels. We have not slept in these buildings, and a guide that pretends otherwise is selling you something. In Vienna the district number does most of the work anyway.",
+    "hoods": [
+      {
+        "name": "Neubau — the 7th",
+        "price": "€90–150",
+        "unit": "/ night",
+        "verdict": "The best balance in the city.",
+        "body": "Tucked behind the MuseumsQuartier: independent shops, courtyard bars, and a walk of ten minutes to the cathedral without paying to look at it from your window. If you only take one recommendation from this section, take this one.",
+        "tags": [
+          "Best balance",
+          "Walkable",
+          "Good food"
+        ],
+        "image": {
+          "src": "assets/img/vienna/band-street.jpg",
+          "alt": "A street in central Vienna.",
+          "caption": "Neubau, the 7th — the best balance in the city. <strong>Representative street.</strong>"
+        }
+      },
+      {
+        "name": "Leopoldstadt — the 2nd",
+        "price": "€90–160",
+        "unit": "/ night",
+        "verdict": "One U-Bahn stop out, forty percent off.",
+        "body": "Across the Danube Canal. Once working-class, now the city's most interesting district: canal-side bars, street art, the Prater on your doorstep. Rooms here run 40–50% below the 1st district for the same standard.",
+        "tags": [
+          "Best value",
+          "Canal bars",
+          "Prater"
+        ],
+        "image": {
+          "src": "assets/img/vienna/st-leopoldstadt.jpg",
+          "alt": "A market square in Vienna.",
+          "caption": "Leopoldstadt, the 2nd — one U-Bahn stop out, far cheaper."
+        }
+      },
+      {
+        "name": "Josefstadt — the 8th",
+        "price": "€80–140",
+        "unit": "/ night",
+        "verdict": "Quiet elegance, and the smallest district.",
+        "body": "Biedermeier townhouses, a famous theatre, and a village stillness that is genuinely startling given it sits minutes from the Ring. The right choice if you have seen the palaces and want to sleep.",
+        "tags": [
+          "Quietest",
+          "Elegant",
+          "Central-ish"
+        ],
+        "image": {
+          "src": "assets/img/vienna/free-band.jpg",
+          "alt": "The Donaukanal in Vienna.",
+          "caption": "Josefstadt, the 8th — quiet and elegant. <strong>Representative view.</strong>"
+        }
+      },
+      {
+        "name": "Innere Stadt — the 1st",
+        "price": "€250–500+",
+        "unit": "/ night",
+        "tone": "warn",
+        "verdict": "You are buying a postcode.",
+        "body": "Inside the Ring, everything is five minutes away and everything costs what it costs. The rooms are lovely. So are the rooms one U-Bahn stop east, for less than half, and you will spend eleven minutes a day on the train.",
+        "tags": [
+          "Central",
+          "Expensive",
+          "Beautiful"
+        ],
+        "image": {
+          "src": "assets/img/vienna/ring-tram.jpg",
+          "alt": "A tram on the Vienna Ringstraße.",
+          "caption": "Innere Stadt, the 1st — you are buying a postcode."
+        }
+      }
+    ],
+    "tipsTitle": "Three things worth knowing before you book",
+    "tips": [
+      {
+        "title": "Read the district number, not the marketing.",
+        "body": "\"Near the centre\" is meaningless. \"1070\" tells you exactly where you are: the 7th, walkable, sane. The middle two digits never lie."
+      },
+      {
+        "title": "Vienna's U-Bahn is fast and it stops early enough to matter.",
+        "body": "Lines run until roughly midnight on weeknights and all night at weekends. Staying out one district costs you minutes, not evenings."
+      },
+      {
+        "title": "Austria charges a nightly city tax",
+        "body": "per adult, usually collected at the property and often absent from your online total. Budget for it; it is not a scam."
+      }
+    ],
+    "band": {
+      "src": "assets/img/vienna/band-street.jpg",
+      "alt": "Two Vienna trams meeting at a junction outside the Ring.",
+      "caption": "Vienna’s tram and U-Bahn network is the reason staying outside the Ring costs you minutes, not evenings."
+    },
+    "hotels": {
+      "title": "A few specific hotels",
+      "lede": "Named hotels, not just districts — you asked. Same honesty rule as the restaurants: we have not slept in these. Prices are indicative and move hard with the season; guest scores are the aggregate on the big booking sites, not ours. Check current rates before you book. Free photos exist mainly for the grand old houses, so the pictured two lean upscale; the colour-plate cards are the better-value picks.",
+      "items": [
+        {
+          "name": "Max Brown 7th District",
+          "stars": "4★",
+          "area": "Neubau",
+          "price": "≈ €110–150",
+          "priceNote": "/ night",
+          "desc": "A design-minded mid-range in the 7th — the district we actually recommend. Better value than the grand houses.",
+          "image": {
+            "src": "assets/img/vienna/band-street.jpg",
+            "alt": "A street in central Vienna.",
+            "caption": "The 7th district feel — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Steigenberger Herrenhof",
+          "stars": "5★",
+          "area": "Innere Stadt",
+          "price": "≈ €180–260",
+          "priceNote": "/ night",
+          "desc": "A 1913 corner house on Herrengasse, minutes from the Hofburg. Grand, central, dependable.",
+          "image": {
+            "src": "assets/img/vienna/hotel-herrenhof.jpg",
+            "alt": "The Steigenberger Herrenhof building on Herrengasse, Vienna."
+          }
+        },
+        {
+          "name": "Hotel Motto",
+          "stars": "4★",
+          "area": "Neubau",
+          "price": "≈ €200–280",
+          "priceNote": "/ night",
+          "desc": "A see-and-be-seen design hotel over the famous Motto restaurant, still in the 7th. Splurge-y for the district.",
+          "image": {
+            "src": "assets/img/vienna/free-band.jpg",
+            "alt": "The Donaukanal in Vienna.",
+            "caption": "The 7th, near the MQ — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Hotel Sacher",
+          "stars": "5★",
+          "area": "Innere Stadt",
+          "price": "≈ €450+",
+          "priceNote": "/ night",
+          "desc": "The one behind the Opera with the cake and the doormen. An institution, priced like one.",
+          "image": {
+            "src": "assets/img/vienna/hotel-sacher.jpg",
+            "alt": "The entrance of Hotel Sacher, Vienna."
+          }
+        },
+        {
+          "name": "Ruby Marie",
+          "stars": "3★",
+          "area": "Mariahilf",
+          "price": "≈ €90–130",
+          "priceNote": "/ night",
+          "desc": "\"Lean luxury\" — small smart rooms, a rooftop bar, near the Mariahilfer shopping street. Good-value design.",
+          "image": {
+            "src": "assets/img/vienna/band-street.jpg",
+            "alt": "A street in central Vienna.",
+            "caption": "A central Vienna street — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "25hours Hotel",
+          "stars": "4★",
+          "area": "Neubau",
+          "price": "≈ €130–180",
+          "priceNote": "/ night",
+          "desc": "A playful design hotel by the MuseumsQuartier, in the 7th — the district we recommend. Circus-themed, fun, central.",
+          "image": {
+            "src": "assets/img/vienna/free-band.jpg",
+            "alt": "The Donaukanal in Vienna.",
+            "caption": "The 7th is walkable to all this — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Hotel Rathaus",
+          "stars": "4★",
+          "area": "Josefstadt",
+          "price": "≈ €150–200",
+          "priceNote": "/ night",
+          "desc": "A wine-themed boutique in the quiet 8th, each room named for an Austrian winemaker. Elegant and calm.",
+          "image": {
+            "src": "assets/img/vienna/st-leopoldstadt.jpg",
+            "alt": "A market square in Vienna.",
+            "caption": "A Vienna market street — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Grand Hotel Wien",
+          "stars": "5★",
+          "area": "Innere Stadt",
+          "price": "≈ €350+",
+          "priceNote": "/ night",
+          "desc": "A Ringstraße grande dame by the Opera, marble and chandeliers throughout. The full imperial splurge.",
+          "image": {
+            "src": "assets/img/vienna/ring-tram.jpg",
+            "alt": "A tram on the Vienna Ringstraße.",
+            "caption": "On the Ringstraße — <strong>representative, not the hotel</strong>."
+          }
+        }
+      ]
+    }
+  },
+  "eat": {
+    "title": "Eat and drink like you live here",
+    "lede": "Vienna's tourist premium is subtler than Prague's. Nobody hands you a nine-language menu. They simply put a beautiful room around a €6.90 beer and let you decide. Here is what things cost on both sides of the Ring.",
+    "compare": {
+      "title": "The same thing, two prices",
+      "lede": "Left: the price where people who live here pay it. Right: the price with an audience.",
+      "rows": [
+        {
+          "item": "Half-litre of lager",
+          "itemNote": "a Beisl or ordinary bar, outside the Ring",
+          "good": "€3.50–4.90",
+          "bad": "€6.90",
+          "badNote": "a well-known café in the centre"
+        },
+        {
+          "item": "Getting in from the airport",
+          "itemNote": "the S7 leaves from under the terminal",
+          "good": "€5.40",
+          "goodNote": "onward travel included",
+          "bad": "€50–70",
+          "badNote": "quoted at the curbside taxi rank"
+        },
+        {
+          "item": "Three days of unlimited transit",
+          "itemNote": "since the 72-hour ticket was scrapped",
+          "good": "€28.90",
+          "goodNote": "the 7-day ticket",
+          "bad": "€30.60",
+          "badNote": "three 24-hour tickets"
+        }
+      ],
+      "foot": "That last row is the whole philosophy of this page in one line. The cheaper option is the one that lasts twice as long, and nobody at the ticket machine is going to point that out to you."
+    },
+    "places": {
+      "title": "Four places to actually eat",
+      "lede": "Why we name restaurants but not hotels: a bad meal costs you €10 and an evening, a bad hotel costs you €500 and a week. And a beer garden that has poured the same beer since before the war is a verifiable fact in a way that \"lovely rooms\" is not. Every address below is checked against an official listing. We have still not eaten in any of them.",
+      "items": [
+        {
+          "name": "Schnitzelwirt",
+          "pill": "≈ €16–20",
+          "area": "Neubau · the 7th",
+          "address": "Neubaugasse 52",
+          "body": "Outside the Ring, exactly as instructed. A plain neighbourhood dining room that serves a schnitzel visibly larger than the plate it arrives on, to people who live on the street outside. Nobody is performing Vienna at you here.",
+          "rows": [
+            {
+              "label": "Mains",
+              "value": "≈ €16–20"
+            },
+            {
+              "label": "Veal or pork?",
+              "value": "ask — the price will tell you"
+            }
+          ],
+          "image": {
+            "src": "assets/img/vienna/place-schnitzelwirt.jpg",
+            "alt": "A Wiener Schnitzel with lemon and fried potatoes.",
+            "caption": "Wiener Schnitzel — <strong>the dish, not this Beisl</strong>."
+          }
+        },
+        {
+          "name": "Gasthaus Pöschl",
+          "pill": "Inside the Ring",
+          "area": "Innere Stadt · the 1st",
+          "address": "Weihburggasse 17",
+          "hours": "Mon–Sat 12:00–23:00 · kitchen until 22:00",
+          "body": "The exception to our own rule. A cramped classic <em>Beisl</em> a few streets behind the cathedral, where the crowd is Viennese and the Tafelspitz is the real article. You pay first-district prices and — unusually for the first district — you get first-district cooking in return.",
+          "rows": [
+            {
+              "label": "Mains",
+              "value": "€22–26"
+            },
+            {
+              "label": "Closed",
+              "value": "Sundays"
+            }
+          ],
+          "url": "https://www.xn--gasthauspschl-qmb.com/",
+          "image": {
+            "src": "assets/img/vienna/place-poschl.jpg",
+            "alt": "Tafelspitz: boiled beef with root vegetables, spinach and apple horseradish.",
+            "caption": "Tafelspitz — <strong>the dish, not this Beisl</strong>."
+          }
+        },
+        {
+          "name": "Bitzinger Würstelstand",
+          "pill": "Sausage & champagne",
+          "area": "Innere Stadt · the 1st",
+          "address": "Albertinaplatz 1, beside the Albertina",
+          "body": "A sausage stand behind the Opera that sells Käsekrainer and, from the same counter, chilled champagne. Opera-goers in black tie stand beside taxi drivers at one in the morning. This is not a tourist experience dressed as a local one. It is simply what Vienna does after midnight.",
+          "rows": [
+            {
+              "label": "Käsekrainer",
+              "value": "€3–5"
+            },
+            {
+              "label": "Best after",
+              "value": "23:00"
+            }
+          ],
+          "image": {
+            "src": "assets/img/vienna/place-bitzinger.jpg",
+            "alt": "The Bitzinger sausage stand on Albertinaplatz, beneath a green rabbit sculpture.",
+            "caption": "This one <strong>is</strong> the place: Bitzinger on Albertinaplatz, green rabbit and all."
+          }
+        },
+        {
+          "name": "Schweizerhaus",
+          "pill": "15 Mar – 31 Oct",
+          "area": "Prater · Leopoldstadt · the 2nd",
+          "address": "Prater 116",
+          "hours": "Daily 11:00–22:30, in season",
+          "body": "A vast beer garden in the Prater that pours more Budweiser Budvar than any other single establishment on earth, and serves a <em>Stelze</em> — roasted pork knuckle — sized for two or three people. Then it closes for the winter. Turn up in January and you will find a locked gate and a great many trees.",
+          "rows": [
+            {
+              "label": "Stelze and mains",
+              "value": "≈ €9–22"
+            },
+            {
+              "label": "Garden season",
+              "value": "15 March – 31 October"
+            }
+          ],
+          "url": "https://www.schweizerhaus.at/en/",
+          "image": {
+            "src": "assets/img/vienna/place-schweizerhaus.jpg",
+            "alt": "A roasted pork knuckle labelled Die Original Schweizerhaus Stelze.",
+            "caption": "This one <strong>is</strong> the place: the original Schweizerhaus Stelze, ticket still in it."
+          }
+        },
+        {
+          "name": "Café Hawelka",
+          "pill": "Kaffeehaus",
+          "area": "Innere Stadt",
+          "body": "The dark, cramped, legendary coffee house off the Graben. Order a Melange and a Buchtel, sit for two hours, buy nothing else.",
+          "image": {
+            "src": "assets/img/vienna/eat-cafe.jpg",
+            "alt": "The Café Hawelka in Vienna.",
+            "caption": "Café Hawelka — <strong>this one really is the place</strong>."
+          }
+        },
+        {
+          "name": "Plachutta",
+          "pill": "Tafelspitz",
+          "area": "Innere Stadt",
+          "body": "The temple of Tafelspitz — boiled beef served in its copper pot with the marrow toast and the two sauces. Book it.",
+          "image": {
+            "src": "assets/img/vienna/eat-cake.jpg",
+            "alt": "A slice of Viennese cake with cream.",
+            "caption": "Vienna runs on cake and boiled beef — <strong>the food, not this restaurant</strong>."
+          }
+        },
+        {
+          "name": "Gulaschmuseum",
+          "pill": "Goulash",
+          "area": "Innere Stadt",
+          "body": "A whole restaurant of goulash — Fiakergulasch with a fried egg and sausage is the one. Heavier and darker than the Hungarian.",
+          "image": {
+            "src": "assets/img/vienna/eat-goulash.jpg",
+            "alt": "Viennese Fiakergulasch with sausage and egg.",
+            "caption": "Fiakergulasch — <strong>the dish, not this restaurant</strong>."
+          }
+        },
+        {
+          "name": "Café Sacher / Konditorei",
+          "pill": "Sachertorte",
+          "area": "Innere Stadt",
+          "body": "The famous chocolate cake, and every konditorei in the 1st has its own. €7 a slice, a queue, a bow tie. Worth it once, knowingly.",
+          "image": {
+            "src": "assets/img/vienna/eat-konditorei.jpg",
+            "alt": "Viennese pastries and cakes in a konditorei.",
+            "caption": "The konditorei window — <strong>the cakes, not a specific café</strong>."
+          }
+        }
+      ]
+    },
+    "trapTitle": "How to spot the premium in four seconds",
+    "traps": [
+      "You can see St Stephen's spire from the table. That view has a price and it is on your bill.",
+      "The menu says \"Wiener Schnitzel\" at a suspiciously low figure. Real Wiener Schnitzel is veal. Pork is <em>Schnitzel Wiener Art</em> — perfectly good, and legally a different dish.",
+      "A waiter in a waistcoat brings bread you did not order. In the grand cafés this is normal and billed. Ask, or wave it away.",
+      "The café is on a list of \"Vienna's most famous coffee houses\". Then you are buying the room, which is a fair trade — just make it knowingly.",
+      "It sits on Kärntner Straße or the Graben. Walk four minutes in any direction perpendicular to the crowd."
+    ],
+    "dishTitle": "What to actually order",
+    "dishes": [
+      {
+        "name": "Wiener Schnitzel",
+        "desc": "Veal, pounded thin, breaded, fried in butter until the coating puffs away from the meat. If it costs less than the fish, it is pork — see above."
+      },
+      {
+        "name": "Gulasch",
+        "desc": "€7–11 in a proper Beisl. Thicker and darker than the Hungarian original, served with a dumpling and, correctly, a beer."
+      },
+      {
+        "name": "Käsekrainer",
+        "desc": "A cheese-filled sausage from a <em>Würstelstand</em>, eaten standing up at one in the morning. This is not a tourist experience. This is the point of Vienna."
+      },
+      {
+        "name": "\"Ein kleiner Brauner\"",
+        "desc": "Never order \"a coffee\". Order it by name — a small black with cream. A <em>Melange</em> is the milky one. The waiter's respect is measurably attached to this."
+      }
+    ],
+    "myth": {
+      "title": "About Café Central, and the Sachertorte queue",
+      "paras": [
+        "Café Central — the one in every guidebook, the one with Trotsky and the papier-mâché poet at the door — <strong>closed on 16 March 2026 for a full renovation</strong> and is not expected to reopen until autumn. Half the articles you will read this week still send you there. Check before you walk across the city.",
+        "As for the Sachertorte: a slice at Café Sacher runs €7.90, and a coffee and cake for two comes to roughly €32. It is a fine cake. It is not a €32 cake. You are buying a hundred and fifty years of marketing, served by a man in a bow tie, and if that is what you came for then it is worth every cent. Just don't mistake the queue for a recommendation."
+      ]
+    },
+    "band": {
+      "src": "assets/img/vienna/band-food.jpg",
+      "alt": "A Wiener Schnitzel with potatoes, salad and a glass of beer.",
+      "caption": "If it costs noticeably less than the fish, it is pork — <em>Schnitzel Wiener Art</em>. Perfectly good, and legally a different dish."
+    }
+  },
+  "see": {
+    "title": "What to see, and what it really costs",
+    "lede": "Vienna's palaces charge properly for the inside and nothing at all for the outside — and in at least two cases the outside is the better half.",
+    "sights": [
+      {
+        "name": "Schönbrunn Palace",
+        "pill": "Gardens free",
+        "body": "The Habsburgs' summer palace. The park, the Great Parterre, the hill up to the Gloriette and the view back down over the whole city cost nothing and take a morning. The rooms are the paid part.",
+        "prices": [
+          {
+            "label": "Imperial Tour (≈22 rooms)",
+            "value": "≈ €22"
+          },
+          {
+            "label": "Grand Tour (≈40 rooms)",
+            "value": "≈ €28–32"
+          },
+          {
+            "label": "Park, Parterre, Gloriette hill",
+            "value": "Free"
+          }
+        ],
+        "note": "Ticket names and prices were reshuffled for 2026 and published figures disagree with each other — confirm on schoenbrunn.at before you go. Entry is timed: book ahead or queue.",
+        "image": {
+          "src": "assets/img/vienna/schonbrunn.jpg",
+          "alt": "The long yellow garden front of Schönbrunn Palace."
+        }
+      },
+      {
+        "name": "The Hofburg",
+        "pill": "€15",
+        "body": "The winter palace, and effectively three museums in one ticket: the Imperial Apartments, the Sisi Museum, and the Silver Collection. Central, indoors, and a genuinely fair price by Vienna standards.",
+        "prices": [
+          {
+            "label": "Adult",
+            "value": "€15"
+          },
+          {
+            "label": "Courtyards & Heldenplatz",
+            "value": "Free"
+          }
+        ],
+        "note": "The courtyards are a public thoroughfare. You can walk through the middle of the Habsburg winter palace on your way to dinner, and most people do without noticing.",
+        "image": {
+          "src": "assets/img/vienna/hofburg.jpg",
+          "alt": "The domed Michaelertrakt of the Hofburg, seen from Michaelerplatz."
+        }
+      },
+      {
+        "name": "St Stephen's Cathedral",
+        "pill": "Nave free",
+        "body": "The black spire at the centre of everything. You can walk into the rear of the nave and stand under it for nothing. The full nave, the towers and the catacombs are ticketed separately at the door.",
+        "prices": [
+          {
+            "label": "Rear of the nave",
+            "value": "Free"
+          },
+          {
+            "label": "Towers, catacombs, full nave",
+            "value": "priced at the door"
+          }
+        ],
+        "note": "We have not verified the ticketed prices against a published source, so we are not printing a number we cannot stand behind. Everything else on this page, we can.",
+        "image": {
+          "src": "assets/img/vienna/stephansdom.jpg",
+          "alt": "St Stephen’s Cathedral, its patterned roof and south steeple, from Stephansplatz."
+        }
+      },
+      {
+        "name": "The Ring, by tram",
+        "pill": "One ticket",
+        "body": "Trams 1 and 2 run the Ringstraße past the Opera, the Burggarten, Parliament, the Rathaus, the Burgtheater and the university. It is the same route the hop-on-hop-off buses sell you, on a normal tram, with people going to work.",
+        "prices": [
+          {
+            "label": "A single ticket",
+            "value": "€3.20"
+          },
+          {
+            "label": "The same tour, sold as a tour",
+            "value": "many times that"
+          }
+        ],
+        "note": "Board tram 1 at Schwedenplatz, sit on the left, ride to Burgring, change to the 2 and come back. Vienna's cheapest sightseeing, and its best.",
+        "image": {
+          "src": "assets/img/vienna/ring-tram.jpg",
+          "alt": "A red tram on line 2 running the Ringstraße, a fiaker behind it."
+        }
+      }
+    ],
+    "freeTitle": "Free, and genuinely worth your time",
+    "free": [
+      {
+        "name": "The Schönbrunn gardens at opening",
+        "desc": "the Gloriette hill at eight in the morning, with the whole city laid out below and nobody on the path."
+      },
+      {
+        "name": "Zentralfriedhof",
+        "desc": "Beethoven, Brahms, Schubert and Strauss, in one quiet corner of Europe's second-largest cemetery. Take tram 71."
+      },
+      {
+        "name": "The Donaukanal",
+        "desc": "kilometres of legal street art, floating bars, and the city's least imperial hour."
+      },
+      {
+        "name": "Naschmarkt",
+        "desc": "browse it. The stalls at the far end, away from Karlsplatz, are where the buying happens."
+      },
+      {
+        "name": "The MuseumsQuartier courtyard",
+        "desc": "free to enter, free to sit in, and full of people who are not visiting Vienna."
+      },
+      {
+        "name": "The Prater",
+        "desc": "the park itself is free and open always. Only the rides, including the Riesenrad, cost anything."
+      }
+    ],
+    "freeBand": {
+      "src": "assets/img/vienna/free-band.jpg",
+      "alt": "The Donaukanal in Vienna, lined with street art and summer crowds.",
+      "caption": "The Donaukanal — kilometres of legal street art and floating bars, all free."
+    }
+  },
+  "safe": {
+    "title": "Vienna is extremely safe. Here is what to watch anyway.",
+    "lede": "Vienna is routinely ranked among the most liveable cities on earth, and it feels like it. The risks to a visitor are almost entirely financial, and they are polite about it.",
+    "scams": [
+      {
+        "title": "The costumed \"Mozart\" ticket sellers",
+        "body": "Powdered wigs, breeches, laminated flyers, Stephansplatz and the Graben. They are <em>licensed</em> by the city — this is not an illegal operation — but the flyer implies a palace and the concert is frequently a student ensemble in a much smaller hall. <strong>Buy from the venue's own website</strong>, where you can see exactly which orchestra plays in which room."
+      },
+      {
+        "title": "The curbside taxi at the airport",
+        "body": "An off-meter \"fixed price\" of €50–70 for a journey that pre-books at €33–39. Covered in <a href=\"#arrive\">section 02</a>. Take the S7 and the question never arises."
+      },
+      {
+        "title": "\"Would you like to pay in your own currency?\"",
+        "body": "Dynamic currency conversion, at a rate the terminal made up. Press <strong>EUR</strong>. Always, everywhere, including at the hotel desk."
+      },
+      {
+        "title": "Pickpockets, and they are good",
+        "body": "Vienna logs roughly 5,300 cases a year. The hotspots are exactly where you will be: <strong>Mariahilfer Straße</strong>, <strong>Stephansplatz</strong>, and the <strong>Naschmarkt</strong>. Front pocket, bag zipped and in front of you, phone off the café table."
+      },
+      {
+        "title": "The restaurant with the cathedral view",
+        "body": "Not a scam. A transaction. A table with the Stephansdom in it costs what a table with the Stephansdom in it costs. Sit there once, deliberately, and eat everywhere else."
+      }
+    ],
+    "emergency": [
+      {
+        "label": "Any emergency, any language",
+        "number": "112"
+      },
+      {
+        "label": "Police",
+        "number": "133"
+      },
+      {
+        "label": "Ambulance",
+        "number": "144"
+      },
+      {
+        "label": "Fire",
+        "number": "122"
+      }
+    ]
+  },
+  "speak": {
+    "title": "Twelve words that change how you're treated",
+    "lede": "Austrians notice when you don't say <em>Grüß Gott</em>. It is the greeting on entering a shop, a lift, a doctor's waiting room. <em>Guten Tag</em> marks you as German; <em>hello</em> marks you as passing through. Tap any phrase to copy it.",
+    "phrases": [
+      {
+        "local": "Grüß Gott",
+        "pron": "GREWS got",
+        "en": "Hello — the Austrian greeting. Use it entering any shop, café or lift"
+      },
+      {
+        "local": "Servus",
+        "pron": "SER-voos",
+        "en": "Hi / bye, informal — friends, younger people, bar staff"
+      },
+      {
+        "local": "Danke",
+        "pron": "DAN-kuh",
+        "en": "Thank you"
+      },
+      {
+        "local": "Bitte",
+        "pron": "BIT-tuh",
+        "en": "Please — also \"here you go\", also \"pardon?\""
+      },
+      {
+        "local": "Auf Wiedersehen",
+        "pron": "owf VEE-der-zayn",
+        "en": "Goodbye, formal"
+      },
+      {
+        "local": "Ja / Nein",
+        "pron": "yah / nine",
+        "en": "Yes / No"
+      },
+      {
+        "local": "Entschuldigung",
+        "pron": "ent-SHOOL-di-goong",
+        "en": "Excuse me / sorry"
+      },
+      {
+        "local": "Was kostet das?",
+        "pron": "vas KOS-tet das",
+        "en": "How much does it cost?"
+      },
+      {
+        "local": "Zahlen, bitte",
+        "pron": "TSAH-len BIT-tuh",
+        "en": "The bill, please — say it to the waiter, they'll come"
+      },
+      {
+        "local": "Ein Bier, bitte",
+        "pron": "ine BEER BIT-tuh",
+        "en": "One beer, please"
+      },
+      {
+        "local": "Ein Leitungswasser, bitte",
+        "pron": "ine LYE-toongs-vasser",
+        "en": "Tap water, please — it comes from the Alps"
+      },
+      {
+        "local": "Prost!",
+        "pron": "prohst",
+        "en": "Cheers! — eye contact, or it doesn't count"
+      }
+    ]
+  },
+  "closing": {
+    "lines": [
+      "Cross the Ring before you eat.",
+      "Say <em>Grüß Gott</em> when you walk in.",
+      "Ride tram 1 around the Ring for the price of a ticket."
+    ],
+    "sig": "That's the whole guide. Enjoy Vienna."
+  },
+  "sources": {
+    "note": "Every price on this page was checked against a published source in <strong>July 2026</strong>. Vienna restructured its fares on 1 January 2026 and abolished the 48- and 72-hour tickets; Café Central closed for renovation in March. Prices and closures change. Treat these as the number you should <em>expect</em>, not a guarantee.",
+    "links": [
+      {
+        "label": "Wiener Linien — 2026 fare structure",
+        "url": "https://www.wienerlinien.at/web/wl-en/new-fare-structure-from-1-january-2026"
+      },
+      {
+        "label": "Wiener Linien — tickets",
+        "url": "https://www.wienerlinien.at/web/wl-en/tickets"
+      },
+      {
+        "label": "wien.info — airport to the centre",
+        "url": "https://www.wien.info/en/travel-info/arrival-departure/airport-to-center"
+      },
+      {
+        "label": "Schönbrunn Palace — tickets & prices",
+        "url": "https://www.schoenbrunn.at/en/tickets-and-prices/all-tickets-tours"
+      },
+      {
+        "label": "Café Central — official site",
+        "url": "https://cafecentral.wien/en/"
+      },
+      {
+        "label": "Café Sacher — official site",
+        "url": "https://www.sacher.com/en/restaurants/cafe-sacher-wien/"
+      },
+      {
+        "label": "Is Vienna expensive? — price survey",
+        "url": "https://www.visitingvienna.com/visitorinfo/prices/"
+      },
+      {
+        "label": "Tourist scams in Vienna, 2026",
+        "url": "https://tabiji.ai/scams/vienna/"
+      },
+      {
+        "label": "Gasthaus Pöschl — official site",
+        "url": "https://www.xn--gasthauspschl-qmb.com/"
+      },
+      {
+        "label": "Schweizerhaus — official site",
+        "url": "https://www.schweizerhaus.at/en/"
+      },
+      {
+        "label": "Beisl & schnitzel guide (Schnitzelwirt, Bitzinger)",
+        "url": "https://www.offbeatbudapest.com/vienna-city-guide/best-schnitzel-and-traditional-austrian-restaurants-in-vienna/"
+      }
+    ]
+  }
+}

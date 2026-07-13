@@ -1,0 +1,14 @@
+{
+  "name": "localpass",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LocalPass — a one-page city guide for people who have just landed. Real local prices, not tourist prices. No signup, no ads, no tracking.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  }
+}

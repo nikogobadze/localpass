@@ -1,0 +1,28 @@
+# Everything here is LOCAL AUTHORING ONLY and must never be deployed.
+#
+# The public site is pure static: index.html + render.js + styles.css + data/ + assets/.
+# It never calls an API. server.js exists solely to run the admin locally, and the
+# admin writes to the filesystem — which a static host cannot do anyway.
+
+# Local dev server + write API
+server.js
+
+# Admin editor (needs server.js's API; useless and confusing in production)
+admin.html
+admin.js
+admin.css
+
+# Translation sources + browser layout checks
+tools/
+
+# Node bits — there is no build step
+package.json
+package-lock.json
+node_modules/
+
+# Secrets and noise
+.admin-token
+.git/
+.gitignore
+README.md
+*.tmp

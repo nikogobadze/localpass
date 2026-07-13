@@ -1,0 +1,990 @@
+{
+  "slug": "prague",
+  "name": "Prague",
+  "localName": "Praha",
+  "country": "Czech Republic",
+  "verified": "July 2026",
+  "currency": {
+    "code": "CZK",
+    "symbol": "Kč",
+    "name": "Czech koruna"
+  },
+  "theme": {
+    "accent": "#C4402A",
+    "accent2": "#1F7D69",
+    "pop": "#2E5BA8",
+    "gold": "#E2A431",
+    "wash": "#FDF6EC"
+  },
+  "hero": {
+    "eyebrow": "Czech Republic · Central Europe · UTC+2",
+    "title": "Praha",
+    "sub": "Everything you need to know before you put your bag down.<br>Written for the person who just landed — and doesn't want to be charged the tourist price."
+  },
+  "art": {
+    "skyline": "<g class=\"sky-far\"><rect x=\"1085\" y=\"60\" width=\"9\" height=\"180\"/><rect x=\"1078\" y=\"96\" width=\"23\" height=\"16\" rx=\"7\"/><rect x=\"1078\" y=\"138\" width=\"23\" height=\"16\" rx=\"7\"/><path d=\"M1055 240 v-52 l22 -14 v66 z\"/></g><g class=\"sky-mid\"><path d=\"M596 240 L610 74 L624 240 Z\"/><rect x=\"602\" y=\"52\" width=\"16\" height=\"26\"/><rect x=\"606\" y=\"30\" width=\"8\" height=\"24\"/><circle cx=\"610\" cy=\"26\" r=\"4\"/><path d=\"M588 200 h44 M592 168 h36 M596 136 h28\" class=\"lattice\"/><rect x=\"640\" y=\"186\" width=\"70\" height=\"54\"/><path d=\"M634 188 L675 160 L716 188 Z\"/></g><g class=\"sky-near\"><rect x=\"0\" y=\"182\" width=\"52\" height=\"58\"/><path d=\"M-6 184 L26 158 L58 184 Z\"/><rect x=\"60\" y=\"196\" width=\"44\" height=\"44\"/><path d=\"M54 198 L82 176 L110 198 Z\"/><rect x=\"118\" y=\"168\" width=\"104\" height=\"72\"/><path d=\"M110 170 L170 132 L230 170 Z\"/><rect x=\"122\" y=\"96\" width=\"22\" height=\"74\"/><path d=\"M117 98 L133 46 L149 98 Z\"/><circle cx=\"133\" cy=\"40\" r=\"3.5\"/><rect x=\"196\" y=\"96\" width=\"22\" height=\"74\"/><path d=\"M191 98 L207 46 L223 98 Z\"/><circle cx=\"207\" cy=\"40\" r=\"3.5\"/><rect x=\"152\" y=\"126\" width=\"36\" height=\"44\"/><path d=\"M146 128 L170 106 L194 128 Z\"/><rect x=\"244\" y=\"190\" width=\"76\" height=\"50\"/><path d=\"M244 190 a38 40 0 0 1 76 0 z\"/><rect x=\"278\" y=\"132\" width=\"8\" height=\"22\"/><path d=\"M270 156 a12 14 0 0 1 24 0 z\"/><circle cx=\"282\" cy=\"126\" r=\"4\"/><rect x=\"330\" y=\"200\" width=\"34\" height=\"40\"/><path d=\"M325 202 L347 182 L369 202 Z\"/><rect x=\"368\" y=\"206\" width=\"30\" height=\"34\"/><path d=\"M363 208 L383 190 L403 208 Z\"/><rect x=\"412\" y=\"196\" width=\"150\" height=\"44\"/><rect x=\"700\" y=\"196\" width=\"130\" height=\"44\"/><rect x=\"560\" y=\"150\" width=\"142\" height=\"90\"/><path d=\"M560 150 L631 118 L702 150 Z\"/><rect x=\"572\" y=\"82\" width=\"20\" height=\"70\"/><path d=\"M567 84 L582 34 L597 84 Z\"/><rect x=\"670\" y=\"82\" width=\"20\" height=\"70\"/><path d=\"M665 84 L680 34 L695 84 Z\"/><rect x=\"622\" y=\"104\" width=\"18\" height=\"48\"/><path d=\"M617 106 L631 62 L645 106 Z\"/><circle cx=\"631\" cy=\"56\" r=\"3.5\"/><rect x=\"848\" y=\"192\" width=\"48\" height=\"48\"/><path d=\"M842 194 L872 170 L902 194 Z\"/><rect x=\"906\" y=\"204\" width=\"36\" height=\"36\"/><path d=\"M900 206 L924 186 L948 206 Z\"/><rect x=\"950\" y=\"186\" width=\"26\" height=\"54\"/><path d=\"M945 188 L963 160 L981 188 Z\"/><rect x=\"984\" y=\"208\" width=\"70\" height=\"32\"/><path d=\"M978 210 L1019 188 L1060 210 Z\"/><rect x=\"1120\" y=\"198\" width=\"44\" height=\"42\"/><path d=\"M1114 200 L1142 178 L1170 200 Z\"/><rect x=\"1168\" y=\"210\" width=\"32\" height=\"30\"/></g>"
+  },
+  "orient": {
+    "title": "Orient yourself in sixty seconds",
+    "lede": "Prague is small. The historic core is walkable end to end in about forty minutes. Almost everything you have heard of sits inside a bend of the Vltava river, split by the water into two halves.",
+    "map": {
+      "riverPath": "M150 -10 C 120 60, 190 100, 160 160 C 130 220, 200 260, 175 350 L 235 350 C 258 258, 190 222, 218 162 C 246 102, 180 62, 210 -10 Z",
+      "riverLabel": "VLTAVA",
+      "riverLabelX": 196,
+      "riverLabelY": 316,
+      "bridge": {
+        "x": 160,
+        "y": 140,
+        "w": 60,
+        "label": "Charles Bridge",
+        "labelX": 190,
+        "labelY": 132
+      },
+      "districts": [
+        {
+          "x": 95,
+          "y": 120,
+          "r": 52,
+          "name": "MALÁ STRANA",
+          "note": "castle side"
+        },
+        {
+          "x": 285,
+          "y": 105,
+          "r": 46,
+          "name": "STARÉ MĚSTO",
+          "note": "old town"
+        },
+        {
+          "x": 300,
+          "y": 230,
+          "r": 42,
+          "name": "VINOHRADY",
+          "note": "where locals eat"
+        },
+        {
+          "x": 105,
+          "y": 255,
+          "r": 38,
+          "name": "SMÍCHOV",
+          "note": "quiet, cheap"
+        }
+      ],
+      "caption": "Not to scale. The river runs north; the castle is always on the west bank, uphill."
+    },
+    "facts": [
+      {
+        "term": "Currency",
+        "def": "Czech koruna (CZK / Kč). <strong>Not the euro.</strong> Anyone quoting you a price in euros is charging you for the privilege."
+      },
+      {
+        "term": "Language",
+        "def": "Czech. English is widely spoken in the centre, less so past the tram ring. Eight words will carry you a long way — <a href=\"#speak\">see the phrases</a>."
+      },
+      {
+        "term": "Tap water",
+        "def": "Clean, safe, free. Ask for <em>kohoutková</em>. Restaurants may still push bottled — you may decline."
+      },
+      {
+        "term": "Emergency",
+        "def": "<strong>112</strong> from any phone, any language. Police 158 · Ambulance 155 · Fire 150."
+      },
+      {
+        "term": "Tipping",
+        "def": "Round up, or 10% for good service. Not obligatory. Tell the server the total you want to pay <em>as you hand over money</em> — don't leave coins on the table."
+      },
+      {
+        "term": "The one rule",
+        "def": "Walk ten minutes away from any famous thing before you eat, drink, or change money. That single habit will save you more than everything else on this page."
+      }
+    ]
+  },
+  "arrive": {
+    "title": "From the airport, without being robbed",
+    "lede": "Václav Havel Airport sits 17 km west of the centre. There is no train and no metro line to the terminal. Here are your four options, honestly compared.",
+    "options": [
+      {
+        "tone": "best",
+        "tag": "Best value",
+        "title": "Trolleybus 59 + Metro A",
+        "price": "50",
+        "unit": "Kč",
+        "priceNote": "≈ €2",
+        "time": "≈ 35 min to the centre",
+        "body": "Trolleybus 59 (it replaced the old bus 119 in 2024 — signs and old blog posts still say 119) runs to <em>Nádraží Veleslavín</em>, where you drop straight onto Metro line A.",
+        "note": "<strong>Buy a 90-minute ticket</strong>, not a 30-minute one. The journey is longer than thirty minutes and inspectors do check."
+      },
+      {
+        "tone": "normal",
+        "tag": "Most comfortable bus",
+        "title": "Airport Express (AE)",
+        "price": "100",
+        "unit": "Kč",
+        "priceNote": "≈ €4",
+        "time": "≈ 40 min · every 30 min · 05:30–22:00",
+        "body": "Direct to Praha hlavní nádraží (the main railway station). Dedicated luggage space, no changes, no stairs.",
+        "note": "Worth it with heavy bags or after a late flight."
+      },
+      {
+        "tone": "normal",
+        "tag": "Door to door",
+        "title": "Bolt or Uber",
+        "price": "~400–500",
+        "unit": "Kč",
+        "priceNote": "≈ €16–20",
+        "time": "≈ 25 min, traffic depending",
+        "body": "Book it in the app from inside the arrivals hall, then walk out to the marked ride-share pickup. Bolt is usually the cheaper of the two; Uber runs roughly 15–25% higher for the same trip.",
+        "note": "Fine, fair, and metered. No negotiation, no surprises."
+      },
+      {
+        "tone": "avoid",
+        "tag": "Avoid",
+        "title": "The man who approaches you",
+        "price": "€50–80",
+        "unit": "",
+        "priceNote": "",
+        "time": "for a €20 journey",
+        "body": "Drivers who walk up to you in the arrivals hall offering a taxi are not a service. They are a business model. The quote will be three to four times the real fare.",
+        "note": "<strong>Never accept a ride from someone who approached you first.</strong> Anywhere in this city."
+      }
+    ],
+    "transit": {
+      "title": "Public transport, decoded",
+      "lede": "One ticket covers metro, tram, bus and funicular. It is timed, not per-journey — change lines as often as you like until it expires.",
+      "columns": [
+        "Ticket",
+        "In the app",
+        "Paper / machine",
+        "By SMS"
+      ],
+      "rows": [
+        {
+          "label": "30 minutes",
+          "values": [
+            "36 Kč",
+            "39 Kč",
+            "42 Kč"
+          ],
+          "best": 0
+        },
+        {
+          "label": "90 minutes",
+          "values": [
+            "46 Kč",
+            "50 Kč",
+            "55 Kč"
+          ],
+          "best": 0
+        },
+        {
+          "label": "24 hours",
+          "values": [
+            "140 Kč",
+            "150 Kč",
+            "—"
+          ],
+          "best": 0
+        }
+      ],
+      "callouts": [
+        {
+          "tone": "good",
+          "title": "Get the app",
+          "body": "It is called <strong>PID Lítačka</strong>. Digital tickets cost about 10% less than paper and 20% less than SMS, and there is nothing to validate."
+        },
+        {
+          "tone": "warn",
+          "title": "Validate the paper one",
+          "body": "A paper ticket is worthless until you stamp it in the yellow box the first time you board. Unstamped ticket = no ticket. The on-the-spot fine is <strong>1,500 Kč</strong>, and inspectors work in plain clothes."
+        },
+        {
+          "tone": "good",
+          "title": "One exception",
+          "body": "The 30- and 90-minute tickets are <em>not</em> valid on the Petřín funicular. A 24-hour ticket is."
+        }
+      ]
+    }
+  },
+  "money": {
+    "title": "Money, and the three ways they take it",
+    "lede": "Prague's currency-exchange industry is one of the most sophisticated tourist traps in Europe. It is also completely avoidable, and the rules fit on a napkin.",
+    "rules": [
+      {
+        "title": "Never change money at a \"0% commission\" booth",
+        "body": "The commission is zero. The rate is the robbery. The gorgeous number in the window is what they'll give you if you <em>buy</em> euros from them — the rate for actually selling them your euros is in six-point type at the bottom. Clusters of these sit on <strong>Staroměstské náměstí</strong> and along <strong>Karlova</strong>, the street funnelling toward Charles Bridge. Walk past all of them."
+      },
+      {
+        "title": "Use a bank's own ATM and take out koruna",
+        "body": "Look for <strong>Česká spořitelna</strong>, <strong>ČSOB</strong> or <strong>Komerční banka</strong> — the machines attached to actual bank branches. Standalone machines parked in tourist alleys exist to charge you for the convenience."
+      },
+      {
+        "title": "When the card machine asks, always choose koruna",
+        "body": "\"Would you like to be charged in euros / pounds / dollars instead?\" is called dynamic currency conversion, and the answer is always no. Saying yes lets the merchant's payment terminal invent its own exchange rate. <strong>Always pay in CZK</strong> and let your own bank do the conversion."
+      }
+    ],
+    "foot": "And never, under any circumstances, change money with a person on the street. That transaction has exactly one outcome.",
+    "converter": {
+      "title": "Quick sanity check",
+      "lede": "A rough feel for what a number on a menu actually means.",
+      "baseLabel": "Amount in Kč",
+      "baseDefault": 100,
+      "targets": [
+        {
+          "key": "eur",
+          "symbol": "€",
+          "label": "euro",
+          "rate": 24.5
+        },
+        {
+          "key": "usd",
+          "symbol": "$",
+          "label": "US dollar",
+          "rate": 21
+        },
+        {
+          "key": "gbp",
+          "symbol": "£",
+          "label": "pound",
+          "rate": 28.9
+        }
+      ],
+      "tip": "<strong>Rule of thumb:</strong> divide koruna by 25 for a close-enough euro figure. 100 Kč ≈ €4. A 500 Kč dinner ≈ €20."
+    }
+  },
+  "sleep": {
+    "title": "Where to sleep",
+    "lede": "We recommend neighbourhoods, not hotels. We have not slept in these buildings, and a guide that pretends otherwise is selling you something. Pick the right district and almost any decent room in it will serve you well.",
+    "hoods": [
+      {
+        "name": "Vinohrady",
+        "price": "€80–140",
+        "unit": "/ night",
+        "verdict": "The best value in Prague, and it isn't close.",
+        "body": "Leafy, residential, nineteenth-century apartment blocks, and the restaurants the city's own residents actually book. Roughly 20% cheaper than Old Town for the same standard of room, and five minutes on the metro from everything you came to see.",
+        "tags": [
+          "Best value",
+          "Great food",
+          "Quiet nights"
+        ],
+        "image": {
+          "src": "assets/img/prague/st-vinohrady.jpg",
+          "alt": "A leafy boulevard in Vinohrady, Prague.",
+          "caption": "Vinohrady — leafy, residential, and where the city actually eats."
+        }
+      },
+      {
+        "name": "Žižkov",
+        "price": "€85–130",
+        "unit": "/ night",
+        "verdict": "For people who came for the pubs.",
+        "body": "Hilly, scuffed, cobbled and unpretentious — historically the working-class quarter, now the highest density of drinking establishments in the city. Cheap beer, real neighbourhood, a bit of a climb home.",
+        "tags": [
+          "Nightlife",
+          "Cheapest beer",
+          "Hills"
+        ],
+        "image": {
+          "src": "assets/img/prague/st-newtown.jpg",
+          "alt": "A street in central Prague.",
+          "caption": "Žižkov — hilly, scuffed and full of pubs. <strong>Photo: a Prague street, not Žižkov itself.</strong>"
+        }
+      },
+      {
+        "name": "Malá Strana",
+        "price": "€120–300",
+        "unit": "/ night",
+        "verdict": "The postcard, minus the crowd.",
+        "body": "Baroque streets under the castle, on the far side of Charles Bridge. It has its own sights, empties out beautifully in the evening once the day-trippers cross back, and remains a ten-minute walk from Old Town. You pay for that.",
+        "tags": [
+          "Most beautiful",
+          "Romantic",
+          "Pricey"
+        ],
+        "image": {
+          "src": "assets/img/prague/st-malastrana.jpg",
+          "alt": "Baroque facades in Malá Strana, Prague.",
+          "caption": "Malá Strana — baroque streets under the castle."
+        }
+      },
+      {
+        "name": "Staré Město",
+        "price": "€150–350",
+        "unit": "/ night",
+        "tone": "warn",
+        "verdict": "Convenient, expensive, and loud until 3am.",
+        "body": "You will be in the middle of it. You will also be in the middle of stag parties, pub crawls, and every restaurant in the city with a laminated nine-language menu. If you stay here, ask for a courtyard-facing room and mean it.",
+        "tags": [
+          "Central",
+          "Noisy",
+          "Tourist pricing"
+        ],
+        "image": {
+          "src": "assets/img/prague/st-oldtown.jpg",
+          "alt": "An Old Town street in Prague.",
+          "caption": "Staré Město — central, and loud until 3am."
+        }
+      }
+    ],
+    "tipsTitle": "Three things worth knowing before you book",
+    "tips": [
+      {
+        "title": "Ask which way the room faces.",
+        "body": "Prague's historic buildings have paper-thin windows onto cobbled streets that amplify every voice. A courtyard room is a different holiday."
+      },
+      {
+        "title": "Check the tram line, not the map distance.",
+        "body": "\"1.5 km from Old Town Square\" means nothing if it's uphill. \"Four stops on the 22\" means everything."
+      },
+      {
+        "title": "The city charges a small nightly tourist fee",
+        "body": "per adult, often collected at the property and not shown in your online total. Budget for it; it is not a scam."
+      }
+    ],
+    "band": {
+      "src": "assets/img/prague/band-street.jpg",
+      "alt": "Baroque and art-nouveau facades along Old Town Square, Prague.",
+      "caption": "Old Town Square. Beautiful — and the single most expensive place in the city to order a beer."
+    },
+    "hotels": {
+      "title": "A few specific hotels",
+      "lede": "Named hotels, not just districts — you asked. Same honesty rule as the restaurants: we have not slept in these. Prices are indicative and move hard with the season; guest scores are the aggregate on the big booking sites, not ours. Check current rates before you book.",
+      "items": [
+        {
+          "name": "EA Hotel Tosca",
+          "stars": "3★",
+          "area": "Vinohrady",
+          "price": "≈ €55–80",
+          "priceNote": "/ night",
+          "desc": "A plain three-star on a quiet Vinohrady street, a few tram stops out. The budget end, in the value district.",
+          "image": {
+            "src": "assets/img/prague/st-vinohrady.jpg",
+            "alt": "A leafy boulevard in Vinohrady, Prague.",
+            "caption": "A Vinohrady street by it — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Hotel Taurus",
+          "stars": "4★",
+          "area": "Vinohrady",
+          "price": "≈ €90–130",
+          "priceNote": "/ night",
+          "desc": "A restored Art-Nouveau house on Vinohradská, on the tram line into the centre. Solid mid-range.",
+          "image": {
+            "src": "assets/img/prague/hotel-taurus.jpg",
+            "alt": "The Hotel Taurus building on Vinohradská, Prague."
+          }
+        },
+        {
+          "name": "The Julius Prague",
+          "stars": "4★",
+          "area": "Vinohrady",
+          "price": "≈ €150–200",
+          "priceNote": "/ night",
+          "desc": "A boutique aparthotel that guidebooks push hard, walkable to the best cafés. Upper-mid.",
+          "image": {
+            "src": "assets/img/prague/st-oldtown.jpg",
+            "alt": "An Old Town street in Prague.",
+            "caption": "Near it in the centre — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Le Palais Art Hotel",
+          "stars": "5★",
+          "area": "Vinohrady",
+          "price": "≈ €200–260",
+          "priceNote": "/ night",
+          "score": "8.8",
+          "scoreNote": "1,500+ reviews",
+          "desc": "A Belle-Époque palace turned five-star, a few quiet streets back from the noise. The splurge.",
+          "image": {
+            "src": "assets/img/prague/hotel-lepalais.jpg",
+            "alt": "The Le Palais Art Hotel building in Vinohrady, Prague."
+          }
+        },
+        {
+          "name": "Miss Sophie's",
+          "stars": "2★",
+          "area": "Nové Město",
+          "price": "≈ €70–100",
+          "priceNote": "/ night",
+          "desc": "A design hostel-hotel a few blocks off Wenceslas Square. Cheap, stylish, well-run — the backpacker-plus option.",
+          "image": {
+            "src": "assets/img/prague/st-newtown.jpg",
+            "alt": "A street in central Prague near Wenceslas Square.",
+            "caption": "A street near it in Nové Město — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Mosaic House",
+          "stars": "4★",
+          "area": "Nové Město",
+          "price": "≈ €100–140",
+          "priceNote": "/ night",
+          "desc": "A big eco-minded design hotel with a hostel wing, near the river. Reliable mid-range with a bar in the basement.",
+          "image": {
+            "src": "assets/img/prague/st-vinohrady.jpg",
+            "alt": "A leafy boulevard in central Prague.",
+            "caption": "A nearby boulevard — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Hotel Josef",
+          "stars": "4★",
+          "area": "Staré Město",
+          "price": "≈ €160–220",
+          "priceNote": "/ night",
+          "desc": "A glass-and-white design landmark tucked in the Old Town, minutes from everything. Boutique, minimalist, central.",
+          "image": {
+            "src": "assets/img/prague/st-oldtown.jpg",
+            "alt": "An Old Town street in Prague.",
+            "caption": "An Old Town street by it — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "The Golden Well",
+          "stars": "5★",
+          "area": "Malá Strana",
+          "price": "≈ €250–350",
+          "priceNote": "/ night",
+          "desc": "A Renaissance house built into the castle hill, with a terrace over the whole city. The romantic splurge.",
+          "image": {
+            "src": "assets/img/prague/st-malastrana.jpg",
+            "alt": "Baroque facades in Malá Strana, Prague.",
+            "caption": "Malá Strana, where it sits — <strong>representative, not the hotel</strong>."
+          }
+        }
+      ]
+    }
+  },
+  "eat": {
+    "title": "Eat and drink like you live here",
+    "lede": "This is where the gap between the local price and the tourist price is widest — and where closing it takes the least effort. Usually about a three-minute walk.",
+    "compare": {
+      "title": "The same thing, two prices",
+      "lede": "Left: what it costs where Czechs buy it. Right: what it costs within sight of something famous.",
+      "rows": [
+        {
+          "item": "Half-litre of Pilsner",
+          "itemNote": "a proper pub in Žižkov, Vinohrady or Holešovice",
+          "good": "45–70 Kč",
+          "bad": "100–120 Kč",
+          "badNote": "on Old Town Square"
+        },
+        {
+          "item": "Lunch, two courses",
+          "itemNote": "the \"polední menu\", weekdays until ~14:00",
+          "good": "150–180 Kč",
+          "bad": "400 Kč +",
+          "badNote": "same food, tourist street"
+        },
+        {
+          "item": "Czech classic + a beer",
+          "itemNote": "svíčková, goulash, roast pork",
+          "good": "≈ 300 Kč",
+          "goodNote": "≈ €12",
+          "bad": "≈ 550 Kč",
+          "badNote": "≈ €22, near Charles Bridge"
+        }
+      ],
+      "foot": "A beer that costs 100 Kč on Old Town Square costs 50 Kč three blocks away. You are not paying for the beer. You are paying for the view of people who also overpaid."
+    },
+    "places": {
+      "title": "Four places to actually eat",
+      "lede": "Why we name restaurants but not hotels: a bad meal costs you €10 and an evening, a bad hotel costs you €500 and a week. And a pub that has served the same street since 1895 is a verifiable fact in a way that \"lovely rooms\" is not. Every address below is checked against an official listing. We have still not eaten in any of them.",
+      "items": [
+        {
+          "name": "Lokál Dlouhááá",
+          "pill": "Tank beer",
+          "area": "Staré Město · Praha 1",
+          "address": "Dlouhá 33",
+          "body": "Nine Lokáls now exist; this is the first, and at just under seventy metres the longest. Twelve tanks of unpasteurised Pilsner Urquell feed the taps behind a steel bar. It is a chain, it is in the centre, and it is still the most reliable Czech kitchen within five minutes of Old Town Square.",
+          "rows": [
+            {
+              "label": "Half-litre from the tank",
+              "value": "≈ 75–100 Kč"
+            },
+            {
+              "label": "Where it sits",
+              "value": "above a local pub, below a trap"
+            }
+          ],
+          "note": "Published beer prices for this address range from 42 Kč to 100 Kč depending on the source and the year. Budget for the upper end.",
+          "url": "https://lokal-dlouha.ambi.cz/en/",
+          "image": {
+            "src": "assets/img/prague/place-lokal.jpg",
+            "alt": "A half-litre of Czech lager on a wooden table in a pub.",
+            "caption": "A Czech pub half-litre — <strong>not Lokál itself</strong>. Lokál pours Pilsner Urquell from twelve steel tanks."
+          }
+        },
+        {
+          "name": "U Kroka",
+          "pill": "Book ahead",
+          "area": "Vyšehrad · Praha 2",
+          "address": "Vratislavova 12",
+          "hours": "Daily 11:30–23:00",
+          "body": "Family-run since 1895, at the foot of the Vyšehrad hill and a tram ride from every crowd in this guide. Home-style Czech cooking, done properly, in a room that fills with locals every single night. The city's own tourism board tells you to reserve. Reserve.",
+          "rows": [
+            {
+              "label": "Opening hours",
+              "value": "11:30–23:00 daily"
+            },
+            {
+              "label": "Price",
+              "value": "not published — we won't guess"
+            }
+          ],
+          "url": "https://prague.eu/en/objevujte/u-kroka-restaurant/",
+          "image": {
+            "src": "assets/img/prague/place-ukroka.jpg",
+            "alt": "Svíčková: beef in cream sauce with bread dumplings.",
+            "caption": "Svíčková na smetaně — <strong>the dish, not this restaurant</strong>."
+          }
+        },
+        {
+          "name": "Havelská Koruna",
+          "pill": "≈ 100 Kč a meal",
+          "area": "Staré Město · Praha 1",
+          "address": "Havelská 23",
+          "hours": "Daily 10:00–20:00",
+          "body": "A self-service canteen thirty seconds from Old Town Square, where a full plate of svíčková or goulash costs roughly what a single beer costs on the square outside. Take a tray, collect a paper ticket for everything you order, pay on the way out. No atmosphere whatsoever, and that is the point.",
+          "rows": [
+            {
+              "label": "A full meal",
+              "value": "from ≈ 100 Kč (€4)"
+            },
+            {
+              "label": "The paper ticket",
+              "value": "hold onto it — you pay against it"
+            }
+          ],
+          "url": "https://www.avantgarde-prague.com/havelska-koruna/",
+          "image": {
+            "src": "assets/img/prague/place-havelska.jpg",
+            "alt": "Beef goulash with bread dumplings, raw onion and a Pilsner.",
+            "caption": "Guláš with knedlíky — <strong>the dish, not this canteen</strong>."
+          }
+        },
+        {
+          "name": "U Zlatého Tygra",
+          "pill": "Cash only",
+          "area": "Staré Město · Praha 1",
+          "address": "Husova 17",
+          "hours": "Daily 15:00–23:00",
+          "body": "Bohumil Hrabal drank here every afternoon for decades. It is still a working Czech pub, not a monument to one: the regulars' seats are reserved by unwritten right and are not surrendered to anybody. Arrive at three when it opens, take a genuinely empty chair, and say <em>dobrý den</em> to the table you join.",
+          "rows": [
+            {
+              "label": "Payment",
+              "value": "Cash only — and no sign says so"
+            },
+            {
+              "label": "Opens",
+              "value": "15:00, and fills within the hour"
+            }
+          ],
+          "url": "https://prague.eu/en/objevujte/u-zlateho-tygra-beerhall/",
+          "image": {
+            "src": "assets/img/prague/place-tygr.jpg",
+            "alt": "A glass of Czech lager on a table.",
+            "caption": "A Czech half-litre — <strong>not this pub</strong>. Nobody has photographed U Zlatého Tygra under a free licence."
+          }
+        },
+        {
+          "name": "Grand Café Orient",
+          "pill": "Café",
+          "area": "Staré Město",
+          "body": "The world's only Cubist café, up a spiral stair on Ovocný trh. Coffee and cake in a 1912 interior nobody else thought to build.",
+          "image": {
+            "src": "assets/img/prague/eat-cafe.jpg",
+            "alt": "The Cubist Grand Café Orient building in Prague.",
+            "caption": "The Grand Café Orient — <strong>this one really is the place</strong>."
+          }
+        },
+        {
+          "name": "Sisters Bistro",
+          "pill": "Chlebíčky",
+          "area": "Staré Město",
+          "body": "A tiny counter doing chlebíčky — the Czech open sandwich — done properly: cured meats, egg, potato salad, on good bread.",
+          "image": {
+            "src": "assets/img/prague/eat-chleb.jpg",
+            "alt": "Chlebíčky, Czech open-faced sandwiches.",
+            "caption": "Chlebíčky — <strong>the dish, not this bistro</strong>."
+          }
+        },
+        {
+          "name": "U Fleků",
+          "pill": "Roast pork",
+          "area": "Nové Město",
+          "body": "A brewing house since 1499, touristy but real. Come for the vepřo-knedlo-zelo — roast pork, dumplings and kraut — and the dark lager.",
+          "image": {
+            "src": "assets/img/prague/eat-pork.jpg",
+            "alt": "Roast pork with bread dumplings and sauerkraut.",
+            "caption": "Vepřo-knedlo-zelo — <strong>the dish, not this pub</strong>."
+          }
+        },
+        {
+          "name": "Lahůdky deli counters",
+          "pill": "Cheap",
+          "area": "across the centre",
+          "body": "Not one place but a habit: the stand-up delis where locals grab a chlebíček and a coffee for pocket change between errands.",
+          "image": {
+            "src": "assets/img/prague/eat-pastry.jpg",
+            "alt": "Open-faced Czech deli sandwiches.",
+            "caption": "Deli chlebíčky — <strong>the food, not a specific shop</strong>."
+          }
+        }
+      ]
+    },
+    "trapTitle": "How to spot the trap in four seconds",
+    "traps": [
+      "A menu translated into six or more languages. Prices run about 20% higher the moment English appears prominently.",
+      "Someone standing outside inviting you in. Good pubs in this city have never needed to do that.",
+      "Photographs of the food on the menu.",
+      "Prices listed by weight — \"100 g\" — so the plate that arrives is 250 g and the bill is two and a half times what you read.",
+      "Anything already sitting on the table. Bread, nuts, olives. It is not complimentary. Ask, or push it away."
+    ],
+    "dishTitle": "What to actually order",
+    "dishes": [
+      {
+        "name": "Svíčková na smetaně",
+        "desc": "Beef in a root-vegetable cream sauce, bread dumplings, cranberry, a curl of whipped cream. The national dish, and better than that description sounds."
+      },
+      {
+        "name": "Guláš s knedlíky",
+        "desc": "Thick beef goulash, dumplings, raw onion. Order it in a pub, never in a restaurant with a doorman."
+      },
+      {
+        "name": "Smažený sýr",
+        "desc": "A deep-fried slab of cheese with tartar sauce. Culturally significant. Nutritionally indefensible."
+      },
+      {
+        "name": "Tank beer (<em>tankové pivo</em>)",
+        "desc": "Unpasteurised lager pushed from a steel tank rather than a keg. If a pub advertises it, drink there. It is the single most reliable quality signal in Prague."
+      }
+    ],
+    "myth": {
+      "title": "About the trdelník",
+      "paras": [
+        "The sugared chimney of dough sold from every second doorway, usually beneath a sign reading \"OLD BOHEMIAN PASTRY\", is not a traditional Czech pastry. It is not old, it is not Bohemian, and no Czech person has ever eaten one voluntarily.",
+        "It is perfectly nice. Eat it if you want. Just know that you are eating a marketing decision, and that the ice-cream-filled version costs roughly what a full lunch costs four streets away."
+      ]
+    },
+    "band": {
+      "src": "assets/img/prague/band-food.jpg",
+      "alt": "Open wooden fermentation vats in a Pilsner Urquell cellar.",
+      "caption": "Unpasteurised lager, fermented in open wooden vats. This is what <em>tank beer</em> means, and why it is worth walking three streets for."
+    }
+  },
+  "see": {
+    "title": "What to see, and what it really costs",
+    "lede": "A surprising amount of the best of Prague is free. The paid tickets below are the ones worth the money — and we've marked exactly where the free version is just as good.",
+    "sights": [
+      {
+        "name": "Prague Castle",
+        "pill": "Grounds free",
+        "body": "The largest ancient castle complex in the world, and you can walk into most of it for nothing. All four courtyards, the front vestibule of St Vitus Cathedral, and the Royal Garden (April–October) cost zero. The changing of the guard at noon costs zero.",
+        "prices": [
+          {
+            "label": "Main circuit, adult",
+            "value": "450 Kč"
+          },
+          {
+            "label": "Reduced (child / student / 65+)",
+            "value": "300 Kč"
+          },
+          {
+            "label": "Family ticket",
+            "value": "950 Kč"
+          }
+        ],
+        "note": "Buy the circuit if you want inside the cathedral nave, the Old Royal Palace and Golden Lane. Otherwise walk the grounds free, and spend the 450 Kč on dinner.",
+        "image": {
+          "src": "assets/img/prague/castle.jpg",
+          "alt": "The second courtyard of Prague Castle, with the baroque Kohl Fountain."
+        }
+      },
+      {
+        "name": "Petřín Hill & Tower",
+        "pill": "Park free, 24 h",
+        "body": "A wooded hill with the best panorama in the city on top of it. The park itself never closes and never charges. The lookout tower — a stubby cousin of the Eiffel — is the paid part, and the view from it beats the castle's.",
+        "prices": [
+          {
+            "label": "Tower, adult",
+            "value": "250 Kč"
+          },
+          {
+            "label": "Reduced",
+            "value": "170 Kč"
+          },
+          {
+            "label": "Youth 16–26",
+            "value": "200 Kč"
+          },
+          {
+            "label": "Family",
+            "value": "500 Kč"
+          },
+          {
+            "label": "Lift (optional add-on)",
+            "value": "+150 Kč"
+          }
+        ],
+        "note": "299 steps. The lift is 150 Kč. Under-5s free. Remember: your 30- or 90-minute transit ticket does not cover the funicular up the hill — a 24-hour ticket does.",
+        "image": {
+          "src": "assets/img/prague/petrin.jpg",
+          "alt": "The Petřín lookout tower rising from the wooded hill above Malá Strana."
+        }
+      },
+      {
+        "name": "Vyšehrad",
+        "pill": "Free entry",
+        "body": "The other castle. A tenth-century fortress on a cliff over the river, with ramparts you can walk, lawns you can lie on, and the national cemetery where Dvořák and Mucha are buried. Almost no crowds. Free, all year, always.",
+        "prices": [
+          {
+            "label": "Grounds, ramparts, cemetery",
+            "value": "Free"
+          },
+          {
+            "label": "Basilica of Ss Peter & Paul",
+            "value": "≈ 150 Kč"
+          },
+          {
+            "label": "Casemates / Gorlice hall",
+            "value": "small fee"
+          }
+        ],
+        "note": "If you have one spare afternoon and you are tired of being jostled, spend it here. This is the recommendation locals give each other.",
+        "image": {
+          "src": "assets/img/prague/vysehrad.jpg",
+          "alt": "The view from the Vyšehrad ramparts, out over the Vltava."
+        }
+      },
+      {
+        "name": "Charles Bridge",
+        "pill": "Free",
+        "body": "Free at every hour, and worth a completely different amount depending which hour you pick. At two in the afternoon it is a slow-moving crush of selfie sticks, caricaturists and pickpockets.",
+        "prices": [
+          {
+            "label": "Cost",
+            "value": "Free"
+          },
+          {
+            "label": "Best time",
+            "value": "06:00–07:00"
+          },
+          {
+            "label": "Worst time",
+            "value": "11:00–18:00"
+          }
+        ],
+        "note": "Set an alarm. Go at dawn. You will have a 650-year-old bridge, thirty baroque saints and the mist off the Vltava essentially to yourself, and you will understand why people write about this city.",
+        "image": {
+          "src": "assets/img/prague/charles-bridge.jpg",
+          "alt": "The Malá Strana bridgehead of Charles Bridge, late afternoon."
+        }
+      }
+    ],
+    "freeTitle": "Free, and genuinely worth your time",
+    "free": [
+      {
+        "name": "The Astronomical Clock",
+        "desc": "the hourly show is famously underwhelming; the clock itself is astonishing. Look at it, skip the crowd on the hour."
+      },
+      {
+        "name": "Letná Park beer garden",
+        "desc": "the view over the river and its bridges, from above, with a cheap beer in hand."
+      },
+      {
+        "name": "Vrtba Garden & the Wallenstein Garden",
+        "desc": "baroque terraces most visitors never find."
+      },
+      {
+        "name": "Náplavka",
+        "desc": "the river embankment — Saturday farmers' market, and locals sitting with their legs over the water all summer."
+      },
+      {
+        "name": "Žižkov TV Tower",
+        "desc": "from the outside, with the sculpted babies crawling up it. The observation deck costs; the sight of it does not."
+      },
+      {
+        "name": "Malá Strana after 21:00",
+        "desc": "when the day crowds have gone and the gas lamps are lit."
+      }
+    ],
+    "freeBand": {
+      "src": "assets/img/prague/free-band.jpg",
+      "alt": "Letná park in Prague — trees, paths and benches above the river.",
+      "caption": "Letná park, high above the Vltava — the free half of Prague is often the best half."
+    }
+  },
+  "safe": {
+    "title": "Prague is very safe. Here is what to watch anyway.",
+    "lede": "Violent crime against visitors is rare — genuinely, statistically rare. What Prague has instead is an ecosystem of people who would like to overcharge you. Know the five, and none of them will work.",
+    "scams": [
+      {
+        "title": "The taxi that finds you",
+        "body": "Any driver who approaches you — at the airport, outside a club, on a square — is not looking for a fare. He is looking for someone who doesn't know the fare. <strong>Book Bolt, Uber, or Liftago in the app.</strong> If you must hail one, it must have a working meter and a printed price on the door."
+      },
+      {
+        "title": "The exchange booth with a beautiful number",
+        "body": "Covered in <a href=\"#money\">section 03</a>, and worth repeating because it costs people the most. The advertised rate is the direction that does not apply to you. There are no exceptions and there is no clever booth."
+      },
+      {
+        "title": "\"Would you like to pay in your own currency?\"",
+        "body": "The card terminal is offering to convert for you at a rate it made up. Press the button for <strong>CZK</strong>, always, everywhere, including at the hotel."
+      },
+      {
+        "title": "The plainclothes \"police officer\"",
+        "body": "Someone shows a badge, says there is a problem with counterfeit currency, and asks to inspect your wallet or passport. Real Czech police do not do this. Do not hand anything over. Say you will walk with them to the nearest police station — the encounter ends there."
+      },
+      {
+        "title": "The crowd on the bridge and in tram 22",
+        "body": "Pickpocketing is the one crime you're realistically exposed to, and it happens exactly where you'd expect: Charles Bridge, Old Town Square, the astronomical clock on the hour, the metro at Můstek, and tram 22 to the castle. Front pocket. Bag zipped and in front of you. That's the whole defence."
+      }
+    ],
+    "emergency": [
+      {
+        "label": "Any emergency, any language",
+        "number": "112"
+      },
+      {
+        "label": "Police",
+        "number": "158"
+      },
+      {
+        "label": "Ambulance",
+        "number": "155"
+      },
+      {
+        "label": "Fire",
+        "number": "150"
+      }
+    ]
+  },
+  "speak": {
+    "title": "Twelve words that change how you're treated",
+    "lede": "Czechs do not expect you to speak Czech. They notice enormously when you try. <em>Dobrý den</em> on entering a shop and <em>děkuji</em> on leaving will measurably improve your week. Tap any phrase to copy it.",
+    "phrases": [
+      {
+        "local": "Dobrý den",
+        "pron": "DOH-bree den",
+        "en": "Hello — formal, and the correct greeting on entering any shop, pub or lift"
+      },
+      {
+        "local": "Děkuji",
+        "pron": "DYEH-koo-yi",
+        "en": "Thank you"
+      },
+      {
+        "local": "Prosím",
+        "pron": "PRO-seem",
+        "en": "Please — also \"here you go\", also \"pardon?\". Endlessly useful"
+      },
+      {
+        "local": "Na shledanou",
+        "pron": "NAS-khle-da-noh",
+        "en": "Goodbye"
+      },
+      {
+        "local": "Ano / Ne",
+        "pron": "AH-no / neh",
+        "en": "Yes / No"
+      },
+      {
+        "local": "Promiňte",
+        "pron": "PRO-min-yeh-teh",
+        "en": "Excuse me / sorry"
+      },
+      {
+        "local": "Kolik to stojí?",
+        "pron": "KO-lik to STO-yee",
+        "en": "How much does it cost?"
+      },
+      {
+        "local": "Zaplatím, prosím",
+        "pron": "ZAP-la-tyeem PRO-seem",
+        "en": "The bill, please — say it to the server, they'll come to you"
+      },
+      {
+        "local": "Jedno pivo, prosím",
+        "pron": "YED-no PEE-vo PRO-seem",
+        "en": "One beer, please"
+      },
+      {
+        "local": "Kohoutková, prosím",
+        "pron": "KO-hoat-kova",
+        "en": "Tap water, please — it's safe, it's free"
+      },
+      {
+        "local": "Nemluvím česky",
+        "pron": "NEM-loo-veem CHES-kee",
+        "en": "I don't speak Czech"
+      },
+      {
+        "local": "Na zdraví!",
+        "pron": "NAZ-dra-vee",
+        "en": "Cheers! — look them in the eye, clink, then tap the table before you drink"
+      }
+    ]
+  },
+  "closing": {
+    "lines": [
+      "Walk ten minutes away from anything famous before you eat, drink, or change money.",
+      "Say <em>dobrý den</em> when you walk in.",
+      "Cross Charles Bridge at six in the morning."
+    ],
+    "sig": "That's the whole guide. Enjoy Prague."
+  },
+  "sources": {
+    "note": "Every price on this page was checked against a published source in <strong>July 2026</strong>. Prices change — Prague raised its transport fares on 1 January 2026, and will do so again. Treat these as the number you should <em>expect</em>, not a guarantee. If a price you're quoted is wildly above what's here, that's the point of this page.",
+    "links": [
+      {
+        "label": "PID — official tickets & fares",
+        "url": "https://pid.cz/en/tickets-and-fare/"
+      },
+      {
+        "label": "DPP — fare pricelist",
+        "url": "https://www.dpp.cz/en/fares/fare-pricelist"
+      },
+      {
+        "label": "Prague Castle — official tickets",
+        "url": "https://www.hrad.cz/en/prague-castle-for-visitors/tickets"
+      },
+      {
+        "label": "Prague City Tourism — Petřín Tower",
+        "url": "https://prague.eu/en/objevujte/petrin-tower-petrinska-rozhledna/"
+      },
+      {
+        "label": "Vyšehrad — official visitor info",
+        "url": "https://praha-vysehrad.cz/en/visit/"
+      },
+      {
+        "label": "Food & drink prices, 2026",
+        "url": "https://www.viewfromprague.com/food-and-drink-prices/"
+      },
+      {
+        "label": "What a beer actually costs in Prague",
+        "url": "https://yumprague.com/info-beer-prices-in-prague"
+      },
+      {
+        "label": "Airport transfers compared",
+        "url": "https://www.helloprague.net/how-to-get-from-prague-airport-to-city-centre-transfers-taxis-buses/"
+      },
+      {
+        "label": "Prague City Tourism — U Kroka",
+        "url": "https://prague.eu/en/objevujte/u-kroka-restaurant/"
+      },
+      {
+        "label": "Prague City Tourism — U Zlatého tygra",
+        "url": "https://prague.eu/en/objevujte/u-zlateho-tygra-beerhall/"
+      },
+      {
+        "label": "Lokál Dlouhááá — official site",
+        "url": "https://lokal-dlouha.ambi.cz/en/"
+      },
+      {
+        "label": "Havelská Koruna — listing",
+        "url": "https://www.avantgarde-prague.com/havelska-koruna/"
+      }
+    ]
+  }
+}

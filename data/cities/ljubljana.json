@@ -1,0 +1,970 @@
+{
+  "slug": "ljubljana",
+  "name": "Ljubljana",
+  "localName": "Ljubljana",
+  "country": "Slovenia",
+  "verified": "July 2026",
+  "currency": {
+    "code": "EUR",
+    "symbol": "€",
+    "name": "Euro"
+  },
+  "theme": {
+    "accent": "#C25A2B",
+    "accent2": "#17836B",
+    "pop": "#2478A8",
+    "gold": "#DFA93A",
+    "wash": "#FAF8EF"
+  },
+  "hero": {
+    "eyebrow": "Slovenia · Central Europe · UTC+2",
+    "title": "Ljubljana",
+    "sub": "Everything you need to know before you put your bag down.<br>Written for the person who just landed — in the rare European capital where the honest price and the tourist price are nearly the same number."
+  },
+  "art": {
+    "skyline": "<g class=\"sky-far\"><path d=\"M0 240 L120 118 L200 188 L300 88 L430 240 Z\"/><path d=\"M360 240 L470 132 L580 240 Z\"/><path d=\"M960 240 L1075 126 L1200 240 Z\"/></g><g class=\"sky-mid\"><path d=\"M430 240 C 520 236, 570 176, 700 166 C 830 176, 880 236, 970 240 Z\"/></g><g class=\"sky-near\"><rect x=\"30\" y=\"200\" width=\"170\" height=\"8\"/><path d=\"M40 240 V226 a24 22 0 0 1 48 0 V240 Z\"/><path d=\"M96 240 V226 a24 22 0 0 1 48 0 V240 Z\"/><path d=\"M152 240 V226 a24 22 0 0 1 48 0 V240 Z\"/><rect x=\"200\" y=\"160\" width=\"110\" height=\"80\"/><path d=\"M194 162 L255 120 L316 162 Z\"/><rect x=\"246\" y=\"88\" width=\"22\" height=\"74\"/><path d=\"M242 90 a13 15 0 0 1 26 0 z\"/><rect x=\"254\" y=\"64\" width=\"4\" height=\"14\"/><circle cx=\"256\" cy=\"62\" r=\"3\"/><rect x=\"340\" y=\"198\" width=\"56\" height=\"42\"/><path d=\"M334 200 L368 176 L402 200 Z\"/><rect x=\"404\" y=\"208\" width=\"40\" height=\"32\"/><path d=\"M398 210 L424 190 L450 210 Z\"/><rect x=\"630\" y=\"126\" width=\"150\" height=\"42\"/><rect x=\"634\" y=\"118\" width=\"10\" height=\"8\"/><rect x=\"654\" y=\"118\" width=\"10\" height=\"8\"/><rect x=\"674\" y=\"118\" width=\"10\" height=\"8\"/><rect x=\"742\" y=\"118\" width=\"10\" height=\"8\"/><rect x=\"762\" y=\"118\" width=\"10\" height=\"8\"/><rect x=\"690\" y=\"66\" width=\"32\" height=\"60\"/><rect x=\"684\" y=\"58\" width=\"44\" height=\"10\"/><rect x=\"704\" y=\"36\" width=\"3\" height=\"22\"/><rect x=\"830\" y=\"196\" width=\"60\" height=\"44\"/><path d=\"M824 198 L860 174 L896 198 Z\"/><rect x=\"898\" y=\"206\" width=\"38\" height=\"34\"/><path d=\"M892 208 L917 188 L942 208 Z\"/><rect x=\"1040\" y=\"110\" width=\"54\" height=\"130\"/><rect x=\"1052\" y=\"92\" width=\"30\" height=\"20\"/><rect x=\"1060\" y=\"74\" width=\"14\" height=\"18\"/><circle cx=\"1067\" cy=\"70\" r=\"4\"/><rect x=\"1130\" y=\"202\" width=\"46\" height=\"38\"/><path d=\"M1124 204 L1153 182 L1182 204 Z\"/></g>"
+  },
+  "orient": {
+    "title": "Orient yourself in sixty seconds",
+    "lede": "Ljubljana is the smallest capital in this guide and the easiest to hold in your head. A green river loops around a castle hill; a car-free old town sits on one bank, the cafés and squares on the other. You can cross the entire centre on foot in twenty minutes, and you will.",
+    "map": {
+      "riverPath": "M150 -10 C 120 60, 190 100, 160 160 C 130 220, 200 260, 175 350 L 235 350 C 258 258, 190 222, 218 162 C 246 102, 180 62, 210 -10 Z",
+      "riverLabel": "LJUBLJANICA",
+      "riverLabelX": 196,
+      "riverLabelY": 320,
+      "bridge": {
+        "x": 160,
+        "y": 140,
+        "w": 60,
+        "label": "Triple Bridge",
+        "labelX": 190,
+        "labelY": 132
+      },
+      "districts": [
+        {
+          "x": 292,
+          "y": 148,
+          "r": 46,
+          "name": "OLD TOWN",
+          "note": "under the castle"
+        },
+        {
+          "x": 96,
+          "y": 108,
+          "r": 48,
+          "name": "CENTRE",
+          "note": "cafés, Prešeren Sq"
+        },
+        {
+          "x": 100,
+          "y": 262,
+          "r": 40,
+          "name": "TRNOVO",
+          "note": "quiet, bohemian"
+        },
+        {
+          "x": 300,
+          "y": 258,
+          "r": 38,
+          "name": "TABOR",
+          "note": "cheap beds"
+        }
+      ],
+      "caption": "Not to scale. The castle sits on the hill above the Old Town. Nothing in the centre is more than a twenty-minute walk from anything else."
+    },
+    "facts": [
+      {
+        "term": "Currency",
+        "def": "The euro. No exchange booths preying on you, no koruna arithmetic, no dual pricing. Slovenia joined the eurozone in 2007 and it shows."
+      },
+      {
+        "term": "Language",
+        "def": "Slovenian. English is spoken at a level that will genuinely surprise you — near-universal under fifty. Try <em>dober dan</em> anyway; it lands."
+      },
+      {
+        "term": "Tap water",
+        "def": "Excellent and free. Ask for <em>voda iz pipe</em>. There are drinking fountains through the centre."
+      },
+      {
+        "term": "Emergency",
+        "def": "<strong>112</strong> from any phone, any language. Police <strong>113</strong>."
+      },
+      {
+        "term": "You will not need a bus",
+        "def": "The Old Town is closed to cars and the whole centre is walkable. Read the transport section anyway, because the fare has a trick in it worth €0.20 and a €2 card."
+      },
+      {
+        "term": "The one rule",
+        "def": "Walk one bridge upstream. Ljubljana has no real tourist trap — what it has is a riverside terrace where everything costs about a euro more. That euro buys a genuinely lovely view. Just don't eat all three meals on it."
+      }
+    ]
+  },
+  "arrive": {
+    "title": "From the airport, without being robbed",
+    "lede": "Ljubljana Jože Pučnik Airport is 26 km north of the city, which is further than it sounds and served less frequently than you'd like. This is the one part of the trip where planning ahead pays for itself several times over.",
+    "options": [
+      {
+        "tone": "best",
+        "tag": "Cheapest",
+        "title": "Public bus 28",
+        "price": "≈ 4.10",
+        "unit": "€",
+        "priceNote": "pay the driver, cash",
+        "time": "≈ 50 min to the main bus station",
+        "body": "An ordinary public bus. Slow, infrequent, and by a wide margin the cheapest way into town. Bring small notes — the driver will not love a fifty.",
+        "note": "<strong>This is the one price on this page we cannot pin down.</strong> Published figures range from €1.30 (weekend, older listings) to €4.10 (2026). Carry €5 and expect the higher end."
+      },
+      {
+        "tone": "normal",
+        "tag": "Best compromise",
+        "title": "Shared shuttle",
+        "price": "12–15",
+        "unit": "€",
+        "priceNote": "if booked ~4 weeks ahead",
+        "time": "≈ 40 min, door to door",
+        "body": "Nomago and GoOpti both run shared vans that drop you at your address. Booked early, this is the sweet spot: a fraction of a taxi, a fraction of the wait for a bus.",
+        "note": "<strong>Book it before you fly.</strong> The same GoOpti seat sold last-minute climbs to €50 or more. This is dynamic pricing, not a scam, and it punishes the unprepared."
+      },
+      {
+        "tone": "normal",
+        "tag": "Door to door",
+        "title": "Bolt",
+        "price": "20–28",
+        "unit": "€",
+        "priceNote": "€5–10 within the city",
+        "time": "≈ 30 min",
+        "body": "Metered, in-app, no negotiation. If there are two or three of you, this beats the shuttle on both money and dignity.",
+        "note": "Fine at any hour. The price you see is the price you pay."
+      },
+      {
+        "tone": "avoid",
+        "tag": "Avoid",
+        "title": "The car with no meter",
+        "price": "€40–60",
+        "unit": "",
+        "priceNote": "for a €20–28 journey",
+        "time": "",
+        "body": "Unofficial drivers work the airport arrivals area and the Central Bus Station. No meter, no company logo, no receipt. An official taxi runs €35–50; an unofficial one asks more and offers less.",
+        "note": "<strong>Never take a car without a working meter and a visible company name.</strong> Open Bolt instead — it takes forty seconds."
+      }
+    ],
+    "transit": {
+      "title": "Public transport, decoded",
+      "lede": "One bus network, one flat fare, ninety minutes of free transfers. And a genuine trick: the way you pay changes the price.",
+      "columns": [
+        "Ticket",
+        "Price",
+        "How"
+      ],
+      "rows": [
+        {
+          "label": "Single ride, contactless bank card",
+          "values": [
+            "€1.30",
+            "Tap your own card on the validator"
+          ],
+          "best": 0
+        },
+        {
+          "label": "Single ride, Urbana card",
+          "values": [
+            "€1.50",
+            "90 minutes of transfers included"
+          ]
+        },
+        {
+          "label": "The Urbana card itself",
+          "values": [
+            "€2.00",
+            "One-off. Holds up to €50 of credit"
+          ]
+        },
+        {
+          "label": "Airport bus 28",
+          "values": [
+            "≈ €4.10",
+            "Cash, to the driver"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "tone": "good",
+          "title": "Don't buy the Urbana card",
+          "body": "Tapping your own contactless bank card on the validator costs <strong>€1.30</strong>. Buying the tourist-facing Urbana card costs €2.00 up front and then charges you <strong>€1.50</strong> a ride. Unless you are here a fortnight, the card you already own is cheaper."
+        },
+        {
+          "tone": "good",
+          "title": "You probably won't ride a bus at all",
+          "body": "The Old Town is closed to traffic and the centre is twenty minutes end to end on foot. Most visitors use the bus exactly once: to and from the airport."
+        },
+        {
+          "tone": "warn",
+          "title": "The airport fare is genuinely unclear",
+          "body": "We checked several sources and they disagree — €1.30, €3.30, €4.10, depending on the year and the day of the week. We have printed the highest recent figure so you are not caught short. We would rather over-warn you than have you standing at a bus door with the wrong coins."
+        }
+      ]
+    }
+  },
+  "money": {
+    "title": "Money: there is almost nothing to warn you about",
+    "lede": "This section is short, and that is the finding. Slovenia sits in the top ten of the Global Peace Index, uses the euro, and has no meaningful exchange racket, taxi-meter fraud, or menu scam. Three small things remain.",
+    "rules": [
+      {
+        "title": "Cards work almost everywhere. Bureks do not take them",
+        "body": "Restaurants, bars, shops and buses all take contactless without blinking. The exceptions are the ones you'll actually want: the <strong>burek windows</strong>, the market stalls on Vodnik Square, and the odd tiny bar. <strong>Keep €20 in cash</strong> and you'll never be embarrassed."
+      },
+      {
+        "title": "When the terminal offers you your own currency, say no",
+        "body": "If your card isn't euro-denominated, the machine may offer to charge you in pounds or dollars. That is dynamic currency conversion, and the rate is invented by the merchant's terminal. <strong>Always choose EUR</strong> and let your own bank convert."
+      },
+      {
+        "title": "Tipping is not expected — round up anyway",
+        "body": "Nobody in Ljubljana depends on your tip and nobody will chase you down the street. Rounding up, or 10% after a genuinely good meal, is welcomed and entirely optional. There is no service charge to check for."
+      }
+    ],
+    "foot": "Ljubljana's principal threat to your wallet is a second slice of potica. We have written this section as honestly as we can and there simply isn't more to say.",
+    "converter": {
+      "title": "Quick sanity check",
+      "lede": "For visitors arriving from outside the eurozone.",
+      "baseLabel": "Amount in €",
+      "baseDefault": 20,
+      "targets": [
+        {
+          "key": "usd",
+          "symbol": "$",
+          "label": "US dollar",
+          "rate": 0.92,
+          "rateLabel": "€ per $"
+        },
+        {
+          "key": "gbp",
+          "symbol": "£",
+          "label": "pound",
+          "rate": 1.18,
+          "rateLabel": "€ per £"
+        }
+      ],
+      "tip": "<strong>Your yardstick is a beer and a burek.</strong> A large domestic lager is €3 in a pub and €4.20 by the river. A burek is €3 and will defeat you. If you're paying much more, you're sitting on the water — which is allowed."
+    }
+  },
+  "sleep": {
+    "title": "Where to sleep",
+    "lede": "We recommend neighbourhoods, not hotels. In Ljubljana that advice comes with a caveat: the city is so small that the neighbourhood barely moves the price. It moves the character, and how much sleep you get.",
+    "hoods": [
+      {
+        "name": "Old Town & Centre",
+        "price": "€70–150",
+        "unit": "/ night",
+        "verdict": "Car-free, cobbled, and the loveliest place to wake up.",
+        "body": "Between Prešeren Square and the castle hill. No traffic, a river running through it, and every sight you came for within eight minutes. The trade is summer nights: the riverside bars beneath your window run late and they run loud.",
+        "tags": [
+          "Most beautiful",
+          "Car-free",
+          "Loud in summer"
+        ],
+        "image": {
+          "src": "assets/img/ljubljana/st-slovenska.jpg",
+          "alt": "A pedestrian street in central Ljubljana.",
+          "caption": "Old Town & Centre — car-free, cobbled, loud in summer."
+        }
+      },
+      {
+        "name": "Trnovo",
+        "price": "€60–110",
+        "unit": "/ night",
+        "verdict": "Fifteen minutes' walk and a different city.",
+        "body": "The bohemian south bank: leafy streets, galleries, weekend markets, cafés with nobody's suitcase in them. Close enough to walk into the centre for dinner, far enough that you'll sleep afterwards.",
+        "tags": [
+          "Quietest",
+          "Local",
+          "Best value"
+        ],
+        "image": {
+          "src": "assets/img/ljubljana/st-miklosiceva.jpg",
+          "alt": "Miklošičeva street in Ljubljana.",
+          "caption": "Trnovo — quiet and bohemian. <strong>Representative street.</strong>"
+        }
+      },
+      {
+        "name": "Tabor",
+        "price": "€45–90",
+        "unit": "/ night",
+        "verdict": "The cheapest beds, five minutes from the square.",
+        "body": "Next to the train and bus stations, which sounds worse than it is — this is Ljubljana, and the station district is a residential neighbourhood with good cafés. If you are counting euros, count them here.",
+        "tags": [
+          "Cheapest",
+          "Handy for arrival",
+          "Unglamorous"
+        ],
+        "image": {
+          "src": "assets/img/ljubljana/eat-market.jpg",
+          "alt": "A central Ljubljana street.",
+          "caption": "Tabor — the cheapest beds, five minutes from the square."
+        }
+      },
+      {
+        "name": "Beside Metelkova",
+        "price": "€50–100",
+        "unit": "/ night",
+        "tone": "warn",
+        "verdict": "Wonderful to visit. Difficult to sleep next to.",
+        "body": "Metelkova is a former army barracks turned autonomous art squat — murals, sculpture, live music, and a genuine counterculture that has survived thirty years. It is one of the best things in the city. It is also loud until four in the morning.",
+        "tags": [
+          "Art district",
+          "Nightlife",
+          "No sleep"
+        ],
+        "image": {
+          "src": "assets/img/ljubljana/metelkova.jpg",
+          "alt": "The Metelkova art quarter, Ljubljana.",
+          "caption": "Beside Metelkova — wonderful to visit, hard to sleep next to."
+        }
+      }
+    ],
+    "tipsTitle": "Three things worth knowing before you book",
+    "tips": [
+      {
+        "title": "Book on quiet, not on distance.",
+        "body": "Everything is walkable, so proximity buys you nothing and costs you a night's sleep. Ask which way the room faces and whether there is a bar below."
+      },
+      {
+        "title": "Citywide, the bands are narrow.",
+        "body": "Budget rooms sit around €29 a night, mid-range around €69, and the top of the market around €147. There is no €400 tier here, and that is part of the appeal."
+      },
+      {
+        "title": "Slovenia charges a nightly tourist tax",
+        "body": "per adult, collected at the property and usually absent from your online total. It is a euro or two. It is not a scam."
+      }
+    ],
+    "band": {
+      "src": "assets/img/ljubljana/band-street.jpg",
+      "alt": "People crossing the Triple Bridge towards Prešeren Square in the evening.",
+      "caption": "The whole centre is twenty minutes end to end on foot. Book on quiet, not on distance — you will not need a bus."
+    },
+    "hotels": {
+      "title": "A few specific hotels",
+      "lede": "Named hotels, not just districts — you asked. Same honesty rule as the restaurants: we have not slept in these. Prices are indicative and move with the season; guest scores are the aggregate on the big booking sites, not ours. Check current rates before you book.",
+      "items": [
+        {
+          "name": "Emonec Hotel",
+          "stars": "3★",
+          "area": "Old Town",
+          "price": "≈ €70–95",
+          "priceNote": "/ night",
+          "desc": "A plain, central, riverside three-star — the honest budget pick, two minutes from Prešeren Square.",
+          "image": {
+            "src": "assets/img/ljubljana/st-slovenska.jpg",
+            "alt": "A pedestrian street in central Ljubljana.",
+            "caption": "The riverside old town nearby — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "City Hotel Ljubljana",
+          "stars": "3★",
+          "area": "Centre",
+          "price": "≈ €85–120",
+          "priceNote": "/ night",
+          "score": "9.4",
+          "desc": "A big, reliable three-star a few minutes from the Old Town. Consistently high scores for the price.",
+          "image": {
+            "src": "assets/img/ljubljana/st-miklosiceva.jpg",
+            "alt": "Miklošičeva street in Ljubljana.",
+            "caption": "A central street by it — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "BW Premier Hotel Slon",
+          "stars": "4★",
+          "area": "Centre",
+          "price": "≈ €110–150",
+          "priceNote": "/ night",
+          "score": "9.0",
+          "desc": "A four-star on the main street, Slovenska cesta, in the thick of it. Mid-upper, central.",
+          "image": {
+            "src": "assets/img/ljubljana/st-slovenska.jpg",
+            "alt": "Slovenska cesta in Ljubljana.",
+            "caption": "On Slovenska cesta — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Grand Hotel Union",
+          "stars": "4★",
+          "area": "Centre",
+          "price": "≈ €140–190",
+          "priceNote": "/ night",
+          "score": "9.4",
+          "desc": "The Art-Nouveau landmark on Miklošičeva, green dome and all. Historic and well-rated.",
+          "image": {
+            "src": "assets/img/ljubljana/hotel-union.jpg",
+            "alt": "The Art-Nouveau Grand Hotel Union building, Ljubljana."
+          }
+        },
+        {
+          "name": "Hostel Celica",
+          "stars": "Hostel",
+          "area": "Metelkova",
+          "price": "≈ €30–60",
+          "priceNote": "/ night",
+          "desc": "A former military prison in the Metelkova art quarter, each cell restyled by an artist. Cheap, unique, lively.",
+          "image": {
+            "src": "assets/img/ljubljana/st-slovenska.jpg",
+            "alt": "A pedestrian street in central Ljubljana.",
+            "caption": "Central Ljubljana nearby — <strong>representative, not the hostel</strong>."
+          }
+        },
+        {
+          "name": "B&B Hotel Ljubljana",
+          "stars": "3★",
+          "area": "Centre",
+          "price": "≈ €75–105",
+          "priceNote": "/ night",
+          "desc": "A no-surprises budget-mid chain hotel, walkable to the old town. What you book when you just want a clean room.",
+          "image": {
+            "src": "assets/img/ljubljana/st-slovenska.jpg",
+            "alt": "A pedestrian street in central Ljubljana.",
+            "caption": "A central street by it — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Hotel Cubo",
+          "stars": "4★",
+          "area": "Centre",
+          "price": "≈ €120–170",
+          "priceNote": "/ night",
+          "desc": "A slick, muted design hotel on Slovenska cesta with a well-regarded restaurant. The stylish mid-upper pick.",
+          "image": {
+            "src": "assets/img/ljubljana/st-miklosiceva.jpg",
+            "alt": "Miklošičeva street in Ljubljana.",
+            "caption": "A central street by it — <strong>representative, not the hotel</strong>."
+          }
+        },
+        {
+          "name": "Vander Urbani Resort",
+          "stars": "4★",
+          "area": "Old Town",
+          "price": "≈ €150–210",
+          "priceNote": "/ night",
+          "desc": "A design boutique folded into old town houses by the river, with a tiny rooftop pool. Central and quietly luxe.",
+          "image": {
+            "src": "assets/img/ljubljana/hotel-union.jpg",
+            "alt": "The Art-Nouveau Grand Hotel Union, Ljubljana.",
+            "caption": "The old-town centre — <strong>representative, not the hotel</strong>."
+          }
+        }
+      ]
+    }
+  },
+  "eat": {
+    "title": "Eat and drink like you live here",
+    "lede": "In Prague the gap between the local price and the tourist price is a factor of two. In Vienna it is a beautiful room. In Ljubljana it is about one euro — and the euro buys you a river.",
+    "compare": {
+      "title": "The same thing, two prices",
+      "lede": "Left: a normal pub or café, one street back. Right: a terrace on the Ljubljanica.",
+      "rows": [
+        {
+          "item": "Large domestic beer",
+          "itemNote": "Union or Laško, 0.5 l",
+          "good": "€3.00",
+          "bad": "€4.20",
+          "badNote": "riverside, in the tourist centre"
+        },
+        {
+          "item": "Coffee",
+          "itemNote": "espresso €1.50 · cappuccino €2.10",
+          "good": "€1.50–2.10",
+          "bad": "€2.60",
+          "badNote": "a bela kava on the embankment"
+        },
+        {
+          "item": "A meal that defeats you",
+          "itemNote": "burek, from a window, standing up",
+          "good": "€3.00",
+          "goodNote": "you will not finish it",
+          "bad": "≈ €35",
+          "badNote": "three courses in the Old Town"
+        }
+      ],
+      "foot": "One euro. That is the entire tourist premium in this city, and the view is worth more than that. We have spent this section telling you what things cost rather than warning you what to avoid, because in Ljubljana there is very little to avoid."
+    },
+    "places": {
+      "title": "Four places to actually eat",
+      "lede": "Why we name restaurants but not hotels: a bad meal costs you €10 and an evening, a bad hotel costs you €500 and a week. And a burek window that has been open since 1972 is a verifiable fact in a way that \"lovely rooms\" is not. Every address below is checked against an official listing. We have still not eaten in any of them.",
+      "items": [
+        {
+          "name": "Klobasarna",
+          "pill": "The national sausage",
+          "area": "Old Town",
+          "address": "Ciril-Metodov trg 15",
+          "hours": "Mon–Sat 10:00–21:00 · Sun 10:00–16:00",
+          "body": "Six seats and a counter, serving the one thing it makes: <em>kranjska klobasa</em>, the Carniolan sausage whose recipe is protected by EU law. It arrives with a kaiser roll, mustard and fresh horseradish, and nothing else, because nothing else is required.",
+          "rows": [
+            {
+              "label": "Sausage",
+              "value": "€6.90–8.90"
+            },
+            {
+              "label": "Half portion",
+              "value": "≈ €3.50"
+            }
+          ],
+          "url": "https://www.klobasarna.si/",
+          "image": {
+            "src": "assets/img/ljubljana/place-klobasarna.jpg",
+            "alt": "A Carniolan sausage on a board with bread, mustard and horseradish.",
+            "caption": "Kranjska klobasa with mustard and horseradish — <strong>the dish, not this counter</strong>."
+          }
+        },
+        {
+          "name": "Nobel Burek",
+          "pill": "Open 24 hours",
+          "area": "Centre",
+          "address": "Miklošičeva cesta 30",
+          "body": "A window, not a restaurant, serving burek since 1972 at every hour of every day. Meat, cheese or spinach, coiled in pastry, and roughly the size of your head. It is the correct end to an evening and the correct beginning to the following morning.",
+          "rows": [
+            {
+              "label": "Burek",
+              "value": "€3"
+            },
+            {
+              "label": "Everything else",
+              "value": "€1–5"
+            },
+            {
+              "label": "Open",
+              "value": "24 hours, every day"
+            }
+          ],
+          "url": "https://www.visitljubljana.com/en/poi/nobel-burek/",
+          "image": {
+            "src": "assets/img/ljubljana/eat-market.jpg",
+            "alt": "A food spot in central Ljubljana.",
+            "caption": "Central Ljubljana — <strong>representative, not this burek window</strong>."
+          }
+        },
+        {
+          "name": "Druga violina",
+          "pill": "€6–8 lunch",
+          "area": "Old Town",
+          "address": "Stari trg 21",
+          "body": "On the main tourist street of the Old Town, and still the cheapest honest plate on it. Druga violina is a social enterprise: most of its staff have disabilities, and the <em>gostilna</em> exists to employ them. The Slovenian home cooking is genuinely good, the lunch menu is six to eight euros, and none of that is a charitable concession.",
+          "rows": [
+            {
+              "label": "Lunch menu",
+              "value": "€6–8"
+            },
+            {
+              "label": "Where",
+              "value": "Stari trg, in the thick of it"
+            }
+          ],
+          "url": "https://www.visitljubljana.com/en/poi/druga-violina",
+          "image": {
+            "src": "assets/img/ljubljana/place-violina.jpg",
+            "alt": "Slices of štruklji dusted with sugar on a white plate.",
+            "caption": "Štruklji — <strong>the dish, not this gostilna</strong>."
+          }
+        },
+        {
+          "name": "Odprta kuhna",
+          "pill": "Fridays, Mar–Nov",
+          "area": "Pogačarjev trg",
+          "address": "beside the Central Market",
+          "body": "Sixty-five vendors and something like two hundred and eighty dishes, every sunny Friday from March to November. Entry costs nothing and you pay per plate. This is where Ljubljana eats lunch on a Friday — with one honest caveat, set out below.",
+          "rows": [
+            {
+              "label": "Entry",
+              "value": "Free"
+            },
+            {
+              "label": "Plates",
+              "value": "pay per stall"
+            },
+            {
+              "label": "When",
+              "value": "Fridays, March–November"
+            }
+          ],
+          "url": "https://www.odprtakuhna.si/en/",
+          "image": {
+            "src": "assets/img/ljubljana/place-odprta.jpg",
+            "alt": "A smoking grill and a vendor serving at the Open Kitchen market.",
+            "caption": "This one <strong>is</strong> the place: Odprta kuhna on a Friday, Pogačarjev trg."
+          }
+        },
+        {
+          "name": "Gostilna Šestica",
+          "pill": "Traditional",
+          "area": "Centre",
+          "body": "Ljubljana's oldest inn, on Slovenska cesta since 1776. Courtyard tables and the full roster of Slovenian classics done straight.",
+          "image": {
+            "src": "assets/img/ljubljana/eat-cafe.jpg",
+            "alt": "A café-lined street in central Ljubljana.",
+            "caption": "Central Ljubljana dining — <strong>a representative view, not this inn</strong>."
+          }
+        },
+        {
+          "name": "Ribca",
+          "pill": "Seafood",
+          "area": "Central Market",
+          "body": "A basement fish bar under the market colonnade: fried sardines, calamari, a glass of white, the river outside. Lunch only.",
+          "image": {
+            "src": "assets/img/ljubljana/eat-market.jpg",
+            "alt": "The central market area of Ljubljana.",
+            "caption": "By the Central Market — <strong>a representative view, not this bar</strong>."
+          }
+        },
+        {
+          "name": "Slaščičarna potica",
+          "pill": "Potica",
+          "area": "Old Town",
+          "body": "Potica — the rolled walnut cake — by the slice, plus other Slovenian sweets. Buy one and eat it on the river wall.",
+          "image": {
+            "src": "assets/img/ljubljana/eat-potica.jpg",
+            "alt": "Potica, the Slovenian rolled walnut cake.",
+            "caption": "Potica — <strong>the cake, not this shop</strong>."
+          }
+        },
+        {
+          "name": "Čokl coffee",
+          "pill": "Coffee",
+          "area": "Old Town",
+          "body": "A speck of a specialty-coffee bar in the car-free old town. Proper espresso, standing room, locals on their way somewhere.",
+          "image": {
+            "src": "assets/img/ljubljana/eat-cafe.jpg",
+            "alt": "A café-lined street in Ljubljana Old Town.",
+            "caption": "The Old Town café strip — <strong>a representative view, not this bar</strong>."
+          }
+        }
+      ]
+    },
+    "trapTitle": "The small print, such as it is",
+    "traps": [
+      "Sit-down cafés directly on the riverbank charge for the water view. This is a fair trade. Make it once, deliberately.",
+      "At Odprta kuhna, a few vendors price a dish higher at the market stall than in their own restaurant across town. Still worth going.",
+      "The Urbana card is sold to visitors who would pay less by tapping the bank card already in their pocket.",
+      "Unofficial drivers at the Central Bus Station and airport arrivals: no meter, no logo, €40–60 for a €20–28 ride.",
+      "Clipboard petitions and donation approaches in the busiest central squares. Keep walking; there is nothing to sign."
+    ],
+    "dishTitle": "What to actually order",
+    "dishes": [
+      {
+        "name": "Burek",
+        "desc": "€3, from a window, at any hour. Flaky pastry coiled around meat, cheese or spinach. The correct late-night food, the correct hangover food, and larger than you are expecting."
+      },
+      {
+        "name": "Štruklji",
+        "desc": "A rolled dumpling, sweet or savoury — cottage cheese and tarragon is the canonical one, and it is far better than it sounds on paper."
+      },
+      {
+        "name": "Kranjska klobasa",
+        "desc": "Carniolan sausage. Protected by EU law, which specifies the pork content and forbids the rest. Slovenians take this personally and they are right to."
+      },
+      {
+        "name": "Potica",
+        "desc": "A rolled nut cake, walnut for preference, eaten at every occasion that matters. Buy a slice at the Central Market and eat it by the river."
+      }
+    ],
+    "myth": {
+      "title": "About Odprta kuhna — Open Kitchen",
+      "paras": [
+        "Every sunny Friday from March to November, Pogačar Square fills with sixty-five vendors and something like two hundred and eighty dishes: žlikrofi, ramen, tacos, štruklji, smash burgers. Entry is free and you pay per plate. It is the single best food afternoon in the city and it is not a tourist invention — it is where Ljubljana eats lunch on a Friday.",
+        "One honest caveat, because we said we'd give you them: a few vendors charge more for a dish at the market than they do in their own restaurant across town. You are paying for the square, the crowd and the sunshine. Given what those cost elsewhere in Europe, we would call it fair — but you should know before you queue."
+      ]
+    },
+    "band": {
+      "src": "assets/img/ljubljana/band-food.jpg",
+      "alt": "Grilled kranjska klobasa on a plate with bread, peppers and tomato.",
+      "caption": "<em>Kranjska klobasa</em> — protected by EU law, which specifies the pork content and forbids most of the rest. €6.90–8.90 at Klobasarna."
+    }
+  },
+  "see": {
+    "title": "What to see, and what it really costs",
+    "lede": "Almost all of it is free. Ljubljana's great pleasure is a river, three bridges and a hill, and none of those has a ticket office. Here is the one thing worth paying for, and exactly how little of it you need to pay for.",
+    "sights": [
+      {
+        "name": "Ljubljana Castle",
+        "pill": "Grounds free",
+        "body": "On the hill above the Old Town. The <strong>grounds, courtyard and ramparts are free to walk</strong>, all day, and the walk up takes twenty minutes through woods. The exhibitions and the viewing tower are the paid part.",
+        "prices": [
+          {
+            "label": "Castle ticket, adult",
+            "value": "€15"
+          },
+          {
+            "label": "Funicular, return",
+            "value": "€6"
+          },
+          {
+            "label": "Combined castle + funicular",
+            "value": "€19"
+          },
+          {
+            "label": "Grounds, courtyard, ramparts",
+            "value": "Free"
+          },
+          {
+            "label": "Children under 7",
+            "value": "Free"
+          }
+        ],
+        "note": "The €15 ticket covers the Viewing Tower, the Slovenian History Exhibition, the Museum of Puppetry and the Virtual Castle. If you came for the view over the red roofs, the free courtyard gives you most of it. Walk up, pay nothing, decide there.",
+        "image": {
+          "src": "assets/img/ljubljana/castle.jpg",
+          "alt": "The courtyard of Ljubljana Castle beneath its viewing tower and dragon standard."
+        }
+      },
+      {
+        "name": "The bridges",
+        "pill": "Free",
+        "body": "Plečnik's Triple Bridge fans out from Prešeren Square in three directions at once — a solution to a problem nobody else would have solved that way. Downstream, the Dragon Bridge is guarded by four copper dragons that are, unofficially, the city's whole personality.",
+        "prices": [
+          {
+            "label": "Triple Bridge",
+            "value": "Free"
+          },
+          {
+            "label": "Dragon Bridge",
+            "value": "Free"
+          },
+          {
+            "label": "Cobblers' Bridge",
+            "value": "Free"
+          }
+        ],
+        "note": "Walk all three in fifteen minutes. Do it once in daylight and once after the lamps come on; they are not the same bridges.",
+        "image": {
+          "src": "assets/img/ljubljana/bridges.jpg",
+          "alt": "Plečnik’s Triple Bridge, with the pink Franciscan Church beyond."
+        }
+      },
+      {
+        "name": "Tivoli Park",
+        "pill": "Free",
+        "body": "Five square kilometres of formal gardens, gravel avenues and forest, starting a few minutes' walk north-west of the centre and simply not stopping. There is usually a free outdoor photography exhibition along the main promenade.",
+        "prices": [
+          {
+            "label": "Entry",
+            "value": "Free"
+          },
+          {
+            "label": "Always open",
+            "value": "Free"
+          }
+        ],
+        "note": "Climb through it to Rožnik hill for a view back over the city, and a small inn at the top that has been serving walkers for a very long time.",
+        "image": {
+          "src": "assets/img/ljubljana/tivoli.jpg",
+          "alt": "Old trees and fallen leaves in Tivoli Park."
+        }
+      },
+      {
+        "name": "Metelkova",
+        "pill": "Free",
+        "body": "An abandoned Yugoslav army barracks that squatters took over in 1993 and never left. Every surface is painted, sculpted, welded or bolted onto. Galleries, bars, live music, and an aesthetic that has nothing whatsoever to do with the postcard old town ten minutes away.",
+        "prices": [
+          {
+            "label": "Entry",
+            "value": "Free"
+          },
+          {
+            "label": "Concerts",
+            "value": "a few euros"
+          }
+        ],
+        "note": "Go in daylight first to look at it, and after dark to understand it. It is safe and it is welcoming. It does not look like either, which is rather the point.",
+        "image": {
+          "src": "assets/img/ljubljana/metelkova.jpg",
+          "alt": "The painted, sculpted courtyard of Metelkova."
+        }
+      }
+    ],
+    "freeTitle": "Free, and genuinely worth your time",
+    "free": [
+      {
+        "name": "The Central Market",
+        "desc": "Plečnik's riverside colonnade, open every morning but Sunday. Buy potica, eat it on the wall."
+      },
+      {
+        "name": "Prešeren Square at dusk",
+        "desc": "the pink Franciscan church, the poet, and the whole city walking through on its way somewhere."
+      },
+      {
+        "name": "The riverside, end to end",
+        "desc": "from Trnovo to the Dragon Bridge, one bank down and the other back. Forty minutes, no ticket."
+      },
+      {
+        "name": "Several municipal galleries",
+        "desc": "the City Museum and the City Gallery among them have free admission — worth checking on the day you go."
+      },
+      {
+        "name": "The free walking tour",
+        "desc": "two to three hours, tip-based, and unusually good. It leaves from the town hall."
+      },
+      {
+        "name": "The Botanical Garden",
+        "desc": "two hundred years old, free to enter, and almost always empty."
+      }
+    ],
+    "freeBand": {
+      "src": "assets/img/ljubljana/free-band.jpg",
+      "alt": "A cobbled street in Ljubljana’s car-free Old Town at dawn.",
+      "caption": "Ljubljana’s car-free Old Town — the whole centre is a free walk."
+    }
+  },
+  "safe": {
+    "title": "Ljubljana is one of the safest capitals in Europe.",
+    "lede": "That is not a pleasantry. Slovenia ranks in the top ten of the Global Peace Index; the car-free Old Town is safe at any hour; violent crime against visitors is close to statistically absent. Four things remain, and they are all about money.",
+    "scams": [
+      {
+        "title": "The car with no meter",
+        "body": "Unofficial drivers work the <strong>Central Bus Station</strong> and <strong>airport arrivals</strong>. No meter, no company logo, no receipt. They ask €40–60 for a ride that costs €20–28 on Bolt, and €5–10 within the city. <strong>Open the app.</strong> It takes less time than the negotiation would."
+      },
+      {
+        "title": "The clipboard",
+        "body": "Fake petitions and donation approaches in the busiest squares, usually working in pairs — one holds your attention, the other holds your bag. There is nothing to sign and no charity. Keep walking."
+      },
+      {
+        "title": "Distraction theft in a crowd",
+        "body": "The only property crime you are realistically exposed to, and it needs a crowd to work: the Friday food market, the bridges at sunset, a packed bar. Bag zipped, in front of you, phone off the table. That is the entire defence."
+      },
+      {
+        "title": "\"Would you like to pay in your own currency?\"",
+        "body": "Dynamic currency conversion, at a rate the terminal invented. Press <strong>EUR</strong>. Always, everywhere, including at the hotel desk."
+      }
+    ],
+    "emergency": [
+      {
+        "label": "Any emergency, any language",
+        "number": "112"
+      },
+      {
+        "label": "Police",
+        "number": "113"
+      }
+    ]
+  },
+  "speak": {
+    "title": "Twelve words that change how you're treated",
+    "lede": "Slovenians speak better English than almost anyone in Europe, and they will happily switch the moment you falter. Say <em>dober dan</em> first anyway. It is a small country and it notices. Tap any phrase to copy it.",
+    "phrases": [
+      {
+        "local": "Dober dan",
+        "pron": "DOH-ber dahn",
+        "en": "Hello — formal, and the right greeting entering any shop or café"
+      },
+      {
+        "local": "Živjo",
+        "pron": "ZHEEV-yo",
+        "en": "Hi — informal, with anyone roughly your own age"
+      },
+      {
+        "local": "Hvala",
+        "pron": "HVAH-lah",
+        "en": "Thank you"
+      },
+      {
+        "local": "Prosim",
+        "pron": "PROH-seem",
+        "en": "Please — also \"you're welcome\", also \"pardon?\""
+      },
+      {
+        "local": "Nasvidenje",
+        "pron": "nahs-VEE-den-yeh",
+        "en": "Goodbye"
+      },
+      {
+        "local": "Da / Ne",
+        "pron": "dah / neh",
+        "en": "Yes / No"
+      },
+      {
+        "local": "Oprostite",
+        "pron": "oh-pros-TEE-teh",
+        "en": "Excuse me / sorry"
+      },
+      {
+        "local": "Koliko stane?",
+        "pron": "KOH-lee-koh STAH-neh",
+        "en": "How much does it cost?"
+      },
+      {
+        "local": "Račun, prosim",
+        "pron": "RAH-choon PROH-seem",
+        "en": "The bill, please"
+      },
+      {
+        "local": "Eno pivo, prosim",
+        "pron": "EH-noh PEE-voh PROH-seem",
+        "en": "One beer, please"
+      },
+      {
+        "local": "Voda iz pipe, prosim",
+        "pron": "VOH-dah eez PEE-peh",
+        "en": "Tap water, please — it's excellent"
+      },
+      {
+        "local": "Na zdravje!",
+        "pron": "nah ZDRAV-yeh",
+        "en": "Cheers! — eye contact, always"
+      }
+    ]
+  },
+  "closing": {
+    "lines": [
+      "Walk one bridge upstream before you order.",
+      "Say <em>dober dan</em> when you walk in.",
+      "Climb to the castle instead of paying for the funicular."
+    ],
+    "sig": "That's the whole guide. Enjoy Ljubljana."
+  },
+  "sources": {
+    "note": "Every price on this page was checked against a published source in <strong>July 2026</strong>, with one exception we have flagged in the text: the airport bus fare, where published figures genuinely contradict each other and we have printed the highest recent number so you are not caught short. Prices change. Treat these as the number you should <em>expect</em>, not a guarantee.",
+    "links": [
+      {
+        "label": "LPP — price list & payment methods",
+        "url": "https://www.lpp.si/en/price-list-and-payment-methods"
+      },
+      {
+        "label": "Javni holding Ljubljana — Urbana prices",
+        "url": "https://www.jhl.si/en/single-city-card-urbana/prices"
+      },
+      {
+        "label": "Ljubljana Airport — public bus",
+        "url": "https://www.lju-airport.si/en/transport/bus/"
+      },
+      {
+        "label": "Ljubljana Castle — price list",
+        "url": "https://www.ljubljanskigrad.si/en/plan-your-visit/price-list/"
+      },
+      {
+        "label": "Odprta kuhna — official site",
+        "url": "https://www.odprtakuhna.si/en/"
+      },
+      {
+        "label": "Ljubljana prices in 2026",
+        "url": "https://www.ljubljanainfo.org/%F0%9F%92%B8-ljubljana-prices-in-2026-coffee-beer-taxi-dinner-real-costs-explained/"
+      },
+      {
+        "label": "Visit Ljubljana — city buses",
+        "url": "https://www.visitljubljana.com/en/visitors/travel-information/getting-around/city-buses"
+      },
+      {
+        "label": "Is Ljubljana safe? 2026 safety guide",
+        "url": "https://eurocityguide.com/slovenia/is-ljubljana-safe-for-tourists"
+      },
+      {
+        "label": "Klobasarna — official site",
+        "url": "https://www.klobasarna.si/"
+      },
+      {
+        "label": "Visit Ljubljana — Nobel burek",
+        "url": "https://www.visitljubljana.com/en/poi/nobel-burek/"
+      },
+      {
+        "label": "Visit Ljubljana — Druga violina",
+        "url": "https://www.visitljubljana.com/en/poi/druga-violina"
+      }
+    ]
+  }
+}

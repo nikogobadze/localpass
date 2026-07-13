@@ -1,0 +1,9 @@
+# SECRET — the admin write token. Never commit this.
+.admin-token
+
+node_modules/
+.vercel/
+*.tmp
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — LocalPass</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+
+<!-- ══════ Token gate ══════ -->
+<div class="gate" id="gate">
+  <form class="gate-card" id="gateForm">
+    <h1>Admin</h1>
+    <p>Paste the admin token. It's printed in the terminal where you ran <code>npm start</code>, and stored in <code>.admin-token</code>.</p>
+    <input type="password" id="tokenInput" placeholder="Admin token" autocomplete="off" spellcheck="false" required>
+    <button type="submit">Unlock</button>
+    <p class="gate-err" id="gateErr"></p>
+    <p class="gate-note">This gate exists so a stray browser tab can't rewrite your city files. It is not a real authentication system, and this server should only ever listen on localhost.</p>
+  </form>
+</div>
+
+<!-- ══════ App ══════ -->
+<div class="admin" id="admin" hidden>
+
+  <aside class="side">
+    <div class="side-head">
+      <p class="side-brand">LocalPass<em>admin</em></p>
+      <a class="side-view" href="/" target="_blank" rel="noopener">View site ↗</a>
+    </div>
+
+    <p class="side-label">Cities</p>
+    <ul class="city-list" id="cityList"></ul>
+
+    <button class="btn-new" id="btnNew">+ New city</button>
+
+    <div class="side-foot">
+      <p>Each city is one file in <code>data/cities/</code>. Saving rewrites that file and rebuilds <code>data/cities.json</code>.</p>
+      <button class="btn-lock" id="btnLock">Lock admin</button>
+    </div>
+  </aside>
+
+  <main class="pane" id="pane">
+    <div class="empty" id="empty">
+      <p>Pick a city on the left, or create a new one.</p>
+    </div>
+
+    <form class="editor" id="editor" hidden>
+      <header class="ed-head">
+        <div>
+          <h2 id="edTitle">Prague</h2>
+          <p class="ed-path" id="edPath">data/cities/prague.json</p>
+        </div>
+        <div class="ed-actions">
+          <a class="btn-ghost" id="btnPreview" href="/?city=prague" target="_blank" rel="noopener">Preview ↗</a>
+          <button type="button" class="btn-danger" id="btnDelete">Delete</button>
+          <button type="submit" class="btn-save" id="btnSave">Save city</button>
+        </div>
+      </header>
+
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+
+      <!-- Identity -->
+      <section class="card">
+        <h3>Identity</h3>
+        <div class="grid-2">
+          <label>Slug <small>URL and filename. Lowercase, hyphens.</small>
+            <input id="f_slug" required
+                   pattern="[a-z0-9]([a-z0-9\-]{0,46}[a-z0-9])?"
+                   title="Lowercase letters, digits and hyphens. Must start and end with a letter or digit."
+                   spellcheck="false">
+          </label>
+          <label>Name <small>English name, shown in the switcher.</small>
+            <input id="f_name" required>
+          </label>
+          <label>Local name <small>Shown as the wordmark. e.g. Praha.</small>
+            <input id="f_localName">
+          </label>
+          <label>Country
+            <input id="f_country">
+          </label>
+          <label>Verified <small>When you last checked the prices.</small>
+            <input id="f_verified" placeholder="July 2026">
+          </label>
+          <label>Currency code <small>Required. e.g. CZK, EUR.</small>
+            <input id="f_currency" placeholder="EUR" spellcheck="false">
+          </label>
+        </div>
+      </section>
+
+      <!-- Theme -->
+      <section class="card">
+        <h3>Theme</h3>
+        <p class="card-lede">Five colours drive the whole page. The first four are used as text, so keep them dark enough to read on warm paper. <code>Wash</code> is the page background and should stay very pale.</p>
+        <div class="grid-3">
+          <label class="swatch">Accent <small>City primary: section chips, rules, keywords.</small>
+            <span><input type="color" id="f_accent"><input class="hex" id="f_accentHex" spellcheck="false"></span>
+          </label>
+          <label class="swatch">Good <small>The honest price, free-entry pills, "yes".</small>
+            <span><input type="color" id="f_accent2"><input class="hex" id="f_accent2Hex" spellcheck="false"></span>
+          </label>
+          <label class="swatch">Pop <small>The bright one: shapes, shadows, highlights.</small>
+            <span><input type="color" id="f_pop"><input class="hex" id="f_popHex" spellcheck="false"></span>
+          </label>
+          <label class="swatch">Gold <small>Warm: dark sections, stickers, the hero sun.</small>
+            <span><input type="color" id="f_gold"><input class="hex" id="f_goldHex" spellcheck="false"></span>
+          </label>
+          <label class="swatch">Wash <small>Page background. Keep it near-white.</small>
+            <span><input type="color" id="f_wash"><input class="hex" id="f_washHex" spellcheck="false"></span>
+          </label>
+        </div>
+        <div class="theme-preview" id="themePreview" aria-hidden="true"></div>
+      </section>
+
+      <!-- Hero -->
+      <section class="card">
+        <h3>Hero</h3>
+        <div class="grid-2">
+          <label>Eyebrow <small>Small line above the title.</small>
+            <input id="f_eyebrow" placeholder="Austria · Central Europe · UTC+2">
+          </label>
+          <label>Title <small>The huge serif wordmark.</small>
+            <input id="f_heroTitle" placeholder="Wien">
+          </label>
+        </div>
+        <label>Subtitle <small>Inline HTML allowed: &lt;br&gt;, &lt;em&gt;, &lt;strong&gt;.</small>
+          <textarea id="f_heroSub" rows="3"></textarea>
+        </label>
+      </section>
+
+      <!-- Skyline -->
+      <section class="card">
+        <h3>Skyline</h3>
+        <p class="card-lede">Inner SVG markup on a <code>0 0 1200 240</code> canvas, ground at <code>y=240</code>. Group shapes into <code>&lt;g class="sky-far"&gt;</code>, <code>sky-mid</code> and <code>sky-near</code> for depth. Leave blank to use a generic rooftop silhouette.</p>
+        <textarea id="f_skyline" rows="5" spellcheck="false" class="mono"></textarea>
+        <div class="sky-preview">
+          <svg viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax meet" id="skyPreview" aria-label="Skyline preview"></svg>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <section class="card">
+        <h3>Content</h3>
+        <p class="card-lede">
+          The eight sections, plus <code>closing</code> and <code>sources</code>. This is deliberately a raw JSON field rather than three hundred form inputs — the prose is the product, and you'll want to write it in one place.
+          <button type="button" class="link" id="btnSkeleton">Insert blank skeleton</button> ·
+          <button type="button" class="link" id="btnCopyFrom">Copy structure from another city</button>
+        </p>
+        <textarea id="f_content" rows="26" spellcheck="false" class="mono"></textarea>
+        <p class="json-status" id="jsonStatus"></p>
+      </section>
+    </form>
+  </main>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

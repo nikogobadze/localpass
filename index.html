@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LocalPass</title>
+<meta name="description" content="Everything a visitor needs to know about a city, on one page. Real local prices, not tourist prices. No signup, no ads.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Noto *Georgian faces carry the Georgian glyphs the other three families lack.
+     Google serves them per unicode-range, so an English reader never downloads them. -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Georgian:wght@400;600;700&family=Noto+Sans+Georgian:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="assets/compass_icon_logo.png">
+<link rel="apple-touch-icon" href="assets/compass_icon_logo.png">
+</head>
+<body>
+
+<a class="skip" href="#orient">Skip to content</a>
+
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+<!-- ══════════════ NAV ══════════════ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <img class="brand-logo" src="assets/compass_icon_logo.png" alt="" width="36" height="36" decoding="async">
+      <span class="brand-text"><i>LocalPass</i></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Sections"></nav>
+
+    <div class="nav-right">
+      <div class="langpick" id="langpick" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ka" aria-pressed="false" lang="ka">ქარ</button>
+      </div>
+
+      <div class="citypick" id="citypick">
+        <button class="citypick-btn" id="citypickBtn" aria-haspopup="listbox" aria-expanded="false">
+          <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">
+            <circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M1.6 8h12.8M8 1.4c3.4 3.6 3.4 9.6 0 13.2M8 1.4C4.6 5 4.6 11 8 14.6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+          <span id="citypickCurrent">Prague</span>
+          <svg class="chev" viewBox="0 0 10 6" width="9" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+        <ul class="citypick-menu" id="citypickMenu" role="listbox"></ul>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Rendered from data/cities/<slug>.json -->
+<div id="app"></div>
+
+<noscript>
+  <div class="noscript">
+    <h1>LocalPass</h1>
+    <p>This guide is rendered from a small JSON file per city, so it needs JavaScript switched on.
+       You can read the raw data directly at <code>data/cities/prague.json</code>,
+       <code>data/cities/vienna.json</code> and <code>data/cities/ljubljana.json</code> — every price is in there, in plain text.</p>
+  </div>
+</noscript>
+
+<script src="render.js"></script>
+</body>
+</html>

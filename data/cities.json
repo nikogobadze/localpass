@@ -1,0 +1,64 @@
+{
+  "cities": [
+    {
+      "slug": "ljubljana",
+      "name": "Ljubljana",
+      "localName": "Ljubljana",
+      "country": "Slovenia",
+      "names": {
+        "en": "Ljubljana",
+        "ka": "ლუბლიანა"
+      },
+      "countries": {
+        "en": "Slovenia",
+        "ka": "სლოვენია"
+      },
+      "langs": [
+        "en",
+        "ka"
+      ],
+      "accent": "#C25A2B",
+      "verified": "July 2026"
+    },
+    {
+      "slug": "prague",
+      "name": "Prague",
+      "localName": "Praha",
+      "country": "Czech Republic",
+      "names": {
+        "en": "Prague",
+        "ka": "პრაღა"
+      },
+      "countries": {
+        "en": "Czech Republic",
+        "ka": "ჩეხეთი"
+      },
+      "langs": [
+        "en",
+        "ka"
+      ],
+      "accent": "#C4402A",
+      "verified": "July 2026"
+    },
+    {
+      "slug": "vienna",
+      "name": "Vienna",
+      "localName": "Wien",
+      "country": "Austria",
+      "names": {
+        "en": "Vienna",
+        "ka": "ვენა"
+      },
+      "countries": {
+        "en": "Austria",
+        "ka": "ავსტრია"
+      },
+      "langs": [
+        "en",
+        "ka"
+      ],
+      "accent": "#A5294A",
+      "verified": "July 2026"
+    }
+  ]
+}
