@@ -1,0 +1,9 @@
+# Normalise line endings so a Windows checkout doesn't rewrite every file.
+* text=auto eol=lf
+
+# Photos and the logo are binary — never touch them.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
