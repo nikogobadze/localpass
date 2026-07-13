@@ -35,7 +35,13 @@
       ]
     },
     {
-      "source": "/(render.js|styles.css)",
+      "source": "/render.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/styles.css",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, must-revalidate" }
       ]
