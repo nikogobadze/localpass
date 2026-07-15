@@ -44,6 +44,8 @@
       carNext: 'More options',
       expandHint: 'Tap to read the full details',
       closeLabel: 'Close',
+      mapLink: 'Open in Maps',
+      mapSights: 'See the sights on a map',
     },
     ka: {
       nav: ['მთავარი', 'ჩასვლა', 'დარჩენა', 'საჭმელი', 'სანახავი', 'უფასო', 'ენა'],
@@ -72,6 +74,8 @@
       carNext: 'მეტი ვარიანტი',
       expandHint: 'დააჭირეთ სრული ინფორმაციისთვის',
       closeLabel: 'დახურვა',
+      mapLink: 'რუკაზე ნახვა',
+      mapSights: 'ნახეთ ღირსშესანიშნაობები რუკაზე',
     },
   };
 
@@ -243,6 +247,27 @@
     if (!more) return [];
     const paras = Array.isArray(more) ? more : [more];
     return paras.filter(Boolean).map((p) => h('p', 'more-p', p));
+  }
+
+  /* ── Maps ────────────────────────────────────────────────
+     Plain Google Maps URLs (no key, no account, nothing embedded) — they open
+     in a new tab only when tapped, so the page itself still loads nothing and
+     tracks nothing. `search` drops a pin on one place; `dir` shows several. */
+  const PIN_ICON =
+    '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M8 1.4c-2.6 0-4.6 2-4.6 4.6 0 3.3 4.6 8.6 4.6 8.6s4.6-5.3 4.6-8.6C12.6 3.4 10.6 1.4 8 1.4z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6" r="1.7" fill="currentColor"/></svg>';
+  const mapSearchUrl = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+  const mapDirUrl = (stops) => `https://www.google.com/maps/dir/${stops.map(encodeURIComponent).join('/')}`;
+
+  /* A place → its location on the map. Name + city (plus a street where we have
+     one) is enough for Maps to resolve the real spot. */
+  function mapLinkNode(parts) {
+    const q = parts.filter(Boolean).join(', ');
+    const a = h('a', 'map-link');
+    a.href = mapSearchUrl(q);
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML = `${PIN_ICON}<span>${esc(t().mapLink)}</span> ↗`;
+    return a;
   }
 
   /* ── Section shell ───────────────────────────────────────── */
@@ -537,7 +562,7 @@
       head.append(h('h3', null, esc(n.name)), h('p', 'hood-price', `${esc(n.price)} <span>${esc(n.unit || '')}</span>`));
       art.append(head, h('p', 'hood-verdict', esc(n.verdict || '')), h('p', 'hood-body', n.body || ''));
       // The at-a-glance tags and any extra notes are expanded-only.
-      const more = moreBlock(tagRow(n.tags), detailList(n.details), moreProse(n.more));
+      const more = moreBlock(tagRow(n.tags), detailList(n.details), moreProse(n.more), mapLinkNode([n.name, city.name]));
       if (more) art.append(more);
       return art;
     });
@@ -578,7 +603,7 @@
 
       // Popover-only extras: the thumbnail already carries area/class/price, so
       // this is for genuinely new info the data provides (details / guidance).
-      const more = moreBlock(detailList(o.details), moreProse(o.more));
+      const more = moreBlock(detailList(o.details), moreProse(o.more), mapLinkNode([o.name, o.area, city.name]));
       if (more) body.append(more);
       art.append(body);
       return art;
@@ -639,7 +664,8 @@
           extraRows,
           p.note ? h('p', 'place-note', p.note) : null,
           detailList(p.details),
-          moreProse(p.more)
+          moreProse(p.more),
+          mapLinkNode([p.name, p.address, p.area, city.name])
         );
         if (more) art.append(more);
         if (p.url) {
@@ -660,6 +686,22 @@
   function renderSee(city) {
     const d = city.see || {};
     const { sec, wrap } = section('see', '05', d.title, d.lede, 'sec-tint-c');
+
+    // One tap to see every landmark (sights + the free ones) pinned on a map.
+    // A plain Maps directions URL, opened in a new tab — nothing loads here.
+    const landmarks = [...(d.sights || []), ...(d.free || [])]
+      .map((s) => s.name)
+      .filter(Boolean)
+      .slice(0, 9) // Maps directions caps at ~10 stops
+      .map((n) => `${n}, ${city.name}`);
+    if (landmarks.length > 1) {
+      const cta = h('a', 'map-cta reveal');
+      cta.href = mapDirUrl(landmarks);
+      cta.target = '_blank';
+      cta.rel = 'noopener';
+      cta.innerHTML = `${PIN_ICON}<span>${esc(t().mapSights)}</span> ↗`;
+      wrap.append(cta);
+    }
 
     const cards = (d.sights || []).map((s) => {
       const art = h('article', 'sight reveal');
@@ -692,7 +734,8 @@
         priceMore,
         s.note ? h('p', 'sight-note', s.note) : null,
         detailList(s.details),
-        moreProse(s.more)
+        moreProse(s.more),
+        mapLinkNode([s.name, city.name])
       );
       if (more) art.append(more);
       return art;
@@ -717,7 +760,7 @@
       const body = h('div', 'free-body');
       body.append(h('span', 'pill pill-free', esc(t().nav[5])));
       body.append(h('h4', null, esc(f.name)), h('p', null, f.desc));
-      const more = moreBlock(detailList(f.details), moreProse(f.more));
+      const more = moreBlock(detailList(f.details), moreProse(f.more), mapLinkNode([f.name, city.name]));
       if (more) body.append(more);
       art.append(body);
       return art;

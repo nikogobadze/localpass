@@ -1032,6 +1032,29 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
   padding:4px 10px; border-radius:100px; }
 /* Extra, free-authored guidance. */
 .more-p{ font-size:.82rem; color:var(--ink-soft); line-height:1.55; margin:11px 0 0; }
+
+/* "Open in Maps" — a quiet link in the popover, pin + label. */
+.map-link{
+  display:inline-flex; align-items:center; gap:6px; width:max-content; margin:13px 0 0;
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--pop); text-decoration:none;
+  border-bottom:1.5px solid color-mix(in srgb, var(--pop) 40%, transparent); padding-bottom:2px;
+  transition:color .2s, border-color .2s;
+}
+.map-link:hover{ color:var(--ink); border-bottom-color:var(--pop); }
+.map-link svg{ flex:none; }
+
+/* "See the sights on a map" — a button in the See section. */
+.map-cta{
+  display:inline-flex; align-items:center; gap:9px; align-self:flex-start; margin:2px 0 22px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink); text-decoration:none;
+  border:2px solid var(--ink); border-radius:100px; padding:11px 20px;
+  background:var(--card); box-shadow:4px 4px 0 var(--good);
+  transition:transform .18s var(--spring), box-shadow .18s var(--ease);
+}
+.map-cta:hover{ transform:translate(-1px,-1px); box-shadow:6px 6px 0 var(--good); }
+.map-cta svg{ flex:none; }
 /* Space the expanded block from the thumbnail content above it. */
 .cardmodal-body .card-more{ display:block; margin-top:12px; }
 .cardmodal-body .card-more > :first-child{ margin-top:0; }
