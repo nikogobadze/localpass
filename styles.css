@@ -180,10 +180,10 @@ img,svg{ max-width:100%; display:block; }
 /* ═══════════ HERO ═══════════ */
 .hero{
   position:relative; overflow:hidden;
-  /* Grow with the viewport so the hero feels full on a big screen, but cap it
-     so it never balloons on a 1440p+ monitor. On a 1366×768 laptop this is
-     ~675px — still well under a screen height, so the fit-to-laptop rule holds. */
-  min-height:min(88vh, 880px);
+  /* Grow with the viewport so the hero nearly fills a big screen, capped so it
+     doesn't balloon on a very tall monitor. ~94% of the viewport: ~720px on a
+     1366×768 laptop (still fits), ~1015px on a 1080p screen. */
+  min-height:min(94vh, 1080px);
   display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
   padding:86px 26px 170px;
   /* Restrained washes — the sunburst is the focal point, not these. */
