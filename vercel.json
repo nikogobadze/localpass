@@ -23,7 +23,7 @@
       ]
     },
     {
-      "source": "/assets/compass_icon_logo.png",
+      "source": "/assets/localpass_logo.png",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=604800" }
       ]

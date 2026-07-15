@@ -42,6 +42,8 @@
       freeLede: 'A surprising amount of the best of this city costs nothing. These are the free things genuinely worth your time.',
       carPrev: 'Previous',
       carNext: 'More options',
+      expandHint: 'Tap to read the full details',
+      closeLabel: 'Close',
     },
     ka: {
       nav: ['მთავარი', 'ჩასვლა', 'დარჩენა', 'საჭმელი', 'სანახავი', 'უფასო', 'ენა'],
@@ -68,6 +70,8 @@
       freeLede: 'ამ ქალაქში საუკეთესოს გასაკვირად დიდი ნაწილი უფასოა. აი, უფასო ადგილები, რომლებიც ნამდვილად ღირს.',
       carPrev: 'წინა',
       carNext: 'მეტი ვარიანტი',
+      expandHint: 'დააჭირეთ სრული ინფორმაციისთვის',
+      closeLabel: 'დახურვა',
     },
   };
 
@@ -177,6 +181,26 @@
     fig.append(photo(image.src, image.alt));
     if (image.caption) fig.append(h('figcaption', null, image.caption));
     return fig;
+  }
+
+  /* ── Expandable cards ────────────────────────────────────
+     Carousel/grid cards clamp their prose so a row fits a laptop screen.
+     Marking a card expandable lets a tap open it full-size in the overlay
+     (see bindExpand): the full text is already in the DOM, just clipped. */
+  const EXPAND_ICON =
+    '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 2h5v5M14 2 8.5 7.5M7 14H2V9M2 14l5.5-5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function markExpandable(card) {
+    card.classList.add('expandable');
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    const title = (card.querySelector('h2, h3, h4, dt')?.textContent || '').trim();
+    card.setAttribute('aria-label', title ? `${title} — ${t().expandHint}` : t().expandHint);
+    card.setAttribute('title', t().expandHint);
+    const cue = h('span', 'expand-cue', EXPAND_ICON);
+    cue.setAttribute('aria-hidden', 'true');
+    card.append(cue);
+    return card;
   }
 
   /* ── Section shell ───────────────────────────────────────── */
@@ -295,6 +319,7 @@
     const track = h('div', 'car-track');
     cards.forEach((c) => {
       c.classList.remove('reveal', 'in');
+      markExpandable(c);
       track.append(c);
     });
     wrap.append(prev, track, next);
@@ -412,6 +437,7 @@
       facts.forEach((f) => {
         const card = h('div', 'fact-card');
         card.append(h('dt', null, esc(f.term)), h('dd', null, f.def));
+        markExpandable(card);
         grid.append(card);
       });
       box.append(grid);
@@ -538,13 +564,24 @@
 
         if (p.body) art.append(h('p', 'place-body', p.body));
 
-        // One compact price line (first row), plus the official link if any —
-        // the full price table and notes are dropped so the card fits a screen.
+        // One compact price line (first row) shows on the card; the rest of the
+        // table and the note live in .card-more, hidden until the card is expanded.
         if (p.rows && p.rows[0]) {
           const r0 = p.rows[0];
           const pr = h('p', 'place-priceline');
           pr.innerHTML = `<span>${esc(r0.label)}</span><b>${esc(r0.value)}</b>`;
           art.append(pr);
+        }
+        const extraRows = (p.rows || []).slice(1);
+        if (extraRows.length || p.note) {
+          const more = h('div', 'card-more');
+          extraRows.forEach((r) => {
+            const pr = h('p', 'place-priceline');
+            pr.innerHTML = `<span>${esc(r.label)}</span><b>${esc(r.value)}</b>`;
+            more.append(pr);
+          });
+          if (p.note) more.append(h('p', 'place-note', p.note));
+          art.append(more);
         }
         if (p.url) {
           const a = h('a', 'place-link', 'Official listing ↗');
@@ -654,7 +691,7 @@
 
     const left = h('div');
     left.append(
-      h('p', 'foot-brand', `<img class="foot-logo" src="assets/compass_icon_logo.png" alt="" width="30" height="30" decoding="async"><span>${esc(BRAND)}</span>`),
+      h('p', 'foot-brand', `<img class="foot-logo" src="assets/localpass_logo.png" alt="" width="42" height="42" decoding="async"><span>${esc(BRAND)}</span>`),
       h('p', 'foot-copy', esc(t().footBlurb))
     );
 
@@ -709,6 +746,7 @@
   let observers = [];
   let revealTimers = [];
   let closeCityPicker = null;
+  let teardownExpand = null;
 
   function teardown() {
     observers.forEach((o) => o.disconnect());
@@ -719,6 +757,9 @@
     // Drop the document-level listeners the open menu installed.
     if (closeCityPicker) closeCityPicker();
     closeCityPicker = null;
+    // Drop the overlay's listeners and shut it if a repaint lands mid-open.
+    if (teardownExpand) teardownExpand();
+    teardownExpand = null;
   }
 
   /* Scroll state. scrollHeight is a layout read, so it is measured once per
@@ -858,6 +899,94 @@
     });
   }
 
+  /* ── Tap-to-expand overlay ───────────────────────────────
+     One reusable dialog. Since this is a static one-pager there is no detail
+     page to open, so a tapped card opens full-size here with its prose
+     un-clamped. Tap the card again, the backdrop, the ✕, or press Escape to
+     close; tapping a link inside the card still follows the link. */
+  function bindExpand() {
+    let modal = document.getElementById('cardModal');
+    if (!modal) {
+      modal = h('div', 'cardmodal');
+      modal.id = 'cardModal';
+      modal.hidden = true;
+      modal.innerHTML =
+        '<div class="cardmodal-scrim" data-close></div>' +
+        '<div class="cardmodal-panel" role="dialog" aria-modal="true" tabindex="-1">' +
+        '<button class="cardmodal-close" type="button">' +
+        '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>' +
+        '</button><div class="cardmodal-body"></div></div>';
+      document.body.append(modal);
+    }
+    const closeBtn = modal.querySelector('.cardmodal-close');
+    closeBtn.setAttribute('aria-label', t().closeLabel); // refreshed on language change
+    const body = modal.querySelector('.cardmodal-body');
+    let lastFocus = null;
+
+    const open = (card) => {
+      const clone = card.cloneNode(true);
+      clone.classList.remove('reveal', 'in', 'expandable');
+      clone.classList.add('is-expanded');
+      ['role', 'tabindex', 'aria-label', 'title'].forEach((a) => clone.removeAttribute(a));
+      // Images must not lazy-load inside a modal that was just revealed.
+      clone.querySelectorAll('img').forEach((im) => im.setAttribute('loading', 'eager'));
+      body.innerHTML = '';
+      body.append(clone);
+      body.scrollTop = 0;
+      lastFocus = card;
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => {
+        modal.classList.add('show');
+        closeBtn.focus();
+      });
+    };
+    const close = () => {
+      if (modal.hidden) return;
+      modal.classList.remove('show');
+      const finish = () => { modal.hidden = true; body.innerHTML = ''; };
+      modal.addEventListener('transitionend', finish, { once: true });
+      setTimeout(finish, 260); // fallback if no transition fires
+      document.body.classList.remove('modal-open');
+      if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+      lastFocus = null;
+    };
+
+    const onAppClick = (e) => {
+      // A real control inside a card (link, the copy buttons) behaves normally.
+      if (e.target.closest('a, button, input, label, summary, details')) return;
+      const card = e.target.closest('.expandable');
+      if (card) { e.preventDefault(); open(card); }
+    };
+    const onAppKey = (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const card = e.target.closest('.expandable');
+      if (card && card === e.target) { e.preventDefault(); open(card); }
+    };
+    const onModalClick = (e) => {
+      if (e.target.closest('.cardmodal-close') || e.target.closest('[data-close]')) { close(); return; }
+      if (e.target.closest('a, button, input, label, summary')) return; // let links work
+      if (e.target.closest('.cardmodal-panel')) close(); // tap the card again to close
+    };
+    const onKey = (e) => { if (e.key === 'Escape') close(); };
+
+    app.addEventListener('click', onAppClick);
+    app.addEventListener('keydown', onAppKey);
+    modal.addEventListener('click', onModalClick);
+    document.addEventListener('keydown', onKey);
+
+    teardownExpand = () => {
+      app.removeEventListener('click', onAppClick);
+      app.removeEventListener('keydown', onAppKey);
+      modal.removeEventListener('click', onModalClick);
+      document.removeEventListener('keydown', onKey);
+      modal.hidden = true;
+      modal.classList.remove('show');
+      body.innerHTML = '';
+      document.body.classList.remove('modal-open');
+    };
+  }
+
   /* ── City switcher ───────────────────────────────────────── */
   function buildNavLinks() {
     const nav = document.getElementById('navLinks');
@@ -976,6 +1105,7 @@
     bindConverter();
     bindPhrases();
     bindCarousels();
+    bindExpand();
     buildCityPicker(CITIES, city);
     measure(); // the document height just changed
   }

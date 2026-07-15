@@ -115,7 +115,7 @@ img,svg{ max-width:100%; display:block; }
    per city (the whole point of a logo is that it stays put). Transparent PNG,
    so it sits on the cream nav and the dark footer alike. */
 .brand-logo{
-  width:34px; height:34px; flex:none; object-fit:contain;
+  width:44px; height:44px; flex:none; object-fit:contain;
   transition:transform .25s var(--spring);
 }
 .brand:hover .brand-logo{ transform:rotate(-12deg) scale(1.06); }
@@ -686,7 +686,7 @@ img,svg{ max-width:100%; display:block; }
 .foot{ background:var(--dark); color:#8B847A; padding:56px 0 32px; }
 .foot-grid{ display:grid; grid-template-columns:1fr 1.35fr; gap:56px; padding-bottom:36px; border-bottom:1px solid rgba(255,255,255,.09); }
 .foot-brand{ font-family:var(--serif); font-size:1.5rem; font-weight:600; color:#F6F1E5; margin:0; display:flex; align-items:center; gap:12px; letter-spacing:-.02em; }
-.foot-logo{ width:32px; height:32px; flex:none; object-fit:contain; }
+.foot-logo{ width:42px; height:42px; flex:none; object-fit:contain; }
 .foot-copy{ font-size:.82rem; line-height:1.6; margin:14px 0 0; max-width:62ch; }
 .foot-copy strong{ color:#C7C0B4; }
 .foot h4{ font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin:0 0 16px; }
@@ -993,4 +993,62 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
   .citypick-btn{ padding:7px 11px; letter-spacing:.06em; }
   .citypick-menu{ right:-46px; min-width:220px; }
   .sec h2::after{ width:96px; height:6px; }
+}
+
+/* ── Tap-to-expand cards + overlay ───────────────────────────
+   Cards clamp their prose so a carousel row fits a laptop screen. Tapping a
+   card opens it full-size in the dialog with the clamps lifted, since a static
+   one-pager has no detail page to link to. See bindExpand() in render.js. */
+.expandable{ cursor:pointer; position:relative; }
+.expandable:focus-visible{ outline:3px solid var(--pop); outline-offset:3px; }
+.expand-cue{
+  position:absolute; top:8px; right:8px; z-index:4;
+  width:24px; height:24px; display:grid; place-items:center; border-radius:50%;
+  color:#fff; background:color-mix(in srgb, var(--ink) 72%, transparent);
+  pointer-events:none; opacity:.6; transition:opacity .2s, background .2s, transform .2s;
+}
+.expand-cue svg{ width:13px; height:13px; }
+.expandable:hover .expand-cue,
+.expandable:focus-visible .expand-cue{ opacity:1; background:var(--accent); transform:scale(1.08); }
+
+/* Content shown only in the expanded dialog (e.g. a restaurant's full price
+   table + note, dropped from the card so it fits a screen). */
+.card-more{ display:none; }
+.place-note{ font-size:.76rem; color:var(--muted); line-height:1.5; margin:10px 0 0;
+  padding-top:9px; border-top:1px dashed var(--rule); }
+
+/* Overlay ---------------------------------------------------- */
+body.modal-open{ overflow:hidden; }
+.cardmodal{ position:fixed; inset:0; z-index:400; overflow-y:auto; display:flex; padding:24px; }
+.cardmodal[hidden]{ display:none; }
+.cardmodal-scrim{ position:fixed; inset:0; background:color-mix(in srgb, var(--ink) 55%, transparent);
+  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); opacity:0; transition:opacity .2s; }
+.cardmodal.show .cardmodal-scrim{ opacity:1; }
+.cardmodal-panel{ position:relative; z-index:1; margin:auto; width:min(560px, 100%);
+  transform:translateY(14px) scale(.985); opacity:0;
+  transition:transform .24s var(--spring), opacity .24s var(--ease); }
+.cardmodal.show .cardmodal-panel{ transform:none; opacity:1; }
+.cardmodal-close{ position:fixed; top:16px; right:16px; z-index:5;
+  width:36px; height:36px; display:grid; place-items:center; cursor:pointer;
+  border:2px solid var(--ink); border-radius:50%; background:var(--card); color:var(--ink);
+  box-shadow:3px 3px 0 var(--ink); transition:transform .15s, box-shadow .15s; }
+.cardmodal-close:hover{ transform:translate(-1px,-1px); box-shadow:4px 5px 0 var(--accent); }
+.cardmodal-close svg{ width:15px; height:15px; }
+
+/* The cloned card, full-size: shed the carousel width and hover transform. */
+.cardmodal-body .is-expanded{
+  width:auto !important; max-width:none !important; min-width:0 !important;
+  flex:none !important; margin:0 !important; transform:none !important;
+  scroll-snap-align:none !important; box-shadow:6px 6px 0 var(--ink) !important;
+}
+.cardmodal-body .expand-cue{ display:none; }
+.cardmodal-body .card-more{ display:block; }
+/* Lift every clamp inside the dialog so the full prose shows. */
+.cardmodal-body :is(.place-body, .sight > p, .hotel-desc, .free-body p,
+  .airport-body, .airport-note, .hood-body, .hood-verdict, .fact-card dd){
+  -webkit-line-clamp:unset !important; line-clamp:unset !important;
+  display:block !important; overflow:visible !important;
+}
+@media (prefers-reduced-motion: reduce){
+  .cardmodal-scrim, .cardmodal-panel{ transition:none; }
 }
