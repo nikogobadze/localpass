@@ -1020,29 +1020,33 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 .place-note{ font-size:.76rem; color:var(--muted); line-height:1.5; margin:10px 0 0;
   padding-top:9px; border-top:1px dashed var(--rule); }
 
-/* Overlay ---------------------------------------------------- */
-body.modal-open{ overflow:hidden; }
-.cardmodal{ position:fixed; inset:0; z-index:400; overflow-y:auto; display:flex; padding:24px; }
+/* Overlay — an anchored popover that opens next to the tapped card, over a
+   barely-there dim (no blur), so the rest of the page stays fully readable.
+   The panel's left/top are set by JS from the card's position. */
+.cardmodal{ position:fixed; inset:0; z-index:400; }
 .cardmodal[hidden]{ display:none; }
-.cardmodal-scrim{ position:fixed; inset:0; background:color-mix(in srgb, var(--ink) 55%, transparent);
-  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); opacity:0; transition:opacity .2s; }
+.cardmodal-scrim{ position:absolute; inset:0; background:rgba(0,0,0,.12);
+  opacity:0; transition:opacity .18s; }
 .cardmodal.show .cardmodal-scrim{ opacity:1; }
-.cardmodal-panel{ position:relative; z-index:1; margin:auto; width:min(560px, 100%);
-  transform:translateY(14px) scale(.985); opacity:0;
-  transition:transform .24s var(--spring), opacity .24s var(--ease); }
-.cardmodal.show .cardmodal-panel{ transform:none; opacity:1; }
-.cardmodal-close{ position:fixed; top:16px; right:16px; z-index:5;
-  width:36px; height:36px; display:grid; place-items:center; cursor:pointer;
+.cardmodal-panel{ position:fixed; left:0; top:0; z-index:1;
+  width:min(460px, calc(100vw - 40px));
+  opacity:0; transform:scale(.96); transform-origin:center center;
+  transition:transform .2s var(--spring), opacity .16s var(--ease); }
+.cardmodal.show .cardmodal-panel{ opacity:1; transform:none; }
+.cardmodal-close{ position:absolute; top:-13px; right:-13px; z-index:5;
+  width:34px; height:34px; display:grid; place-items:center; cursor:pointer;
   border:2px solid var(--ink); border-radius:50%; background:var(--card); color:var(--ink);
-  box-shadow:3px 3px 0 var(--ink); transition:transform .15s, box-shadow .15s; }
-.cardmodal-close:hover{ transform:translate(-1px,-1px); box-shadow:4px 5px 0 var(--accent); }
-.cardmodal-close svg{ width:15px; height:15px; }
+  box-shadow:2px 2px 0 var(--ink); transition:transform .15s, box-shadow .15s; }
+.cardmodal-close:hover{ transform:translate(-1px,-1px); box-shadow:3px 4px 0 var(--accent); }
+.cardmodal-close svg{ width:14px; height:14px; }
 
-/* The cloned card, full-size: shed the carousel width and hover transform. */
+/* The cloned card, full-size: shed the carousel width and hover transform.
+   Cap its height to the viewport and let a very tall card scroll inside. */
 .cardmodal-body .is-expanded{
   width:auto !important; max-width:none !important; min-width:0 !important;
   flex:none !important; margin:0 !important; transform:none !important;
   scroll-snap-align:none !important; box-shadow:6px 6px 0 var(--ink) !important;
+  max-height:calc(100vh - 40px); overflow-y:auto;
 }
 .cardmodal-body .expand-cue{ display:none; }
 .cardmodal-body .card-more{ display:block; }
@@ -1112,9 +1116,9 @@ html[data-theme="dark"] .hero-grain{ mix-blend-mode:overlay; opacity:.22; }
    melt into the page, so lift it onto the card surface with a hairline. */
 html[data-theme="dark"] .converter{ background:var(--card); border:1px solid var(--rule); }
 
-/* The overlay scrim mixes with --ink; in dark that turns light and useless.
-   Pin it to black so the dialog still reads as lifted above a dimmed page. */
-html[data-theme="dark"] .cardmodal-scrim{ background:color-mix(in srgb, #000 66%, transparent); }
+/* A touch more dim in dark mode so the popover still separates from the page,
+   but still barely there. */
+html[data-theme="dark"] .cardmodal-scrim{ background:rgba(0,0,0,.22); }
 
 /* Photos carry their own light; a gentle dim keeps them from glaring on dark. */
 html[data-theme="dark"] .card-figure img,

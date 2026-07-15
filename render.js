@@ -925,20 +925,44 @@
     closeBtn.setAttribute('aria-label', t().closeLabel); // refreshed on language change
     const body = modal.querySelector('.cardmodal-body');
     let lastFocus = null;
+    let onScrollClose = null;
+
+    const panel = modal.querySelector('.cardmodal-panel');
+
+    /* Anchor the popover to the tapped card: centre it on the card, then clamp
+       inside the viewport so it never spills off an edge. */
+    const place = (card) => {
+      const cr = card.getBoundingClientRect();
+      const pw = panel.offsetWidth, ph = panel.offsetHeight;   // layout size, ignores the entry scale
+      const vw = document.documentElement.clientWidth, vh = window.innerHeight;
+      const M = 20;
+      const cx = cr.left + cr.width / 2, cy = cr.top + cr.height / 2;
+      const left = Math.max(M, Math.min(Math.round(cx - pw / 2), vw - pw - M));
+      const top = Math.max(M, Math.min(Math.round(cy - ph / 2), Math.max(M, vh - ph - M)));
+      panel.style.left = left + 'px';
+      panel.style.top = top + 'px';
+      // Grow out from the card, wherever it ended up relative to the panel.
+      panel.style.transformOrigin = `${Math.round(cx - left)}px ${Math.round(cy - top)}px`;
+    };
 
     const open = (card) => {
       const clone = card.cloneNode(true);
       clone.classList.remove('reveal', 'in', 'expandable');
       clone.classList.add('is-expanded');
       ['role', 'tabindex', 'aria-label', 'title'].forEach((a) => clone.removeAttribute(a));
-      // Images must not lazy-load inside a modal that was just revealed.
+      // Images must not lazy-load inside a popover that was just revealed.
       clone.querySelectorAll('img').forEach((im) => im.setAttribute('loading', 'eager'));
       body.innerHTML = '';
       body.append(clone);
-      body.scrollTop = 0;
       lastFocus = card;
       modal.hidden = false;
-      document.body.classList.add('modal-open');
+      place(card);                 // measure + position while still invisible
+      // The page isn't locked (the reader should see what's underneath), so an
+      // anchored popover would drift on scroll — close it on a deliberate scroll.
+      // The threshold ignores the tiny settle when a click scrolls a card into view.
+      const startY = window.scrollY;
+      onScrollClose = () => { if (Math.abs(window.scrollY - startY) > 24) close(); };
+      window.addEventListener('scroll', onScrollClose, { passive: true });
       requestAnimationFrame(() => {
         modal.classList.add('show');
         closeBtn.focus();
@@ -946,11 +970,11 @@
     };
     const close = () => {
       if (modal.hidden) return;
+      if (onScrollClose) { window.removeEventListener('scroll', onScrollClose); onScrollClose = null; }
       modal.classList.remove('show');
       const finish = () => { modal.hidden = true; body.innerHTML = ''; };
       modal.addEventListener('transitionend', finish, { once: true });
       setTimeout(finish, 260); // fallback if no transition fires
-      document.body.classList.remove('modal-open');
       if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
       lastFocus = null;
     };
@@ -983,10 +1007,10 @@
       app.removeEventListener('keydown', onAppKey);
       modal.removeEventListener('click', onModalClick);
       document.removeEventListener('keydown', onKey);
+      if (onScrollClose) { window.removeEventListener('scroll', onScrollClose); onScrollClose = null; }
       modal.hidden = true;
       modal.classList.remove('show');
       body.innerHTML = '';
-      document.body.classList.remove('modal-open');
     };
   }
 
