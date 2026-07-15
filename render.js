@@ -206,6 +206,45 @@
     return card;
   }
 
+  /* ── Expanded-only detail ────────────────────────────────
+     Content that belongs in the popover, not the thumbnail: a structured
+     label/value list, tag chips, and any extra prose. Everything is optional,
+     so a card with nothing extra simply renders no .card-more. */
+  function detailList(rows) {
+    const clean = (rows || []).filter((r) => r && r.value != null && r.value !== '');
+    if (!clean.length) return null;
+    const dl = h('dl', 'detail-list');
+    clean.forEach((r) => {
+      dl.append(h('dt', null, esc(r.label)));
+      const dd = h('dd');
+      if (r.html) dd.innerHTML = r.value; else dd.textContent = r.value;
+      dl.append(dd);
+    });
+    return dl;
+  }
+  function tagRow(tags) {
+    if (!Array.isArray(tags) || !tags.length) return null;
+    const ul = h('ul', 'card-tags');
+    tags.forEach((s) => ul.append(h('li', null, esc(s))));
+    return ul;
+  }
+  /* Build a .card-more from a list of nodes; returns null if all are empty so
+     callers can `const m = moreBlock(...); if (m) card.append(m);`. */
+  function moreBlock(...nodes) {
+    const kids = nodes.flat().filter(Boolean);
+    if (!kids.length) return null;
+    const box = h('div', 'card-more');
+    kids.forEach((n) => box.append(n));
+    return box;
+  }
+  /* Free-authored extra prose for the popover: an optional heading + one or
+     more paragraphs, taken from item.more (string or string[]). */
+  function moreProse(more) {
+    if (!more) return [];
+    const paras = Array.isArray(more) ? more : [more];
+    return paras.filter(Boolean).map((p) => h('p', 'more-p', p));
+  }
+
   /* ── Section shell ───────────────────────────────────────── */
   function section(id, num, title, lede, extraClass = '') {
     const sec = h('section', `sec ${extraClass}`);
@@ -440,6 +479,8 @@
       facts.forEach((f) => {
         const card = h('div', 'fact-card');
         card.append(h('dt', null, esc(f.term)), h('dd', null, f.def));
+        const more = moreBlock(detailList(f.details), moreProse(f.more));
+        if (more) card.append(more);
         markExpandable(card);
         grid.append(card);
       });
@@ -467,7 +508,14 @@
         art.append(pr);
         if (o.time) art.append(h('p', 'airport-time', esc(o.time)));
         if (o.body) art.append(h('p', 'airport-body', o.body));
-        if (o.note) art.append(h('p', 'airport-note', o.note));
+        // The caveat and any extra detail move to the popover — the thumbnail
+        // keeps just the route, price and time.
+        const more = moreBlock(
+          o.note ? h('p', 'airport-note', o.note) : null,
+          detailList(o.details),
+          moreProse(o.more)
+        );
+        if (more) art.append(more);
         return art;
       });
       wrap.append(carousel(cards));
@@ -489,6 +537,9 @@
       const head = h('header');
       head.append(h('h3', null, esc(n.name)), h('p', 'hood-price', `${esc(n.price)} <span>${esc(n.unit || '')}</span>`));
       art.append(head, h('p', 'hood-verdict', esc(n.verdict || '')), h('p', 'hood-body', n.body || ''));
+      // The at-a-glance tags and any extra notes are expanded-only.
+      const more = moreBlock(tagRow(n.tags), detailList(n.details), moreProse(n.more));
+      if (more) art.append(more);
       return art;
     });
     /* Named hotels — same honesty posture as the restaurants. */
@@ -525,6 +576,11 @@
         body.append(priceRow);
 
       if (o.desc) body.append(h('p', 'hotel-desc', o.desc));
+
+      // Popover-only extras: the thumbnail already carries area/class/price, so
+      // this is for genuinely new info the data provides (details / guidance).
+      const more = moreBlock(detailList(o.details), moreProse(o.more));
+      if (more) body.append(more);
       art.append(body);
       return art;
     });
@@ -575,17 +631,18 @@
           pr.innerHTML = `<span>${esc(r0.label)}</span><b>${esc(r0.value)}</b>`;
           art.append(pr);
         }
-        const extraRows = (p.rows || []).slice(1);
-        if (extraRows.length || p.note) {
-          const more = h('div', 'card-more');
-          extraRows.forEach((r) => {
-            const pr = h('p', 'place-priceline');
-            pr.innerHTML = `<span>${esc(r.label)}</span><b>${esc(r.value)}</b>`;
-            more.append(pr);
-          });
-          if (p.note) more.append(h('p', 'place-note', p.note));
-          art.append(more);
-        }
+        const extraRows = (p.rows || []).slice(1).map((r) => {
+          const pr = h('p', 'place-priceline');
+          pr.innerHTML = `<span>${esc(r.label)}</span><b>${esc(r.value)}</b>`;
+          return pr;
+        });
+        const more = moreBlock(
+          extraRows,
+          p.note ? h('p', 'place-note', p.note) : null,
+          detailList(p.details),
+          moreProse(p.more)
+        );
+        if (more) art.append(more);
         if (p.url) {
           const a = h('a', 'place-link', 'Official listing ↗');
           a.href = p.url;
@@ -614,14 +671,31 @@
       if (s.pill) head.append(h('span', 'pill pill-free', esc(s.pill)));
       art.append(head, h('p', null, s.body || ''));
 
-      const prices = h('div', 'sight-price');
-      (s.prices || []).forEach((p) => {
+      const priceRow = (p) => {
         const row = h('div');
         row.append(h('span', null, esc(p.label)), h('b', null, esc(p.value)));
-        prices.append(row);
-      });
-      art.append(prices);
-      if (s.note) art.append(h('p', 'sight-note', s.note));
+        return row;
+      };
+      const allPrices = s.prices || [];
+      // Headline price on the thumbnail; the rest of the tiers move to the popover.
+      if (allPrices[0]) {
+        const prices = h('div', 'sight-price');
+        prices.append(priceRow(allPrices[0]));
+        art.append(prices);
+      }
+      const restPrices = allPrices.slice(1);
+      let priceMore = null;
+      if (restPrices.length) {
+        priceMore = h('div', 'sight-price');
+        restPrices.forEach((p) => priceMore.append(priceRow(p)));
+      }
+      const more = moreBlock(
+        priceMore,
+        s.note ? h('p', 'sight-note', s.note) : null,
+        detailList(s.details),
+        moreProse(s.more)
+      );
+      if (more) art.append(more);
       return art;
     });
     wrap.append(carousel(cards));
@@ -644,6 +718,8 @@
       const body = h('div', 'free-body');
       body.append(h('span', 'pill pill-free', esc(t().nav[5])));
       body.append(h('h4', null, esc(f.name)), h('p', null, f.desc));
+      const more = moreBlock(detailList(f.details), moreProse(f.more));
+      if (more) body.append(more);
       art.append(body);
       return art;
     });

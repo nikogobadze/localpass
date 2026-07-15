@@ -509,7 +509,8 @@
             "src": "assets/img/prague/place-lokal.jpg",
             "alt": "A half-litre of Czech lager on a wooden table in a pub.",
             "caption": "A Czech pub half-litre — <strong>not Lokál itself</strong>. Lokál pours Pilsner Urquell from twelve steel tanks."
-          }
+          },
+          "more": "Ask for the beer <em>tankové</em> — poured unpasteurised from the steel tanks, and the whole reason to come. At lunch the handwritten <em>polední menu</em> is the cheapest good meal in the centre. Walk in; no booking needed for two."
         },
         {
           "name": "U Kroka",
@@ -690,7 +691,8 @@
         "image": {
           "src": "assets/img/prague/castle.jpg",
           "alt": "The second courtyard of Prague Castle, with the baroque Kohl Fountain."
-        }
+        },
+        "more": "The circuit ticket is valid for two consecutive days, so you needn't rush all four sights into one visit. The courtyards are near-empty before 9am and after the tour buses leave around 5pm."
       },
       {
         "name": "Petřín Hill & Tower",
@@ -770,7 +772,8 @@
         "image": {
           "src": "assets/img/prague/charles-bridge.jpg",
           "alt": "The Malá Strana bridgehead of Charles Bridge, late afternoon."
-        }
+        },
+        "more": "Always open, always free. The statues you photograph are copies — the originals sit indoors in the Lapidárium, out of the weather. Cross before 7am to have it to yourself; by mid-morning it is shoulder to shoulder."
       }
     ],
     "freeTitle": "Free, and genuinely worth your time",

@@ -1014,11 +1014,29 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 .expandable:hover .expand-cue,
 .expandable:focus-visible .expand-cue{ opacity:1; background:var(--accent); transform:scale(1.08); }
 
-/* Content shown only in the expanded dialog (e.g. a restaurant's full price
-   table + note, dropped from the card so it fits a screen). */
+/* Content shown only in the expanded popover: the lean thumbnail keeps the
+   essentials, everything else (extra prices, notes, a detail list, tags, and
+   any extra prose) lives here and appears when the card is opened. */
 .card-more{ display:none; }
 .place-note{ font-size:.76rem; color:var(--muted); line-height:1.5; margin:10px 0 0;
   padding-top:9px; border-top:1px dashed var(--rule); }
+
+/* A tidy label/value reference sheet. */
+.detail-list{ display:grid; grid-template-columns:auto 1fr; gap:7px 16px; align-items:baseline;
+  margin:2px 0 0; padding-top:11px; border-top:2px dashed var(--rule); }
+.detail-list dt{ font-family:var(--mono); font-size:9.5px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--muted); white-space:nowrap; }
+.detail-list dd{ margin:0; font-size:.82rem; color:var(--ink); text-align:right; line-height:1.4; }
+/* At-a-glance chips (e.g. a neighbourhood's tags). */
+.card-tags{ list-style:none; display:flex; flex-wrap:wrap; gap:6px; margin:2px 0 0; padding:0; }
+.card-tags li{ font-family:var(--mono); font-size:9.5px; font-weight:500; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ink); background:var(--tint-gold); border:1.5px solid var(--ink);
+  padding:4px 10px; border-radius:100px; }
+/* Extra, free-authored guidance. */
+.more-p{ font-size:.82rem; color:var(--ink-soft); line-height:1.55; margin:11px 0 0; }
+/* Space the expanded block from the thumbnail content above it. */
+.cardmodal-body .card-more{ display:block; margin-top:12px; }
+.cardmodal-body .card-more > :first-child{ margin-top:0; }
 
 /* Overlay — an anchored popover that opens next to the tapped card, over a
    barely-there dim (no blur), so the rest of the page stays fully readable.
