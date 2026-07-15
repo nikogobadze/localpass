@@ -24,15 +24,14 @@ The admin token is printed in the terminal and stored in `.admin-token` (gitigno
 
 ## Live
 
-**https://localpass-livid.vercel.app**
+**https://localpass-destination.vercel.app**
 
 Deployed on Vercel from `main`. The GitHub repo is connected, so **pushing to `main` redeploys
 automatically** — edit a price, commit, push, done.
 
-> The `-livid` suffix is Vercel's: the bare `localpass.vercel.app` subdomain is already owned by
-> another Vercel user, and `*.vercel.app` names are first-come-first-served globally, so ours got a
-> random suffix. To get a clean URL either rename the project (Vercel → Settings → General) or add
-> a custom domain you own (Vercel → Settings → Domains).
+> `localpass-destination.vercel.app` is a `.vercel.app` production domain added to the project
+> (Vercel → Settings → Domains). The bare `localpass.vercel.app` subdomain is already owned by
+> another Vercel user, and `*.vercel.app` names are first-come-first-served globally.
 
 ## Deploying (Vercel)
 
