@@ -180,10 +180,9 @@ img,svg{ max-width:100%; display:block; }
 /* ═══════════ HERO ═══════════ */
 .hero{
   position:relative; overflow:hidden;
-  /* Grow with the viewport so the hero nearly fills a big screen, capped so it
-     doesn't balloon on a very tall monitor. ~94% of the viewport: ~720px on a
-     1366×768 laptop (still fits), ~1015px on a 1080p screen. */
-  min-height:min(94vh, 1080px);
+  /* Full-height hero — fills the whole viewport on any screen, capped so it
+     doesn't leave a sea of empty space on a very tall monitor. */
+  min-height:min(100vh, 1200px);
   display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
   padding:86px 26px 170px;
   /* Restrained washes — the sunburst is the focal point, not these. */
