@@ -305,7 +305,6 @@
 
     const wordmark = city.hero?.title || city.localName || city.name;
     const title = h('h1', 'hero-title', esc(wordmark));
-    title.dataset.text = wordmark; // the two offset colour plates behind the ink
 
     const inner = h('div', 'hero-inner');
     inner.append(

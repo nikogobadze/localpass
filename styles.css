@@ -231,37 +231,35 @@ img,svg{ max-width:100%; display:block; }
 .hero-inner{ position:relative; z-index:3; max-width:820px; }
 
 .eyebrow{
-  display:inline-block; margin:0 0 14px; padding:5px 12px;
+  display:inline-block; margin:0 0 24px; padding:5px 12px;
   background:var(--ink); color:var(--wash); border-radius:100px;
   font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase;
 }
+/* A clean serif masthead: solid ink with a subtle warm gradient down the
+   letters for depth. Readable first — no offset colour plates. The plain
+   `color` is the fallback wherever background-clip:text isn't supported. */
 .hero-title{
-  position:relative; margin:0; color:var(--ink);
-  font-family:var(--serif); font-weight:400;
-  font-size:clamp(2.6rem, 7.5vw, 5.4rem);
-  font-variation-settings:"SOFT" 60, "WONK" 1;
-  letter-spacing:-.05em; line-height:.86;
+  position:relative; margin:0;
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(2.7rem, 7.6vw, 5.7rem);
+  font-variation-settings:"SOFT" 40, "WONK" 0;
+  letter-spacing:-.035em; line-height:.92;
+  color:var(--ink);
+  background:linear-gradient(178deg, var(--ink) 42%, color-mix(in srgb, var(--accent) 30%, var(--ink)));
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-/* Riso misprint: two offset colour plates behind the ink.
-   No mix-blend-mode here — .hero-inner is a stacking context, which would
-   isolate the blend and composite these against transparency instead of
-   the hero gradient. Plain opacity gives the same look, reliably. */
-.hero-title::before,.hero-title::after{
-  content:attr(data-text); position:absolute; inset:0; z-index:-1; pointer-events:none;
-}
-.hero-title::before{ color:var(--accent); transform:translate(-9px,-7px); opacity:.5; }
-.hero-title::after{  color:var(--pop);    transform:translate(9px,6px);   opacity:.38; }
 
-.hero-rule{ display:flex; align-items:center; gap:14px; justify-content:center; margin:18px auto 16px; max-width:260px; }
+.hero-rule{ display:flex; align-items:center; gap:14px; justify-content:center; margin:26px auto 24px; max-width:260px; }
 .hero-rule span{ flex:1; height:3px; border-radius:3px; background:linear-gradient(90deg,transparent,var(--accent)); }
 .hero-rule span:last-child{ background:linear-gradient(90deg,var(--pop),transparent); }
 .hero-rule b{ color:var(--gold); font-size:12px; }
 
-.hero-sub{ font-size:clamp(.88rem,1.1vw,.98rem); color:var(--ink-soft); line-height:1.55; margin:0 auto; max-width:560px; }
+.hero-sub{ font-size:clamp(.9rem,1.1vw,1rem); color:var(--ink-soft); line-height:1.62; margin:0 auto; max-width:580px; }
 .hero-sub em{ color:var(--accent); font-style:italic; }
 
 .hero-meta{
-  margin-top:18px; display:flex; flex-wrap:wrap; gap:8px 12px; justify-content:center; align-items:center;
+  margin-top:30px; display:flex; flex-wrap:wrap; gap:10px 14px; justify-content:center; align-items:center;
   font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
 }
 .hero-meta .dot{ color:var(--faint); }
@@ -272,7 +270,7 @@ img,svg{ max-width:100%; display:block; }
 }
 
 .hero-scroll{
-  display:inline-flex; align-items:center; gap:9px; margin-top:24px;
+  display:inline-flex; align-items:center; gap:9px; margin-top:38px;
   font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
   color:var(--ink); text-decoration:none;
   border:2px solid var(--ink); border-radius:100px; padding:12px 22px;
