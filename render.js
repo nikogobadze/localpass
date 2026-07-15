@@ -1179,15 +1179,8 @@
     document.title = `${BRAND} — ${display}`;
 
     // Five colours drive the whole page. `accent2` is the JSON name for --good.
-    // (Named `theme`, not `t`: `t` is the i18n accessor used elsewhere in this scope.)
-    const theme = city.theme || {};
-    const root = document.documentElement;
-    root.style.setProperty('--accent', theme.accent || '#C4402A');
-    root.style.setProperty('--good', theme.accent2 || '#1F7D69');
-    root.style.setProperty('--pop', theme.pop || '#2E5BA8');
-    root.style.setProperty('--gold', theme.gold || '#E2A431');
-    // --wash (the page base) depends on the theme, so it is set by applyThemeVars.
-    CURRENT_THEME = theme;
+    // applyThemeVars sets all of them (softened in dark mode), from CURRENT_THEME.
+    CURRENT_THEME = city.theme || {};
     applyThemeVars();
 
     CURRENT_SLUG = city.slug;
@@ -1283,13 +1276,26 @@
      render.js sets inline — so it is computed here rather than in CSS. */
   function applyThemeVars() {
     const root = document.documentElement;
+    const th = CURRENT_THEME || {};
+    const A = th.accent || '#C4402A', G = th.accent2 || '#1F7D69',
+          P = th.pop || '#2E5BA8', GD = th.gold || '#E2A431';
     if (THEME === 'dark') {
-      const accent = CURRENT_THEME.accent || '#C4402A';
-      // A near-black base, faintly tinted with the city colour so it keeps
-      // character without the cream washing it out.
-      root.style.setProperty('--wash', `color-mix(in srgb, ${accent} 7%, #131110)`);
+      // Fully saturated hues vibrate against a dark page (halation) and tire
+      // the eye. Pull every brand colour toward a common muted warm grey so
+      // they read as calm, low-saturation tones — easier to look at and read.
+      const soft = (c) => `color-mix(in srgb, ${c} 62%, #7c7266)`;
+      root.style.setProperty('--accent', soft(A));
+      root.style.setProperty('--good', soft(G));
+      root.style.setProperty('--pop', soft(P));
+      root.style.setProperty('--gold', soft(GD));
+      // A near-black warm base, only faintly tinted so it never looks coloured.
+      root.style.setProperty('--wash', `color-mix(in srgb, ${A} 4%, #15120e)`);
     } else {
-      root.style.setProperty('--wash', CURRENT_THEME.wash || '#FDF6EC');
+      root.style.setProperty('--accent', A);
+      root.style.setProperty('--good', G);
+      root.style.setProperty('--pop', P);
+      root.style.setProperty('--gold', GD);
+      root.style.setProperty('--wash', th.wash || '#FDF6EC');
     }
   }
 

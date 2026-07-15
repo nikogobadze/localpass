@@ -1100,12 +1100,14 @@ html[data-theme="dark"] .theme-toggle .ic-sun{ display:block; }
 html[data-theme="light"]{ color-scheme:light; }
 html[data-theme="dark"]{
   color-scheme:dark;
-  --ink:      #F0EADD;   /* warm off-white — text on the dark page */
-  --ink-soft: #CBC4B5;
-  --muted:    #9A9284;
-  --faint:    #6E6659;
-  --wash:     #14120F;   /* JS overrides this inline per city; this is the fallback */
-  --card:     #211D18;   /* elevated surface, a touch warmer/lighter than the page */
+  /* Warm off-white, held a little below full brightness — pure-bright text on a
+     dark page glares. ~88% luminance is the comfortable reading range. */
+  --ink:      #E4DDCF;
+  --ink-soft: #BDB6A8;
+  --muted:    #928A7D;
+  --faint:    #6B6458;
+  --wash:     #15120E;   /* JS overrides this inline per city; this is the fallback */
+  --card:     #211D19;   /* elevated surface, a touch warmer/lighter than the page */
   --rule:     color-mix(in srgb, var(--ink) 16%, var(--wash));
   --rule-soft:color-mix(in srgb, var(--ink) 9%,  var(--wash));
   --shadow-soft: 0 20px 44px -24px rgba(0,0,0,.75);
