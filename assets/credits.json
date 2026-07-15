@@ -23,18 +23,6 @@
     "licence": "CC0",
     "source": "https://commons.wikimedia.org/wiki/File:1Proch%C3%A1zka_po_Karlov%C4%9B_most%C4%9B_20250818_181627.jpg"
   },
-  "prague/band-street": {
-    "title": "Altstädter Ring (1) Prag.jpg",
-    "author": "Ricardalovesmonuments",
-    "licence": "CC BY-SA 4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Altst%C3%A4dter_Ring_(1)_Prag.jpg"
-  },
-  "prague/band-food": {
-    "title": "Pilsen Beer Cellar.jpg",
-    "author": "Pagh123",
-    "licence": "CC0",
-    "source": "https://commons.wikimedia.org/wiki/File:Pilsen_Beer_Cellar.jpg"
-  },
   "vienna/schonbrunn": {
     "title": "20190206 Schönbrunn 5118 (47460588212).jpg",
     "author": "Ray Swi-hymn from Sijhih-Taipei, Taiwan",
@@ -59,18 +47,6 @@
     "licence": "CC BY-SA 4.0",
     "source": "https://commons.wikimedia.org/wiki/File:E1%2Bc4_Ring,_Volkstheater.jpg"
   },
-  "vienna/band-street": {
-    "title": "Wien (Vienna), Austria 🇦🇹 2025-05 - trams.jpg",
-    "author": "Sharon Hahn Darlin",
-    "licence": "CC BY 2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Wien_(Vienna),_Austria_%F0%9F%87%A6%F0%9F%87%B9_2025-05_-_trams.jpg"
-  },
-  "vienna/band-food": {
-    "title": "02023 1224 Wiener Schnitzel.jpg",
-    "author": "Silar",
-    "licence": "CC BY-SA 4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:02023_1224_Wiener_Schnitzel.jpg"
-  },
   "ljubljana/castle": {
     "title": "Burg Laibach, Ljubljana, Slowenien.JPG",
     "author": "Silberbeeren",
@@ -94,18 +70,6 @@
     "author": "Steven Penton from Bakers Beach, Tasmania Australia",
     "licence": "CC BY 2.0",
     "source": "https://commons.wikimedia.org/wiki/File:Ljubljana,_Slovenia._(48354680251).jpg"
-  },
-  "ljubljana/band-street": {
-    "title": "Crossing the triple bridge (34834748760).jpg",
-    "author": "Francisco Anzola from United States",
-    "licence": "CC BY 2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Crossing_the_triple_bridge_(34834748760).jpg"
-  },
-  "ljubljana/band-food": {
-    "title": "Kranjska klobasa.jpg",
-    "author": "J.O.",
-    "licence": "CC BY-SA 4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Kranjska_klobasa.jpg"
   },
   "prague/place-lokal": {
     "title": "HORAŽĎOVICE V ZÁMKU pivo Klostermann 20220813 125628.jpg",

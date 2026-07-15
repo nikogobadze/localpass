@@ -42,8 +42,6 @@
       freeLede: 'A surprising amount of the best of this city costs nothing. These are the free things genuinely worth your time.',
       carPrev: 'Previous',
       carNext: 'More options',
-      swipeHint: 'swipe or use the arrows for more →',
-      nbhoodsLabel: 'Neighbourhoods',
     },
     ka: {
       nav: ['მთავარი', 'ჩასვლა', 'დარჩენა', 'საჭმელი', 'სანახავი', 'უფასო', 'ენა'],
@@ -70,8 +68,6 @@
       freeLede: 'ამ ქალაქში საუკეთესოს გასაკვირად დიდი ნაწილი უფასოა. აი, უფასო ადგილები, რომლებიც ნამდვილად ღირს.',
       carPrev: 'წინა',
       carNext: 'მეტი ვარიანტი',
-      swipeHint: 'გადაფურცლეთ ან ისრებით მეტი ნახეთ →',
-      nbhoodsLabel: 'უბნები',
     },
   };
 
@@ -263,7 +259,7 @@
     inner.append(meta);
 
     const scroll = h('a', 'hero-scroll');
-    scroll.href = '#orient';
+    scroll.href = `#${SECTION_IDS[0]}`;
     scroll.innerHTML = `${esc(t().startReading)} <svg viewBox="0 0 12 20" width="10" height="16" aria-hidden="true"><path d="M6 1v17m0 0-4.5-4.5M6 18l4.5-4.5" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>`;
     inner.append(scroll);
 
@@ -350,47 +346,7 @@
     return d;
   }
 
-  /* ── Shared builders (map + converter live in two sections now) ── */
-
-  function buildMap(city) {
-    const m = (city.orient && city.orient.map) || {};
-    const wrap = h('div', 'essentials-map reveal');
-    const svg = svgEl('svg', { viewBox: '0 0 400 340', 'aria-label': `Simplified orientation map of central ${city.name}` });
-    svg.innerHTML = `<defs><linearGradient id="river" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#8FB0AE"/><stop offset="100%" stop-color="#5E8582"/></linearGradient></defs>`;
-    svg.append(svgEl('rect', { width: 400, height: 340, fill: '#F2EDE4' }));
-    if (m.riverPath) svg.append(svgEl('path', { d: m.riverPath, fill: 'url(#river)', opacity: '.85' }));
-    if (m.ring) {
-      const g = svgEl('g', { class: 'map-ring' });
-      g.append(svgEl('circle', { cx: m.ring.cx, cy: m.ring.cy, r: m.ring.r }));
-      svg.append(g);
-    }
-    const blobs = svgEl('g', { class: 'map-blob' });
-    (m.districts || []).forEach((p) => blobs.append(svgEl('circle', { cx: p.x, cy: p.y, r: p.r })));
-    svg.append(blobs);
-    if (m.bridge) {
-      const bg = svgEl('g', { class: 'map-bridge' });
-      bg.append(svgEl('rect', { x: m.bridge.x, y: m.bridge.y, width: m.bridge.w, height: 7, rx: 3 }));
-      svg.append(bg);
-    }
-    const labels = svgEl('g', { class: 'map-label' });
-    const text = (x, y, cls, str) => {
-      const el = svgEl('text', { x, y, 'text-anchor': 'middle' });
-      if (cls) el.setAttribute('class', cls);
-      el.textContent = str;
-      return el;
-    };
-    (m.districts || []).forEach((p) => {
-      labels.append(text(p.x, p.y - 2, '', p.name));
-      if (p.note) labels.append(text(p.x, p.y + 12, 'sm', p.note));
-    });
-    if (m.ring && m.ring.label) labels.append(text(m.ring.labelX, m.ring.labelY, 'tiny', m.ring.label));
-    if (m.bridge && m.bridge.label) labels.append(text(m.bridge.labelX, m.bridge.labelY, 'tiny', m.bridge.label));
-    if (m.riverLabel) labels.append(text(m.riverLabelX, m.riverLabelY, 'tiny rot', m.riverLabel));
-    svg.append(labels);
-    wrap.append(svg, h('p', 'caption', esc(m.caption || '')));
-    return wrap;
-  }
+  /* ── Shared builders ── */
 
   function buildConverter(city) {
     const c = (city.money && city.money.converter) || null;
@@ -491,12 +447,12 @@
   }
 
   /* ── 02 Stay (neighbourhoods, trimmed to 3, image-led) ── */
-  let STAY_CARDS = [];
   function renderStay(city) {
     const d = city.sleep || {};
     const { sec, wrap } = section('stay', '03', d.title, d.lede, 'sec-tint-b');
 
-    // Neighbourhoods as a carousel too, so heading + hoods + hotels all fit one screen.
+    // Neighbourhoods and hotels share ONE carousel — two stacked rows could not fit
+    // a laptop screen. Both are "where to stay"; both cards carry a photo.
     const hoodCards = (d.hoods || []).map((n) => {
       const art = h('article', `hood reveal ${n.tone === 'warn' ? 'hood-warn' : ''}`);
       const fig = cardImage(n.image);
@@ -506,21 +462,10 @@
       art.append(head, h('p', 'hood-verdict', esc(n.verdict || '')), h('p', 'hood-body', n.body || ''));
       return art;
     });
-    // Neighbourhoods and hotels share ONE carousel — two stacked rows could not
-    // fit a laptop screen. Both are "where to stay"; both cards carry a photo.
-    STAY_CARDS = hoodCards;
-
-    /* Named hotels — same honesty posture as the restaurants. A hotel with no
-       free photo gets a colour plate, not a fabricated one, so rows stay even. */
-    const ht = d.hotels;
-    if (ht && ht.items && ht.items.length) {
-      const box = h('div', 'hotels');
-      const head = h('div', 'hotels-head reveal');
-      head.append(h('h3', 'mini-h', esc(ht.title || '')));
-      if (ht.lede) head.append(h('p', 'mini-lede', ht.lede));
-      box.append(head);
-
-      const cards = STAY_CARDS.concat(ht.items.map((o) => {
+    /* Named hotels — same honesty posture as the restaurants. */
+    const ht = d.hotels || {};
+    const hotelItems = Array.isArray(ht.items) ? ht.items : [];
+    const hotelCards = hotelItems.map((o) => {
         const art = h('article', 'hotel reveal');
 
         const fig = cardImage(o.image);
@@ -550,13 +495,21 @@
         }
         body.append(priceRow);
 
-        if (o.desc) body.append(h('p', 'hotel-desc', o.desc));
-        art.append(body);
-        return art;
-      }));
-      box.append(carousel(cards));
-      wrap.append(box);
+      if (o.desc) body.append(h('p', 'hotel-desc', o.desc));
+      art.append(body);
+      return art;
+    });
+
+    const cards = hoodCards.concat(hotelCards);
+    if (!cards.length) return sec;              // nothing to show at all
+
+    if (hotelCards.length) {
+      const head = h('div', 'hotels-head reveal');
+      head.append(h('h3', 'mini-h', esc(ht.title || '')));
+      if (ht.lede) head.append(h('p', 'mini-lede', ht.lede));
+      wrap.append(head);
     }
+    wrap.append(carousel(cards));                // always rendered
     return sec;
   }
 
