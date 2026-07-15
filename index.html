@@ -10,6 +10,17 @@
 <!-- Noto *Georgian faces carry the Georgian glyphs the other three families lack.
      Google serves them per unicode-range, so an English reader never downloads them. -->
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Georgian:wght@400;600;700&family=Noto+Sans+Georgian:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#FDF6EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14120F" media="(prefers-color-scheme: dark)">
+<!-- Set the theme before the first paint so a dark reader never sees a light flash. -->
+<script>
+  try {
+    var stored = localStorage.getItem('localpass.theme');
+    var theme = (stored === 'light' || stored === 'dark') ? stored
+      : (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+</script>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/png" href="assets/localpass_logo.png">
 <link rel="apple-touch-icon" href="assets/localpass_logo.png">
@@ -31,6 +42,11 @@
     <nav class="nav-links" id="navLinks" aria-label="Sections"></nav>
 
     <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Toggle dark / light">
+        <svg class="ic-sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="12" cy="12" r="4.3" fill="currentColor"/><g stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 2.4v2.8M12 18.8v2.8M2.4 12h2.8M18.8 12h2.8M4.9 4.9l2 2M17.1 17.1l2 2M19.1 4.9l-2 2M6.9 17.1l-2 2"/></g></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M20.5 15A8.2 8.2 0 0 1 9 3.5a7.5 7.5 0 1 0 11.5 11.5z" fill="currentColor"/></svg>
+      </button>
+
       <div class="langpick" id="langpick" role="group" aria-label="Language">
         <button type="button" data-lang="en" aria-pressed="true">EN</button>
         <button type="button" data-lang="ka" aria-pressed="false" lang="ka">ქარ</button>

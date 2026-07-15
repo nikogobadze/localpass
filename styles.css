@@ -1052,3 +1052,67 @@ body.modal-open{ overflow:hidden; }
 @media (prefers-reduced-motion: reduce){
   .cardmodal-scrim, .cardmodal-panel{ transition:none; }
 }
+
+/* ── Theme toggle button ─────────────────────────────────── */
+.theme-toggle{
+  width:38px; height:38px; flex:none; display:grid; place-items:center; cursor:pointer;
+  border:2px solid var(--ink); border-radius:50%; background:var(--card); color:var(--ink);
+  box-shadow:3px 3px 0 var(--pop);
+  transition:transform .15s var(--spring), box-shadow .15s, background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
+}
+.theme-toggle:hover{ transform:translate(-1px,-1px); box-shadow:4px 5px 0 var(--pop); }
+.theme-toggle:active{ transform:translate(1px,1px); box-shadow:1px 1px 0 var(--pop); }
+.theme-toggle .ic-sun{ display:none; }
+html[data-theme="dark"] .theme-toggle .ic-moon{ display:none; }
+html[data-theme="dark"] .theme-toggle .ic-sun{ display:block; }
+@media (max-width:560px){ .theme-toggle{ width:34px; height:34px; } }
+
+/* ═══════════════════ DARK THEME ═══════════════════
+   The five brand colours (--accent/--good/--pop/--gold) stay vivid; render.js
+   swaps --wash to a dark, faintly city-tinted base (inline, so it beats this
+   rule). Everything else is expressed in terms of the neutrals below, so
+   flipping them carries the whole page — cards, rules, tints all re-derive. */
+html[data-theme="light"]{ color-scheme:light; }
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:      #F0EADD;   /* warm off-white — text on the dark page */
+  --ink-soft: #CBC4B5;
+  --muted:    #9A9284;
+  --faint:    #6E6659;
+  --wash:     #14120F;   /* JS overrides this inline per city; this is the fallback */
+  --card:     #211D18;   /* elevated surface, a touch warmer/lighter than the page */
+  --rule:     color-mix(in srgb, var(--ink) 16%, var(--wash));
+  --rule-soft:color-mix(in srgb, var(--ink) 9%,  var(--wash));
+  --shadow-soft: 0 20px 44px -24px rgba(0,0,0,.75);
+}
+
+/* Smooth the switch (only fires on toggle — initial paint has no prior value). */
+body, .sec, .divider, .nav.stuck,
+.fact-card, .hood, .hotel, .place, .sight, .free-card, .airport-card{
+  transition:background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
+}
+
+/* Hero: the base gradient had a hardcoded cream top; go dark and let the
+   coloured washes glow a little stronger. The sunburst multiplies on paper —
+   on a dark page it must screen instead, or it vanishes into black. */
+html[data-theme="dark"] .hero{
+  background:
+    radial-gradient(80% 60% at 18% 12%, color-mix(in srgb, var(--pop) 24%, transparent), transparent 62%),
+    radial-gradient(70% 55% at 84% 8%,  color-mix(in srgb, var(--accent) 24%, transparent), transparent 60%),
+    radial-gradient(90% 70% at 50% 106%, color-mix(in srgb, var(--gold) 30%, transparent), transparent 66%),
+    linear-gradient(180deg, color-mix(in srgb, var(--pop) 10%, #0F0D12), var(--wash) 55%, var(--paper-2));
+}
+html[data-theme="dark"] .hero-art{ mix-blend-mode:screen; }
+html[data-theme="dark"] .hero-grain{ mix-blend-mode:overlay; opacity:.22; }
+
+/* The converter sits on a light section in light mode; in dark mode it would
+   melt into the page, so lift it onto the card surface with a hairline. */
+html[data-theme="dark"] .converter{ background:var(--card); border:1px solid var(--rule); }
+
+/* The overlay scrim mixes with --ink; in dark that turns light and useless.
+   Pin it to black so the dialog still reads as lifted above a dimmed page. */
+html[data-theme="dark"] .cardmodal-scrim{ background:color-mix(in srgb, #000 66%, transparent); }
+
+/* Photos carry their own light; a gentle dim keeps them from glaring on dark. */
+html[data-theme="dark"] .card-figure img,
+html[data-theme="dark"] .photo-band img{ filter:brightness(.92) contrast(1.02); }

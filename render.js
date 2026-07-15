@@ -77,6 +77,9 @@
 
   const STORE_KEY = 'honestguide.city';
   const LANG_KEY = 'honestguide.lang';
+  const THEME_KEY = 'localpass.theme';
+  let THEME = 'light';           // set from storage / OS in boot(), before first paint
+  let CURRENT_THEME = {};        // the active city's palette, so theme swaps recompute --wash
   const app = document.getElementById('app');
 
   let LANG = 'en';
@@ -1083,7 +1086,9 @@
     root.style.setProperty('--good', theme.accent2 || '#1F7D69');
     root.style.setProperty('--pop', theme.pop || '#2E5BA8');
     root.style.setProperty('--gold', theme.gold || '#E2A431');
-    root.style.setProperty('--wash', theme.wash || '#FDF6EC');
+    // --wash (the page base) depends on the theme, so it is set by applyThemeVars.
+    CURRENT_THEME = theme;
+    applyThemeVars();
 
     CURRENT_SLUG = city.slug;
 
@@ -1172,6 +1177,49 @@
   /* ── Language ────────────────────────────────────────────── */
   let CURRENT_SLUG = null;
 
+  /* ── Theme (light / dark) ────────────────────────────────
+     The dark stylesheet flips the neutral tokens; the only palette value that
+     must change per-theme *and* per-city is --wash (the page base), which
+     render.js sets inline — so it is computed here rather than in CSS. */
+  function applyThemeVars() {
+    const root = document.documentElement;
+    if (THEME === 'dark') {
+      const accent = CURRENT_THEME.accent || '#C4402A';
+      // A near-black base, faintly tinted with the city colour so it keeps
+      // character without the cream washing it out.
+      root.style.setProperty('--wash', `color-mix(in srgb, ${accent} 7%, #131110)`);
+    } else {
+      root.style.setProperty('--wash', CURRENT_THEME.wash || '#FDF6EC');
+    }
+  }
+
+  function applyThemeChrome() {
+    document.documentElement.setAttribute('data-theme', THEME);
+    const btn = document.getElementById('themeToggle');
+    if (btn) {
+      const dark = THEME === 'dark';
+      btn.setAttribute('aria-pressed', String(dark));
+      btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    const meta = document.querySelector('meta[name="theme-color"]:not([media])')
+      || document.head.appendChild(Object.assign(document.createElement('meta'), { name: 'theme-color' }));
+    meta.setAttribute('content', THEME === 'dark' ? '#14120F' : '#FDF6EC');
+  }
+
+  function setTheme(theme) {
+    if (theme !== 'light' && theme !== 'dark') return;
+    THEME = theme;
+    try { localStorage.setItem(THEME_KEY, theme); } catch { /* URL/OS still decides next visit */ }
+    applyThemeChrome();
+    applyThemeVars();   // recompute --wash live — no full re-render needed
+  }
+
+  function bindThemeToggle() {
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    btn.addEventListener('click', () => setTheme(THEME === 'dark' ? 'light' : 'dark'));
+  }
+
   function applyLangChrome() {
     document.documentElement.lang = LANG;
     const skip = document.querySelector('.skip');
@@ -1219,9 +1267,20 @@
     const wantedLang = params.get('lang') || storedLang;
     if (UI[wantedLang]) LANG = wantedLang;
 
+    // The inline <head> script already set data-theme (no flash); trust it, then
+    // fall back to storage / OS so THEME here matches what the page is showing.
+    let storedTheme = null;
+    try { storedTheme = localStorage.getItem(THEME_KEY); } catch { /* ignore */ }
+    const attrTheme = document.documentElement.getAttribute('data-theme');
+    THEME = (attrTheme === 'dark' || attrTheme === 'light') ? attrTheme
+      : (storedTheme === 'dark' || storedTheme === 'light') ? storedTheme
+      : (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
     buildNavLinks();
     bindNav();
     bindLangPicker();
+    bindThemeToggle();
+    applyThemeChrome();
     applyLangChrome();
 
     try {
