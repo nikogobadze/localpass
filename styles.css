@@ -748,14 +748,19 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 
 /* ── Language switch ── */
 .langpick{ display:flex; align-items:center; gap:2px; border:2px solid var(--ink); border-radius:100px; padding:2px; background:var(--card); box-shadow:3px 3px 0 var(--gold); }
+/* Both buttons are one fixed size and centre their own text. "EN" is two latin
+   characters and "ქარ" is three Georgian ones, so left to themselves they size
+   differently and the pressed pill comes out lopsided. */
 .langpick button{
+  display:grid; place-items:center;
+  min-width:46px; min-height:30px; line-height:1;
   font:inherit; cursor:pointer; border:0; background:none; color:var(--muted);
   font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase;
-  padding:5px 9px; border-radius:100px; transition:background .18s, color .18s;
+  padding:5px 8px; border-radius:100px; transition:background .18s, color .18s;
 }
 .langpick button:hover{ color:var(--ink); }
 .langpick button[aria-pressed="true"]{ background:var(--ink); color:var(--wash); }
-@media (max-width:560px){ .langpick button{ padding:5px 7px; font-size:9px; } }
+@media (max-width:560px){ .langpick button{ min-width:42px; padding:5px 6px; font-size:9px; } }
 
 /* ═══════════ CAROUSEL (horizontal, swipeable rows) ═══════════ */
 .carousel{ position:relative; }
@@ -944,7 +949,11 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
   .car-track > *{ flex:0 0 min(47%, 360px); }
 }
 
-@media (max-width:820px){
+/* Nav collapses on its own breakpoint, not the layout's. Below ~900 the brand,
+   seven section links and three controls stop fitting on one bar: at 834 they
+   came within 20px of the edge, so any change to a control spilled the whole
+   cluster off-screen. Hand the links to the hamburger instead. */
+@media (max-width:900px){
   html{ scroll-padding-top:72px; }
   /* Solid, not translucent: a see-through panel left the hero showing through
      the links and made them unreadable. */
@@ -958,10 +967,16 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
   .nav-links.open{ transform:none; opacity:1; pointer-events:auto; }
   .nav-links a{ padding:14px 16px; font-size:12px; }
   .nav-toggle{ display:flex; }
+  /* Sit the toggles in the middle of the bar: the section links have moved into
+     the hamburger menu, so the space beside the logo was going to waste while
+     the controls were crushed against the right edge. */
+  .nav-right{ margin-inline:auto; }
   .nav{ background:color-mix(in srgb, var(--wash) 92%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom-color:var(--ink); }
   .nav .brand-logo{ opacity:1; transform:none; }
   .nav .brand-text{ opacity:1; transform:none; }
+}
 
+@media (max-width:820px){
   .sec{ padding:56px 0; }
   .sec-head{ margin-bottom:30px; }
   .hero{ padding:92px 22px 150px; }
