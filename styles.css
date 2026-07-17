@@ -181,8 +181,11 @@ img,svg{ max-width:100%; display:block; }
 .hero{
   position:relative; overflow:hidden;
   /* Full-height hero — fills the whole viewport on any screen, capped so it
-     doesn't leave a sea of empty space on a very tall monitor. */
+     doesn't leave a sea of empty space on a very tall monitor. svh, not vh:
+     on a phone, 100vh is measured with the address bar retracted, so a vh hero
+     is taller than the screen and pushes the button under the browser UI. */
   min-height:min(100vh, 1200px);
+  min-height:min(100svh, 1200px);
   display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
   padding:86px 26px 170px;
   /* Restrained washes — the sunburst is the focal point, not these. */
@@ -932,35 +935,45 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 .noscript a{ color:var(--accent); }
 
 /* ═══════════ RESPONSIVE ═══════════ */
+/* ═══════════════════ RESPONSIVE ═══════════════════
+   Same design, made comfortable on smaller screens. The breakpoints follow the
+   layout rather than any device: 1180 (cards tighten) · 1000 (converter and
+   footer stack) · 820 (nav collapses, two cards per view) · 560 (phone: one
+   card per view, compact nav). */
+
 @media (max-width:1180px){
-  .phrases{ grid-template-columns:repeat(3,1fr); }
-  .places-grid,.sights,.free-grid,.hotels-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .hoods,.facts-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-}
-
-@media (max-width:820px){
-
+  .phrases{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .facts-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .car-track > *{ flex:0 0 clamp(240px, 31%, 300px); }
 }
 
 @media (max-width:1000px){
-
   .converter{ position:static; }
   .foot-grid{ grid-template-columns:1fr; gap:32px; }
-  .phrases{ grid-template-columns:repeat(2,1fr); }
+  .phrases{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   .credits{ columns:2; }
+}
+
+/* Tablets read two cards per view comfortably. Its own breakpoint (not the
+   nav's 820) so a 834px iPad Pro doesn't fall back to three narrow cards. */
+@media (max-width:900px){
+  .car-track{ gap:20px; }
+  .car-track > *{ flex:0 0 min(47%, 360px); }
 }
 
 @media (max-width:820px){
   html{ scroll-padding-top:72px; }
+  /* Solid, not translucent: a see-through panel left the hero showing through
+     the links and made them unreadable. */
   .nav-links{
     position:fixed; inset:62px 0 auto 0; flex-direction:column; gap:2px; padding:16px 28px 26px;
-    background:color-mix(in srgb, var(--wash) 97%, transparent);
-    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    background:var(--paper);
     border-bottom:2px solid var(--ink);
+    box-shadow:0 18px 40px -22px rgba(0,0,0,.55);
     transform:translateY(-14px); opacity:0; pointer-events:none; transition:.3s var(--ease);
   }
   .nav-links.open{ transform:none; opacity:1; pointer-events:auto; }
-  .nav-links a{ padding:13px 16px; font-size:12px; }
+  .nav-links a{ padding:14px 16px; font-size:12px; }
   .nav-toggle{ display:flex; }
   .nav{ background:color-mix(in srgb, var(--wash) 92%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom-color:var(--ink); }
   .nav .brand-logo{ opacity:1; transform:none; }
@@ -968,32 +981,87 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 
   .sec{ padding:56px 0; }
   .sec-head{ margin-bottom:30px; }
-  .hero{ padding:92px 22px 170px; }
+  .hero{ padding:92px 22px 150px; }
   .hero-art{ bottom:80px; width:min(360px, 86vw); }
   .skyline{ height:160px; object-fit:cover; }
 
-  .hoods,.sights,.places-grid,.free-grid,.facts-grid{ grid-template-columns:1fr; }
-
+  .facts-grid{ grid-template-columns:1fr; }
   .sources,.credits{ columns:1; }
   .photo-band{ margin-bottom:34px; }
   .photo-band img{ aspect-ratio:16/9; border-radius:12px; box-shadow:5px 5px 0 var(--pop); }
   .photo-band figcaption{ font-size:.92rem; margin-top:14px; text-align:left; }
 
-
-  .scams li{ padding:20px 0; }
-  .scams li::before{ position:static; display:grid; margin-bottom:10px; }
+  /* The converter's cells were fighting over one row and spilling off the
+     right edge; let them wrap instead. */
+  .conv-row{ gap:18px; }
+  .conv-field{ flex:1 1 100%; }
+  .conv-out{ min-width:0; flex:1 1 100%; flex-wrap:wrap; }
+  .conv-out > div{ flex:1 1 30%; min-width:118px; }
 }
 
 @media (max-width:560px){
   body{ font-size:15px; }
   .wrap{ padding-inline:18px; }
   .phrases{ grid-template-columns:1fr; }
-  .hero-meta{ font-size:9.5px; gap:7px; }
-  .hero-meta .dot{ display:none; }
-  .nav-inner{ padding-inline:18px; }
-  .citypick-btn{ padding:7px 11px; letter-spacing:.06em; }
-  .citypick-menu{ right:-46px; min-width:220px; }
   .sec h2::after{ width:96px; height:6px; }
+  .sec{ padding:46px 0; }
+
+  /* Nav — the hamburger was falling off the right edge and the city picker was
+     cut in half. Drop the wordmark (the compass mark still carries the brand)
+     and tighten every control so all of them fit a 360px screen. */
+  .nav-inner{ padding-inline:12px; gap:8px; }
+  .nav-right{ gap:6px; }
+  .brand-text{ display:none; }
+  .brand-logo{ width:36px; height:36px; }
+  .citypick-btn{ padding:9px; font-size:9px; letter-spacing:.04em; gap:5px; }
+  .citypick-btn > svg:first-of-type{ display:none; }   /* the globe — buys room for the name */
+  .citypick-menu{ right:0; min-width:0; width:max-content; max-width:calc(100vw - 24px); }
+  .langpick button{ padding:9px 7px; font-size:9px; }
+  .theme-toggle{ width:36px; height:36px; }
+  .nav-toggle{ width:32px; height:32px; padding:6px 4px; }
+
+  /* One comfortable card per screen, the next just peeking to invite a swipe. */
+  .car-track{ gap:14px; }
+  .car-track > *{ flex:0 0 85%; }
+
+  .eyebrow{ font-size:9px; letter-spacing:.13em; padding:5px 10px; margin-bottom:18px; }
+  .hero-meta{ font-size:9.5px; gap:8px 10px; margin-top:22px; }
+  .hero-meta .dot{ display:none; }
+  .hero-scroll{ margin-top:26px; }
+  .conv-out > div{ flex:1 1 100%; }
+  .map-cta{ font-size:9.5px; padding:10px 15px; letter-spacing:.1em; }
+
+  /* Label + value rows: on a narrow card a long value squeezed the label into
+     two lines. Let the value drop to its own line, still right-aligned. */
+  .place-priceline, .sight-price div, .detail-list{ flex-wrap:wrap; }
+  .place-priceline b, .sight-price div b{ margin-left:auto; }
+  .detail-list{ grid-template-columns:1fr auto; }
+}
+
+/* A phone on its side: the full-height hero would otherwise be several screens
+   of scrolling before a single word of the guide. */
+@media (orientation:landscape) and (max-height:520px){
+  .hero{ min-height:auto; padding:74px 22px 92px; }
+  .hero-title{ font-size:clamp(1.9rem, 5.4vw, 2.9rem); }
+  .hero-sub{ font-size:.86rem; }
+  .hero-art{ width:min(240px, 40vw); bottom:38px; }
+  .skyline{ height:92px; }
+  .hero-rule{ margin:14px auto 12px; }
+  .hero-meta{ margin-top:14px; }
+  .hero-scroll{ margin-top:18px; }
+  .eyebrow{ margin-bottom:12px; }
+}
+
+/* Touch: fingers need a bigger target than a mouse pointer. Heights only —
+   widths stay tight so the nav still fits a narrow phone. */
+@media (pointer:coarse){
+  .langpick button{ min-height:38px; }
+  .theme-toggle{ min-width:38px; min-height:38px; }
+  .citypick-btn{ min-height:38px; }
+  .nav-toggle{ min-height:38px; }
+  .nav-links a{ padding-block:14px; }
+  .map-link,.place-link{ padding-block:9px; }
+  .cardmodal-close{ width:40px; height:40px; }
 }
 
 /* ── Tap-to-expand cards + overlay ───────────────────────────
@@ -1068,7 +1136,7 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
   opacity:0; transition:opacity .18s; }
 .cardmodal.show .cardmodal-scrim{ opacity:1; }
 .cardmodal-panel{ position:fixed; left:0; top:0; z-index:1;
-  width:min(460px, calc(100vw - 40px));
+  width:min(460px, calc(100vw - 32px));
   opacity:0; transform:scale(.96); transform-origin:center center;
   transition:transform .2s var(--spring), opacity .16s var(--ease); }
 .cardmodal.show .cardmodal-panel{ opacity:1; transform:none; }
@@ -1085,7 +1153,7 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
   width:auto !important; max-width:none !important; min-width:0 !important;
   flex:none !important; margin:0 !important; transform:none !important;
   scroll-snap-align:none !important; box-shadow:6px 6px 0 var(--ink) !important;
-  max-height:calc(100vh - 40px); overflow-y:auto;
+  max-height:calc(100vh - 40px); max-height:calc(100dvh - 40px); overflow-y:auto;
 }
 .cardmodal-body .expand-cue{ display:none; }
 .cardmodal-body .card-more{ display:block; }

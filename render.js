@@ -1143,16 +1143,15 @@
     });
 
     const toggle = document.getElementById('navToggle');
-    toggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
+    const setOpen = (open) => {
+      nav.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', String(open));
-    });
-    nav.addEventListener('click', (e) => {
-      if (e.target.tagName === 'A') {
-        nav.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-    });
+    };
+    /* Assigned, not addEventListener: this function re-runs on every language
+       change, and stacked listeners toggled the menu open then straight shut
+       again on a single tap — the mobile menu never opened. */
+    toggle.onclick = () => setOpen(!nav.classList.contains('open'));
+    nav.onclick = (e) => { if (e.target.tagName === 'A') setOpen(false); };
   }
 
   function buildCityPicker(cities, current) {
