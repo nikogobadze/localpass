@@ -64,9 +64,26 @@ body{
   /* clip, not hidden: `overflow-x:hidden` forces overflow-y to auto and can
      turn the body into a scroll container. clip pairs safely with visible-y. */
   overflow-x:clip;
+  /* A slim scrollbar in the page's own palette, and it re-tints with the theme
+     instead of staying a bright system-grey slab against the dark page. */
+  scrollbar-width:thin;
+  scrollbar-color:color-mix(in srgb, var(--ink) 28%, var(--wash)) transparent;
 }
 
 img,svg{ max-width:100%; display:block; }
+
+/* Keyboard focus: one consistent, on-brand ring on everything you can reach by
+   tab. :focus-visible, so it never fires on a mouse click. Most controls had no
+   visible focus at all, which made the page unusable without a pointer. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible{
+  outline:3px solid var(--pop);
+  outline-offset:3px;
+}
 .wrap{ max-width:var(--wrap); margin-inline:auto; padding-inline:34px; position:relative; z-index:2; }
 
 .skip{ position:absolute; left:-9999px; background:var(--ink); color:#fff; padding:12px 20px; z-index:300; }
@@ -355,17 +372,12 @@ img,svg{ max-width:100%; display:block; }
 }
 .sec-lede{ font-size:.92rem; color:var(--muted); line-height:1.5; margin:0; max-width:760px; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 .sec-lede strong{ color:var(--ink); box-shadow:inset 0 -.5em 0 color-mix(in srgb, var(--gold) 45%, transparent); }
-.sec-dark h2{ color:#F6F1E5; }
+
 .sec-dark .sec-lede{ color:#A9A296; }
 
 .mini-h{ font-family:var(--serif); font-weight:600; font-size:1.05rem; letter-spacing:-.015em; margin:0 0 8px; }
 .mini-lede{ color:var(--muted); margin:0 0 12px; max-width:760px; font-size:.86rem; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 
-/* Pull-quote treatment for the closing line of a block */
-.pc-foot,.rule-foot{
-  position:relative; font-family:var(--serif); font-style:italic;
-  font-size:1.02rem; line-height:1.52; color:var(--ink-soft);
-}
 
 
 /* ═══════════ DIVIDER ═══════════ */
@@ -374,17 +386,14 @@ img,svg{ max-width:100%; display:block; }
 .divider .fill{ fill:var(--tint-pop); }
 .divider .band{ fill:var(--accent); }
 
-/* ═══════════ 01 ORIENT ═══════════ */
-.orient-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:start; }
 
-.orient-map svg{ width:100%; height:auto; border:2px solid var(--ink); border-radius:16px; box-shadow:8px 8px 0 var(--pop); background:#fff; }
-.map-blob circle{ fill:color-mix(in srgb, var(--gold) 30%, #FFF8E9); stroke:var(--ink); stroke-width:1.6; }
-.map-blob circle:nth-child(2){ fill:color-mix(in srgb, var(--accent) 22%, #FFF3EE); }
-.map-blob circle:nth-child(3){ fill:color-mix(in srgb, var(--good) 22%, #EFF8F4); }
-.map-blob circle:nth-child(4){ fill:color-mix(in srgb, var(--pop) 20%, #EDF2FB); }
-.map-bridge rect{ fill:var(--ink); }
-.map-ring circle{ fill:none; stroke:var(--accent); stroke-width:2.4; stroke-dasharray:7 5; }
-.map-label text{ font-family:var(--mono); font-size:9px; font-weight:500; letter-spacing:.09em; fill:var(--ink); }
+
+
+
+
+
+
+
 
 .map-label .tiny{ font-size:7px; letter-spacing:.08em; fill:var(--ink-soft); }
 
@@ -408,22 +417,16 @@ img,svg{ max-width:100%; display:block; }
 
 .opt h3{ font-family:var(--serif); font-weight:600; font-size:1.08rem; margin:0 0 11px; line-height:1.2; letter-spacing:-.015em; }
 
-.opt-price span{ font-size:1.2rem; color:var(--muted); }
-.opt-price em{ display:block; font-family:var(--mono); font-style:normal; font-size:10.5px; color:var(--faint); letter-spacing:.06em; margin-top:9px; }
+
 
 .opt p:not([class]){ font-size:.86rem; color:var(--ink-soft); margin:0 0 10px; line-height:1.55; }
 
-.opt-note strong{ color:var(--ink); }
 
 .tickets{ position:relative; }
 
-.ptable th{
-  text-align:left; padding:12px 18px; background:var(--ink); color:var(--wash);
-  font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
-}
-.ptable td{ padding:13px 18px; border-bottom:1.5px solid var(--rule-soft); font-family:var(--serif); font-size:1.1rem; letter-spacing:-.01em; }
-.ptable tr:last-child td{ border-bottom:0; }
-.ptable td:first-child{ font-family:var(--sans); font-size:.88rem; font-weight:500; color:var(--ink-soft); }
+
+
+
 .ptable td.best{ color:var(--good); font-weight:600; }
 .ptable td.best::before{ content:"↓"; font-family:var(--sans); font-size:.7rem; margin-right:8px; vertical-align:2px; }
 
@@ -434,10 +437,7 @@ img,svg{ max-width:100%; display:block; }
 .callout:nth-child(3) h4{ color:var(--gold); }
 .callout p{ margin:0; font-size:.84rem; color:var(--ink-soft); line-height:1.55; }
 
-.callout-warn h4{ color:var(--accent) !important; }
 
-/* ═══════════ 03 MONEY ═══════════ */
-.money-grid{ display:grid; grid-template-columns:1.3fr .7fr; gap:48px; align-items:start; }
 .rule{ display:flex; gap:18px; padding:20px 0; border-top:2px solid var(--rule); }
 .rules .rule:first-child{ border-top:0; padding-top:0; }
 
@@ -460,7 +460,7 @@ img,svg{ max-width:100%; display:block; }
   width:100%; background:transparent; border:0; border-bottom:2px solid #3F3D38; color:#fff;
   font-family:var(--serif); font-size:1.5rem; font-weight:400; padding:0 0 5px; letter-spacing:-.03em;
 }
-.conv-field input:focus{ outline:none; border-bottom-color:var(--gold); }
+.conv-field input:focus{ border-bottom-color:var(--gold); }
 
 .conv-row{ display:flex; align-items:flex-end; gap:26px; flex-wrap:wrap; }
 .conv-out{ display:flex; flex:1; gap:14px; margin:0; min-width:280px; }
@@ -481,7 +481,7 @@ img,svg{ max-width:100%; display:block; }
 .rate-row{ margin-top:14px; }
 .rate-row label{ display:flex; align-items:center; justify-content:space-between; gap:14px; font-size:.85rem; color:#9B9488; }
 .rate-row input{ width:94px; background:#232220; border:1px solid #35332E; color:#fff; font-family:var(--mono); font-size:.85rem; padding:8px 10px; border-radius:6px; text-align:right; }
-.rate-row input:focus{ outline:none; border-color:var(--gold); }
+.rate-row input:focus{ border-color:var(--gold); }
 .conv-rates p{ font-size:.78rem; color:#6D6860; line-height:1.6; margin:18px 0 0; }
 .conv-tip{ margin:10px 0 0; padding-top:10px; border-top:1px solid #302E2A; font-size:.74rem; color:#9B9488; line-height:1.4; display:-webkit-box; -webkit-line-clamp:1; line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
 .conv-tip strong{ color:var(--gold); font-weight:500; }
@@ -508,22 +508,16 @@ img,svg{ max-width:100%; display:block; }
 .hood-verdict{ font-family:var(--serif); font-style:italic; font-size:.94rem; color:var(--ink); margin:0 0 7px; line-height:1.35; }
 .hood p:not([class]){ margin:0 0 14px; font-size:.87rem; color:var(--ink-soft); line-height:1.55; }
 
-.hood-tags li{ font-family:var(--mono); font-size:9.5px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); background:var(--tint-gold); border:1.5px solid var(--ink); padding:5px 11px; border-radius:100px; }
 .hood-warn{ background:var(--tint-red); box-shadow:6px 6px 0 var(--accent) !important; }
 .hood-warn:hover{ box-shadow:9px 10px 0 var(--accent) !important; }
 .hood-warn .hood-price{ background:var(--accent); }
 
-.tips-row div{ font-size:.87rem; color:var(--ink-soft); line-height:1.55; padding-left:16px; border-left:4px solid var(--accent); }
-.tips-row div:nth-child(2){ border-left-color:var(--pop); }
-.tips-row div:nth-child(3){ border-left-color:var(--good); }
-.tips-row strong{ color:var(--ink); display:block; margin-bottom:6px; font-weight:600; }
 
-/* ═══════════ 05 EAT ═══════════ */
-.pricecompare{ border:2px solid var(--ink); border-radius:16px; overflow:hidden; margin-bottom:48px; background:var(--card); box-shadow:7px 7px 0 var(--accent); }
 
-.pc-head p{ margin:0; color:var(--muted); font-size:.94rem; }
 
-.pc-item em,.pc-good em,.pc-bad em{ display:block; font-family:var(--mono); font-style:normal; font-size:10px; letter-spacing:.05em; color:var(--faint); margin-top:6px; font-weight:400; line-height:1.5; }
+
+
+
 
 
 /* Named restaurants — same card vocabulary as .sight / .hood */
@@ -556,7 +550,6 @@ img,svg{ max-width:100%; display:block; }
 }
 .place-link:hover{ color:var(--ink); border-bottom-color:var(--accent); }
 
-.eat-card h3{ font-family:var(--serif); font-weight:600; font-size:1.18rem; margin:0 0 14px; letter-spacing:-.015em; }
 
 .check{ list-style:none; margin:0; padding:0; }
 .check li{ position:relative; padding:0 0 11px 28px; font-size:.87rem; color:var(--ink-soft); line-height:1.55; }
@@ -572,10 +565,9 @@ img,svg{ max-width:100%; display:block; }
 .dish dt em{ font-weight:400; color:var(--muted); }
 .dish dd{ margin:0; font-size:.84rem; color:var(--muted); line-height:1.55; }
 
-.eat-myth h3{ color:var(--gold); }
-.eat-myth p{ margin:0 0 12px; font-size:.91rem; line-height:1.6; max-width:80ch; }
-.eat-myth p:last-child{ margin-bottom:0; color:#9B9488; }
-.eat-myth strong{ color:#fff; }
+
+
+
 
 /* ═══════════ 06 SEE ═══════════ */
 .sights{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
@@ -604,13 +596,10 @@ img,svg{ max-width:100%; display:block; }
 .place .sight-price b{ white-space:normal; text-align:right; }
 .sight-note{ margin:auto 0 0; font-family:var(--serif); font-style:italic; font-size:.82rem; color:var(--muted); line-height:1.45; }
 
-.free-cols ul{ list-style:none; margin:0; padding:0; }
-.free-cols li{ padding:9px 0 9px 22px; border-bottom:1.5px dashed var(--rule); font-size:.86rem; color:var(--muted); line-height:1.5; position:relative; }
-.free-cols li::before{ content:"◆"; position:absolute; left:0; top:10px; color:var(--gold); font-size:.6rem; }
-.free-cols strong{ color:var(--ink); font-weight:600; }
 
-/* ═══════════ 07 SAFE ═══════════ */
-.sec-dark{ position:relative; }
+
+
+
 
 .scams{ list-style:none; counter-reset:s; margin:0 0 44px; padding:0; }
 .scams li{ counter-increment:s; position:relative; padding:22px 0 22px 76px; border-top:1.5px solid rgba(255,255,255,.09); }
@@ -745,7 +734,7 @@ html[lang="ka"] :is(.hood h3, .sight h3, .place-head h4, .cz, .opt h3, .rule h3,
   letter-spacing:0;
 }
 html[lang="ka"] .closing-text{ letter-spacing:-.005em; line-height:1.55; }
-html[lang="ka"] .opt-price{ letter-spacing:-.02em; }
+
 
 /* Tap-to-copy label lives in CSS content, so it needs its own translation. */
 html[lang="ka"] .phrase::after{ content:"კოპირება"; }
@@ -825,8 +814,6 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 .airport-note{ font-size:.72rem; color:var(--muted); line-height:1.4; margin:auto 0 0; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 .airport-note strong{ color:var(--ink); }
 
-/* ═══════════ 02 STAY — named hotels ═══════════ */
-.stay-sub{ font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 12px; }
 .hotels{ margin-top:24px; padding-top:22px; border-top:2px solid var(--rule); }
 .hotels-head{ max-width:900px; margin-bottom:16px; }
 
@@ -875,10 +862,8 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 .place-priceline b{ font-family:var(--mono); font-size:.82rem; color:var(--good); white-space:nowrap; }
 .place-link{ margin-top:10px; }
 
-/* ═══════════ 01 ESSENTIALS (restructured) ═══════════ */
-.ess-top{ display:grid; grid-template-columns:.9fr 1.1fr; gap:20px; align-items:start; margin-bottom:10px; }
 .ess-top .converter{ position:static; top:auto; }
-.essentials-map svg{ width:100%; height:auto; border:2px solid var(--ink); border-radius:16px; box-shadow:8px 8px 0 var(--pop); background:#fff; }
+
 .essentials-map .caption{ font-family:var(--mono); font-size:9.5px; letter-spacing:.05em; color:var(--faint); margin-top:11px; line-height:1.5; }
 
 .ess-facts{ margin-top:26px; }
@@ -906,8 +891,6 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 .facts-grid > *:nth-child(6n+6){ border-top-color:var(--good); }
 .facts-grid > *:nth-child(6n+6) dt{ color:var(--good); }
 
-/* ═══════════ 05 FREE (own section, image-led) ═══════════ */
-.free-grid{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
 .free-card{
   display:flex; flex-direction:column; overflow:hidden;
   background:var(--card); border:2px solid var(--ink); border-radius:14px;

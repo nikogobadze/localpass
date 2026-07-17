@@ -1459,14 +1459,21 @@
 
     await load(slug, false);
 
+    /* Back/forward. Chrome also fires popstate for a same-page #hash jump, so
+       this must not repaint unconditionally: doing so tore down the very
+       section the browser was scrolling to, which left every nav link changing
+       the hash without ever moving the page — and rebuilt the whole document
+       each time. Only re-render when the city or language actually changed. */
     window.addEventListener('popstate', () => {
       const q = new URL(location.href).searchParams;
       const lang = q.get('lang') || 'en';
-      if (UI[lang] && lang !== LANG) {
+      const langChanged = UI[lang] && lang !== LANG;
+      if (langChanged) {
         LANG = lang;
         applyLangChrome();
       }
       const s = q.get('city') || CITIES[0].slug;
+      if (s === CURRENT_SLUG && !langChanged) return; // a hash jump: nothing to rebuild
       CURRENT_SLUG = s;
       load(s, false);
     });
