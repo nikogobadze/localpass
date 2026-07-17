@@ -526,7 +526,8 @@
         const tone = o.tone === 'best' ? 'is-best' : o.tone === 'avoid' ? 'is-avoid' : '';
         const art = h('article', `airport-card ${tone}`);
         if (o.tag) art.append(h('span', 'airport-tag', esc(o.tag)));
-        art.append(h('h4', null, esc(o.title)));
+        // h3: these cards sit directly under the section's h2, so h4 skipped a level.
+        art.append(h('h3', null, esc(o.title)));
         const pr = h('p', 'airport-price');
         pr.innerHTML = `${esc(o.price)}${o.unit ? ` <span>${esc(o.unit)}</span>` : ''}`;
         art.append(pr);
@@ -635,7 +636,7 @@
         if (fig) art.append(fig);
 
         const top = h('div', 'place-head');
-        top.append(h('h4', null, esc(p.name)));
+        top.append(h('h3', null, esc(p.name)));
         if (p.pill) top.append(h('span', 'pill pill-free', esc(p.pill)));
         art.append(top);
 
@@ -660,21 +661,27 @@
           pr.innerHTML = `<span>${esc(r.label)}</span><b>${esc(r.value)}</b>`;
           return pr;
         });
+        /* The links live in the popover, not on the thumbnail: the card itself is
+           role="button", and a button must not contain interactive descendants —
+           screen readers announce the nesting as one confused control. Inside
+           .card-more they're display:none until the card opens, so they stay out
+           of the accessibility tree entirely. */
+        let listing = null;
+        if (p.url) {
+          listing = h('a', 'place-link', 'Official listing ↗');
+          listing.href = p.url;
+          listing.target = '_blank';
+          listing.rel = 'noopener';
+        }
         const more = moreBlock(
           extraRows,
           p.note ? h('p', 'place-note', p.note) : null,
           detailList(p.details),
           moreProse(p.more),
-          mapLinkNode([p.name, p.address, p.area, city.name])
+          mapLinkNode([p.name, p.address, p.area, city.name]),
+          listing
         );
         if (more) art.append(more);
-        if (p.url) {
-          const a = h('a', 'place-link', 'Official listing ↗');
-          a.href = p.url;
-          a.target = '_blank';
-          a.rel = 'noopener';
-          art.append(a);
-        }
         return art;
       });
       wrap.append(carousel(cards));
@@ -759,7 +766,7 @@
       if (fig) art.append(fig);
       const body = h('div', 'free-body');
       body.append(h('span', 'pill pill-free', esc(t().nav[5])));
-      body.append(h('h4', null, esc(f.name)), h('p', null, f.desc));
+      body.append(h('h3', null, esc(f.name)), h('p', null, f.desc));
       const more = moreBlock(detailList(f.details), moreProse(f.more), mapLinkNode([f.name, city.name]));
       if (more) body.append(more);
       art.append(body);

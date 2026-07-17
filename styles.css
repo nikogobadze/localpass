@@ -534,7 +534,7 @@ summary:focus-visible,
 .place:nth-child(4){ box-shadow:6px 6px 0 var(--gold); }
 .place:hover{ transform:translate(-2px,-3px); }
 .place-head{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:14px; }
-.place-head h4{ font-family:var(--serif); font-weight:600; font-size:1.02rem; margin:0; letter-spacing:-.02em; }
+.place-head h3{ font-family:var(--serif); font-weight:600; font-size:1.02rem; margin:0; letter-spacing:-.02em; }
 .place-meta{ display:flex; flex-direction:column; gap:3px; margin-bottom:9px; padding-bottom:9px; border-bottom:2px dashed var(--rule); }
 .place-meta span{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; }
 .place-area{ color:var(--accent); font-weight:500; text-transform:uppercase; }
@@ -730,7 +730,7 @@ html[lang="ka"] :is(
    Ease the negative tracking so nothing collides. */
 html[lang="ka"] .hero-title{ letter-spacing:-.012em; font-size:clamp(2.6rem, 8.5vw, 6.2rem); }
 html[lang="ka"] .sec h2{ letter-spacing:-.008em; line-height:1.2; }
-html[lang="ka"] :is(.hood h3, .sight h3, .place-head h4, .cz, .opt h3, .rule h3, .eat-card h3, .scams h3){
+html[lang="ka"] :is(.hood h3, .sight h3, .place-head h3, .cz, .opt h3, .rule h3, .eat-card h3, .scams h3){
   letter-spacing:0;
 }
 html[lang="ka"] .closing-text{ letter-spacing:-.005em; line-height:1.55; }
@@ -810,7 +810,7 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 }
 .airport-card.is-best .airport-tag{ background:var(--good); }
 .airport-card.is-avoid .airport-tag{ background:var(--accent); }
-.airport-card h4{ font-family:var(--serif); font-weight:600; font-size:1.08rem; margin:0 0 8px; line-height:1.2; letter-spacing:-.02em; }
+.airport-card h3{ font-family:var(--serif); font-weight:600; font-size:1.08rem; margin:0 0 8px; line-height:1.2; letter-spacing:-.02em; }
 .airport-price{ font-family:var(--serif); font-size:1.3rem; font-weight:400; letter-spacing:-.03em; margin:0; line-height:1; color:var(--good); }
 .airport-price span{ font-size:.9rem; color:var(--muted); }
 .airport-card.is-avoid .airport-price{ color:var(--accent); }
@@ -910,7 +910,7 @@ html[lang="ka"] .phrase.copied::after{ content:"დაკოპირდა ✓"
 .free-body{ padding:18px 20px 20px; display:flex; flex-direction:column; align-items:flex-start; gap:8px; }
 .free-body .pill{ background:var(--good); color:#fff; box-shadow:2px 2px 0 var(--ink); }
 .free-card:nth-child(3n+3) .free-body .pill{ background:var(--pop); }
-.free-body h4{ font-family:var(--serif); font-weight:600; font-size:1.02rem; margin:0; letter-spacing:-.02em; }
+.free-body h3{ font-family:var(--serif); font-weight:600; font-size:1.02rem; margin:0; letter-spacing:-.02em; }
 .free-body p{ margin:0; font-size:.8rem; color:var(--muted); line-height:1.5; }
 /* free cards with no photo shouldn't look empty — give the body more presence */
 .free-card:not(:has(.card-figure)) .free-body{ padding-top:26px; }
