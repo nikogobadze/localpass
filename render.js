@@ -1416,8 +1416,8 @@
       };
 
       // ── Grab to pan, wheel / pinch / double-click to zoom ──
-      // Eased rather than 1:1 — the raw map felt too twitchy to drag.
-      const PAN_SENS = 0.55;                    // map moves ~half the cursor travel
+      // Slightly eased from 1:1 — raw felt twitchy, but heavy damping felt sluggish.
+      const PAN_SENS = 0.8;
       const rectOf = () => canvas.getBoundingClientRect();
       const pointers = new Map();
       let panStart = null, pinchStart = null, moved = 0;
@@ -1467,10 +1467,10 @@
       const onWheel = (e) => {
         e.preventDefault();
         const rect = rectOf();
-        // Gentle, proportional zoom (a notch is ~7%, not ~18%), clamped so a big
-        // trackpad flick doesn't lurch.
+        // Proportional zoom (~10% per notch, not the original lurchy ~18%),
+        // clamped so a big trackpad flick doesn't jump.
         const dy = Math.max(-90, Math.min(90, e.deltaY));
-        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, Math.pow(1.00075, dy));
+        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, Math.pow(1.00105, dy));
       };
       const onDbl = (e) => {
         const rect = rectOf();
