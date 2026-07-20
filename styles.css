@@ -1254,16 +1254,26 @@ html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
    pushed the tightly-fitted layout ~10px past the fold on desktop, flashing a
    scrollbar. */
 .mapview .reveal{ transform:none; }
-.mapview > .wrap{ width:100%; height:100%; display:flex; flex-direction:column; min-height:0; }
+/* The chooser gets a wider wrap than the rest of the site (global cap is 1260),
+   so the flanked map has more room. */
+.mapview > .wrap{ width:100%; max-width:1500px; height:100%; display:flex; flex-direction:column; min-height:0; }
 .map-head{ flex:none; text-align:center; max-width:660px; margin:0 auto; }
 .map-head .eyebrow{ margin-bottom:8px; }
 .map-title{ font-family:var(--serif); font-weight:500; letter-spacing:-.025em; line-height:1;
   font-size:clamp(1.3rem, 2.8vw, 2.15rem); margin:0 0 4px; color:var(--ink); }
 .map-lede{ color:var(--ink-soft); font-size:clamp(.82rem, .95vw, .92rem); line-height:1.45; margin:0; }
 
-/* The stage is the space left over; the canvas is centred and JS-sized to it. */
-.map-stage{ position:relative; flex:1 1 auto; min-height:0; margin:8px auto 0; width:100%;
-  max-width:1220px; display:flex; align-items:center; justify-content:center; }
+/* The map, flanked by floating city bubbles. The row takes the space the header
+   leaves; a generous gap above it keeps the title from feeling squeezed. */
+.map-choose{ flex:1 1 auto; min-height:0; margin:30px auto 0; width:100%; max-width:1500px;
+  display:flex; align-items:stretch; justify-content:center; gap:20px; }
+.map-side{ list-style:none; margin:0; padding:0; flex:none; width:170px;
+  display:flex; flex-direction:column; justify-content:center; gap:16px; }
+.map-side-left{ align-items:flex-start; }
+.map-side-right{ align-items:flex-end; }
+/* The stage is the space left between the bubbles; canvas is JS-sized to it. */
+.map-stage{ position:relative; flex:1 1 auto; min-height:0;
+  display:flex; align-items:center; justify-content:center; }
 .map-canvas{ position:relative; border:2px solid var(--ink); border-radius:18px;
   overflow:hidden; background:var(--paper-2);
   box-shadow:8px 8px 0 color-mix(in srgb, var(--pop) 32%, transparent);
@@ -1317,20 +1327,32 @@ html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
   box-shadow:3px 3px 0 var(--pin); transition:transform .15s, box-shadow .15s; }
 .map-popup-cta:hover{ transform:translate(-1px,-1px); box-shadow:4px 5px 0 var(--pin); }
 
-/* The always-usable text list under the map (accessible + small screens). */
-.map-list{ flex:none; list-style:none; display:flex; flex-wrap:wrap; justify-content:center; gap:9px;
-  margin:8px auto 0; padding:0; max-width:760px; }
-.map-list button{ display:flex; align-items:center; gap:10px; cursor:pointer; font:inherit; text-align:left;
-  background:var(--card); border:2px solid var(--ink); border-radius:100px; padding:7px 16px 7px 11px;
-  color:var(--ink); box-shadow:3px 3px 0 var(--pin);
+/* Floating city bubbles beside the map. */
+.map-side button{ display:flex; align-items:center; gap:10px; width:100%; cursor:pointer; font:inherit; text-align:left;
+  background:var(--card); border:2px solid var(--ink); border-radius:100px; padding:9px 18px 9px 12px;
+  color:var(--ink); box-shadow:4px 4px 0 var(--pin);
   transition:transform .16s var(--spring), box-shadow .16s; }
-.map-list button:hover{ transform:translate(-1px, -1px); box-shadow:5px 5px 0 var(--pin); }
-.map-list i{ width:12px; height:12px; border-radius:50%; background:var(--pin); flex:none;
+.map-side button:hover{ transform:translate(-2px, -2px); box-shadow:6px 6px 0 var(--pin); }
+.map-side li{ width:100%; }
+.map-side i{ width:13px; height:13px; border-radius:50%; background:var(--pin); flex:none;
   box-shadow:0 0 0 2px var(--card), 0 0 0 3.5px var(--pin); }
-.map-list span{ display:flex; flex-direction:column; gap:1px; }
-.map-list b{ font-family:var(--serif); font-weight:600; font-size:1.02rem; letter-spacing:-.01em; }
-.map-list em{ font-family:var(--mono); font-style:normal; font-size:8.5px; letter-spacing:.12em;
+.map-side span{ display:flex; flex-direction:column; gap:1px; min-width:0; }
+.map-side b{ font-family:var(--serif); font-weight:600; font-size:1.04rem; letter-spacing:-.01em; }
+.map-side em{ font-family:var(--mono); font-style:normal; font-size:8.5px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--muted); }
+
+/* Narrow screens can't flank the map. Stack the bubbles into two compact rows
+   above it (never below), and let the map fill the width beneath. */
+@media (max-width:999px){
+  .map-choose{ flex-direction:column; justify-content:center; gap:14px; margin-top:18px; }
+  .map-side{ width:auto; flex-direction:row; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; }
+  /* The map fills the width and sits right under the bubbles (no fixed-height
+     stage to centre inside, so no big gap above it). */
+  .map-side-left{ order:1; } .map-side-right{ order:2; } .map-stage{ order:3; flex:0 1 auto; }
+  .map-side li{ width:auto; }
+  .map-side button{ width:auto; padding:7px 15px 7px 10px; }
+  .map-side b{ font-size:.96rem; }
+}
 
 @media (max-width:560px){
   .mapview{ padding:88px 0 44px; }

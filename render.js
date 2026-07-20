@@ -1296,7 +1296,12 @@
     );
     wrap.append(head);
 
-    const stage = h('div', 'map-stage reveal');
+    // The map is flanked by floating city bubbles — the accessible / touch path,
+    // and a fallback if the SVG fails to load. They split evenly left / right.
+    const choose = h('div', 'map-choose reveal');
+    const sideL = h('ul', 'map-side map-side-left');
+    const sideR = h('ul', 'map-side map-side-right');
+    const stage = h('div', 'map-stage');
     const canvas = h('div', 'map-canvas');
     canvas.id = 'mapCanvas';
     stage.append(canvas);
@@ -1304,12 +1309,9 @@
     // (larger) stage. Appended after the SVG below.
     const zoom = h('button', 'map-zoom', `<span>🌍</span> ${esc(t().chooseWhole)}`);
     zoom.type = 'button';
-    wrap.append(stage);
 
-    // An always-usable text list under the map — the accessible / small-screen
-    // path, and a fallback if the SVG fails to load.
-    const list = h('ul', 'map-list reveal');
-    cities.forEach((c) => {
+    const half = Math.ceil(cities.length / 2);
+    cities.forEach((c, i) => {
       const li = h('li');
       const btn = h('button');
       btn.type = 'button';
@@ -1317,11 +1319,18 @@
       btn.style.setProperty('--pin', c.accent || 'var(--accent)');
       btn.innerHTML = `<i></i><span><b>${esc(nameOf(c))}</b><em>${esc(countryOf(c))}</em></span>`;
       li.append(btn);
-      list.append(li);
+      (i < half ? sideL : sideR).append(li);
     });
-    wrap.append(list);
+    choose.append(sideL, stage, sideR);
+    wrap.append(choose);
     sec.append(wrap);
     app.append(sec);
+
+    // A bubble goes straight into that city's guide.
+    [sideL, sideR].forEach((s) => s.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-slug]');
+      if (btn) goToCity(btn.dataset.slug);
+    }));
 
     // Fetch + inject the map, then drop the pins on it.
     try {
@@ -1372,7 +1381,15 @@
       // viewport). Leave 8px for the hard drop-shadow.
       const fit = () => {
         const availW = stage.clientWidth - 8, availH = stage.clientHeight - 8;
-        if (availW <= 0 || availH <= 0) return;
+        if (availW <= 0) return;
+        // Stacked (mobile) layout: the bubbles sit above, so just fill the width
+        // — the stage isn't a fixed-height box to fit into.
+        if (window.matchMedia('(max-width:999px)').matches) {
+          canvas.style.width = `${Math.round(availW)}px`;
+          canvas.style.height = `${Math.round(availW / ar)}px`;
+          return;
+        }
+        if (availH <= 0) return;
         let w = availW, hh = w / ar;
         if (hh > availH) { hh = availH; w = hh * ar; }
         canvas.style.width = `${Math.round(w)}px`;
@@ -1477,7 +1494,7 @@
       };
     }
 
-    bindMapChooser(stage, canvas, zoom, list, cities);
+    bindMapChooser(stage, canvas, zoom, cities);
     // The chooser is one non-scrolling screen. The scroll-reveal observer never
     // fires for anything in the bottom of the viewport (its -12% root margin), so
     // the city list could stay invisible — just fade the whole view in now.
@@ -1486,7 +1503,7 @@
     else requestAnimationFrame(revealAll);
   }
 
-  function bindMapChooser(stage, canvas, zoom, list, cities) {
+  function bindMapChooser(stage, canvas, zoom, cities) {
     let whole = false;
     zoom.onclick = () => {
       whole = !whole;
@@ -1544,11 +1561,6 @@
       if (!pinEl) return;
       const c = cities.find((x) => x.slug === pinEl.dataset.slug);
       if (c) openPopup(pinEl, c);
-    });
-    // The text list goes straight into the guide.
-    list.addEventListener('click', (e) => {
-      const btn = e.target.closest('button[data-slug]');
-      if (btn) goToCity(btn.dataset.slug);
     });
 
     teardownMap = () => {
