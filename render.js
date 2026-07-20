@@ -1416,6 +1416,8 @@
       };
 
       // ── Grab to pan, wheel / pinch / double-click to zoom ──
+      // Eased rather than 1:1 — the raw map felt too twitchy to drag.
+      const PAN_SENS = 0.55;                    // map moves ~half the cursor travel
       const rectOf = () => canvas.getBoundingClientRect();
       const pointers = new Map();
       let panStart = null, pinchStart = null, moved = 0;
@@ -1452,8 +1454,8 @@
         if (panStart) {
           const dx = e.clientX - panStart.x, dy = e.clientY - panStart.y;
           moved = Math.max(moved, Math.abs(dx) + Math.abs(dy));
-          view.x = panStart.vx - dx * (view.w / rect.width);
-          view.y = panStart.vy - dy * (view.h / rect.height);
+          view.x = panStart.vx - dx * (view.w / rect.width) * PAN_SENS;
+          view.y = panStart.vy - dy * (view.h / rect.height) * PAN_SENS;
           clampView(view); applyView();
         }
       };
@@ -1465,11 +1467,14 @@
       const onWheel = (e) => {
         e.preventDefault();
         const rect = rectOf();
-        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, e.deltaY > 0 ? 1.18 : 1 / 1.18);
+        // Gentle, proportional zoom (a notch is ~7%, not ~18%), clamped so a big
+        // trackpad flick doesn't lurch.
+        const dy = Math.max(-90, Math.min(90, e.deltaY));
+        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, Math.pow(1.00075, dy));
       };
       const onDbl = (e) => {
         const rect = rectOf();
-        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, 1 / 1.8);
+        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, 1 / 1.5);
       };
       const onResize = () => fit();
 

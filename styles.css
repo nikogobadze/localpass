@@ -1267,10 +1267,21 @@ html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
    leaves; a generous gap above it keeps the title from feeling squeezed. */
 .map-choose{ flex:1 1 auto; min-height:0; margin:30px auto 0; width:100%; max-width:1500px;
   display:flex; align-items:stretch; justify-content:center; gap:20px; }
-.map-side{ list-style:none; margin:0; padding:0; flex:none; width:170px;
-  display:flex; flex-direction:column; justify-content:center; gap:16px; }
+.map-side{ list-style:none; margin:0; padding:0; flex:none; width:210px;
+  display:flex; flex-direction:column; justify-content:center; gap:14px; }
 .map-side-left{ align-items:flex-start; }
 .map-side-right{ align-items:flex-end; }
+.map-side li{ width:auto; }
+/* Scatter the bubbles so they float rather than sit in a straight line. The
+   offset/tilt is on the <li>, so the <button> keeps its own hover transform.
+   The 3n patterns keep it varied as more cities are added. */
+.map-side-left  li:nth-child(3n+1){ transform:translateX(2px)  rotate(-1.6deg); }
+.map-side-left  li:nth-child(3n+2){ transform:translateX(32px) rotate(1.2deg); }
+.map-side-left  li:nth-child(3n+3){ transform:translateX(15px) rotate(-.7deg); }
+.map-side-right li:nth-child(3n+1){ transform:translateX(-2px)  rotate(1.6deg); }
+.map-side-right li:nth-child(3n+2){ transform:translateX(-32px) rotate(-1.2deg); }
+.map-side-right li:nth-child(3n+3){ transform:translateX(-15px) rotate(.7deg); }
+.map-side li:nth-child(even){ margin-block:4px 10px; }   /* uneven vertical rhythm */
 /* The stage is the space left between the bubbles; canvas is JS-sized to it. */
 .map-stage{ position:relative; flex:1 1 auto; min-height:0;
   display:flex; align-items:center; justify-content:center; }
@@ -1328,12 +1339,11 @@ html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
 .map-popup-cta:hover{ transform:translate(-1px,-1px); box-shadow:4px 5px 0 var(--pin); }
 
 /* Floating city bubbles beside the map. */
-.map-side button{ display:flex; align-items:center; gap:10px; width:100%; cursor:pointer; font:inherit; text-align:left;
+.map-side button{ display:flex; align-items:center; gap:10px; width:auto; cursor:pointer; font:inherit; text-align:left;
   background:var(--card); border:2px solid var(--ink); border-radius:100px; padding:9px 18px 9px 12px;
   color:var(--ink); box-shadow:4px 4px 0 var(--pin);
   transition:transform .16s var(--spring), box-shadow .16s; }
 .map-side button:hover{ transform:translate(-2px, -2px); box-shadow:6px 6px 0 var(--pin); }
-.map-side li{ width:100%; }
 .map-side i{ width:13px; height:13px; border-radius:50%; background:var(--pin); flex:none;
   box-shadow:0 0 0 2px var(--card), 0 0 0 3.5px var(--pin); }
 .map-side span{ display:flex; flex-direction:column; gap:1px; min-width:0; }
@@ -1349,9 +1359,10 @@ html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
   /* The map fills the width and sits right under the bubbles (no fixed-height
      stage to centre inside, so no big gap above it). */
   .map-side-left{ order:1; } .map-side-right{ order:2; } .map-stage{ order:3; flex:0 1 auto; }
-  .map-side li{ width:auto; }
-  .map-side button{ width:auto; padding:7px 15px 7px 10px; }
+  .map-side button{ padding:7px 15px 7px 10px; }
   .map-side b{ font-size:.96rem; }
+  /* No scatter in the stacked rows — keep them tidy. */
+  .map-side li{ transform:none !important; margin-block:0 !important; }
 }
 
 @media (max-width:560px){
