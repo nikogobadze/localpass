@@ -1478,7 +1478,12 @@
     }
 
     bindMapChooser(stage, canvas, zoom, list, cities);
-    bindReveal();
+    // The chooser is one non-scrolling screen. The scroll-reveal observer never
+    // fires for anything in the bottom of the viewport (its -12% root margin), so
+    // the city list could stay invisible — just fade the whole view in now.
+    const revealAll = () => sec.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) revealAll();
+    else requestAnimationFrame(revealAll);
   }
 
   function bindMapChooser(stage, canvas, zoom, list, cities) {
