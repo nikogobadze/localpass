@@ -1256,6 +1256,7 @@
   let WORLDMAP = null;                 // cached SVG text
   let mapFrameView = null;             // frameView(vb) for the current map, for the toggle
   let mapClosePopup = null;            // close the open city popup, if any
+  let mapResizeOff = null;             // detach the map's resize listener
 
   const geoCities = () => CITIES.filter((c) => typeof c.lat === 'number' && typeof c.lng === 'number');
 
@@ -1299,10 +1300,10 @@
     const canvas = h('div', 'map-canvas');
     canvas.id = 'mapCanvas';
     stage.append(canvas);
-
+    // Zoom lives inside the canvas so it rides the map's sized box, not the
+    // (larger) stage. Appended after the SVG below.
     const zoom = h('button', 'map-zoom', `<span>🌍</span> ${esc(t().chooseWhole)}`);
     zoom.type = 'button';
-    stage.append(zoom);
     wrap.append(stage);
 
     // An always-usable text list under the map — the accessible / small-screen
@@ -1331,6 +1332,7 @@
     }
     const svg = canvas.querySelector('svg');
     const pins = [];
+    let ar = 1000 / 386;
     if (svg) {
       cities.forEach((c) => {
         const pin = h('button', 'map-pin');
@@ -1342,17 +1344,36 @@
         canvas.append(pin);
         pins.push({ el: pin, c });
       });
-      // Position pins as a % of the current view, and keep the canvas at the
-      // view's aspect ratio so the % mapping stays exact through any resize.
+      canvas.append(zoom);
+
+      // Size the map to the space the stage actually has (never taller than the
+      // viewport), keeping the view's aspect ratio so the % pin mapping holds.
+      const fit = () => {
+        // Leave room for the hard drop-shadow (8px) so the map never nudges the
+        // page past one screen.
+        const availW = stage.clientWidth - 8, availH = stage.clientHeight - 8;
+        if (availW <= 0 || availH <= 0) return;
+        let w = availW, hh = w / ar;
+        if (hh > availH) { hh = availH; w = hh * ar; }
+        canvas.style.width = `${Math.round(w)}px`;
+        canvas.style.height = `${Math.round(hh)}px`;
+      };
+      // Position pins as a % of the current view; the aspect drives the fit.
       mapFrameView = (vb) => {
         svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
-        canvas.style.aspectRatio = `${vb.w} / ${vb.h}`;
+        ar = vb.w / vb.h;
         pins.forEach(({ el, c }) => {
           el.style.left = `${((mapX(c.lng) - vb.x) / vb.w) * 100}%`;
           el.style.top = `${((mapY(c.lat) - vb.y) / vb.h) * 100}%`;
         });
+        fit();
       };
       mapFrameView(cities.length ? cityFrame(cities) : MAP_VB_FULL);
+      const onResize = () => fit();
+      window.addEventListener('resize', onResize, { passive: true });
+      mapResizeOff = () => window.removeEventListener('resize', onResize);
+      // Fonts/layout settle a frame later; refit so the first paint is exact.
+      requestAnimationFrame(fit);
     }
 
     bindMapChooser(stage, canvas, zoom, list, cities);
@@ -1425,6 +1446,8 @@
 
     teardownMap = () => {
       closePopup();
+      if (mapResizeOff) mapResizeOff();
+      mapResizeOff = null;
       mapFrameView = null;
       mapClosePopup = null;
     };
