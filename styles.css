@@ -1230,3 +1230,96 @@ html[data-theme="dark"] .cardmodal-scrim{ background:rgba(0,0,0,.22); }
 /* Photos carry their own light; a gentle dim keeps them from glaring on dark. */
 html[data-theme="dark"] .card-figure img,
 html[data-theme="dark"] .photo-band img{ filter:brightness(.92) contrast(1.02); }
+
+/* ═══════════════════ CITY CHOOSER (world map) ═══════════════════
+   The front door: a self-hosted world map with a pin per available city.
+   assets/worldmap.svg is plain vector geography — no tiles, nothing external. */
+
+/* On the chooser, the guide-only nav controls are meaningless — hide them and
+   keep just the brand (home), theme and language. */
+html.map-mode .nav-links,
+html.map-mode .citypick,
+html.map-mode .nav-toggle{ display:none !important; }
+html.map-mode .nav-right{ margin:0 0 0 auto; }
+html.map-mode .nav .brand-logo,
+html.map-mode .nav .brand-text{ opacity:1 !important; transform:none !important; }
+html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom-color:var(--ink); }
+
+.mapview{ min-height:100svh; padding:104px 0 60px; display:flex; align-items:center; }
+.mapview > .wrap{ width:100%; }
+.map-head{ text-align:center; max-width:640px; margin:0 auto 30px; }
+.map-title{ font-family:var(--serif); font-weight:500; letter-spacing:-.025em; line-height:1;
+  font-size:clamp(2rem, 5vw, 3.4rem); margin:12px 0 14px; color:var(--ink); }
+.map-lede{ color:var(--ink-soft); font-size:clamp(.9rem, 1.1vw, 1rem); line-height:1.55; margin:0; }
+
+.map-stage{ position:relative; max-width:940px; margin:0 auto; }
+.map-canvas{ position:relative; width:100%; border:2px solid var(--ink); border-radius:18px;
+  overflow:hidden; background:var(--paper-2);
+  box-shadow:8px 8px 0 color-mix(in srgb, var(--pop) 32%, transparent); }
+.worldmap-svg{ display:block; width:100%; height:auto; }
+.worldmap-svg .land{ fill:color-mix(in srgb, var(--ink) 80%, var(--wash));
+  stroke:var(--wash); stroke-width:.4; }
+
+/* Pins — HTML overlays positioned by % of the current view (render.js keeps the
+   canvas at the view's aspect ratio, so the % never drifts on resize). */
+.map-pin{ position:absolute; transform:translate(-50%, -50%); z-index:2; padding:0;
+  background:none; border:0; cursor:pointer; }
+.map-pin::after{ content:""; position:absolute; inset:-12px; }   /* generous touch target */
+.pin-dot{ display:block; width:16px; height:16px; border-radius:50%; background:var(--pin);
+  border:2.5px solid var(--card); box-shadow:0 0 0 2px var(--pin), 0 3px 9px rgba(0,0,0,.45);
+  transition:transform .18s var(--spring); }
+.pin-name{ position:absolute; bottom:calc(100% + 5px); left:50%; transform:translateX(-50%);
+  font-family:var(--mono); font-size:10px; letter-spacing:.05em; text-transform:uppercase;
+  background:var(--card); color:var(--ink); border:1.5px solid var(--ink); border-radius:100px;
+  padding:3px 9px; white-space:nowrap; box-shadow:2px 2px 0 var(--pin); pointer-events:none; }
+.map-pin:hover .pin-dot,
+.map-pin:focus-visible .pin-dot{ transform:scale(1.28); }
+
+.map-zoom{ position:absolute; top:12px; right:12px; z-index:3; cursor:pointer;
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  background:var(--card); color:var(--ink); border:2px solid var(--ink); border-radius:100px;
+  padding:8px 13px; box-shadow:2px 2px 0 var(--ink); transition:transform .15s, box-shadow .15s; }
+.map-zoom:hover{ transform:translate(-1px,-1px); box-shadow:3px 3px 0 var(--accent); }
+.map-zoom span{ font-size:13px; }
+
+.map-popup{ position:absolute; z-index:5; width:min(262px, 74vw);
+  background:var(--card); border:2px solid var(--ink); border-radius:14px; padding:15px 16px 14px;
+  box-shadow:6px 6px 0 var(--pin); opacity:0; transform:translateY(6px) scale(.98);
+  transition:opacity .16s var(--ease), transform .2s var(--spring); }
+.map-popup.show{ opacity:1; transform:none; }
+.map-popup-country{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--pin); margin:0 0 3px; font-weight:500; }
+.map-popup-name{ font-family:var(--serif); font-weight:600; font-size:1.3rem; margin:0 0 8px;
+  letter-spacing:-.02em; color:var(--ink); line-height:1.05; }
+.map-popup-blurb{ font-size:.84rem; line-height:1.5; color:var(--ink-soft); margin:0 0 14px; }
+.map-popup-cta{ display:flex; align-items:center; justify-content:center; gap:6px; width:100%; cursor:pointer;
+  font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  background:var(--ink); color:var(--wash); border:2px solid var(--ink); border-radius:100px; padding:11px 16px;
+  box-shadow:3px 3px 0 var(--pin); transition:transform .15s, box-shadow .15s; }
+.map-popup-cta:hover{ transform:translate(-1px,-1px); box-shadow:4px 5px 0 var(--pin); }
+
+/* The always-usable text list under the map (accessible + small screens). */
+.map-list{ list-style:none; display:flex; flex-wrap:wrap; justify-content:center; gap:12px;
+  margin:30px auto 0; padding:0; max-width:760px; }
+.map-list button{ display:flex; align-items:center; gap:11px; cursor:pointer; font:inherit; text-align:left;
+  background:var(--card); border:2px solid var(--ink); border-radius:100px; padding:9px 18px 9px 13px;
+  color:var(--ink); box-shadow:3px 3px 0 var(--pin);
+  transition:transform .16s var(--spring), box-shadow .16s; }
+.map-list button:hover{ transform:translate(-1px, -1px); box-shadow:5px 5px 0 var(--pin); }
+.map-list i{ width:12px; height:12px; border-radius:50%; background:var(--pin); flex:none;
+  box-shadow:0 0 0 2px var(--card), 0 0 0 3.5px var(--pin); }
+.map-list span{ display:flex; flex-direction:column; gap:1px; }
+.map-list b{ font-family:var(--serif); font-weight:600; font-size:1.02rem; letter-spacing:-.01em; }
+.map-list em{ font-family:var(--mono); font-style:normal; font-size:8.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted); }
+
+@media (max-width:560px){
+  .mapview{ padding:88px 0 44px; }
+  .pin-dot{ width:15px; height:15px; }
+  /* Labels crowd each other on a narrow map — the dots stay tappable, the
+     popup names the city on tap, and the list below names them all. */
+  .pin-name{ display:none; }
+  .map-zoom{ font-size:9px; padding:7px 11px; }
+}

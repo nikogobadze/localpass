@@ -4,6 +4,9 @@
   "localName": "Wien",
   "country": "Austria",
   "verified": "July 2026",
+  "lat": 48.208,
+  "lng": 16.373,
+  "blurb": "Imperial grandeur and coffee-house calm. Pricier than its neighbours, but light on tourist traps.",
   "currency": {
     "code": "EUR",
     "symbol": "€",

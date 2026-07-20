@@ -46,6 +46,13 @@
       closeLabel: 'Close',
       mapLink: 'Open in Maps',
       mapSights: 'See the sights on a map',
+      chooseTitle: 'Where are you going?',
+      chooseLede: (n) => `${n} cities so far — tap a pin to see what's inside. Real local prices, no tourist markup.`,
+      chooseCta: (city) => `Open the ${city} guide`,
+      chooseWhole: 'Whole world',
+      chooseFocus: 'Back to the cities',
+      chooseHint: 'Choose a city',
+      backToMap: 'All cities',
     },
     ka: {
       nav: ['მთავარი', 'ჩასვლა', 'დარჩენა', 'საჭმელი', 'სანახავი', 'უფასო', 'ენა'],
@@ -76,6 +83,13 @@
       closeLabel: 'დახურვა',
       mapLink: 'რუკაზე ნახვა',
       mapSights: 'ნახეთ ღირსშესანიშნაობები რუკაზე',
+      chooseTitle: 'სად მიემგზავრებით?',
+      chooseLede: (n) => `${n} ქალაქი ჯერ — დააჭირეთ პინს, რომ ნახოთ რა არის შიგნით. რეალური ადგილობრივი ფასები, ტურისტული ზედნადების გარეშე.`,
+      chooseCta: (city) => `გახსენით ${city}-ის გზამკვლევი`,
+      chooseWhole: 'მთელი მსოფლიო',
+      chooseFocus: 'ქალაქებთან დაბრუნება',
+      chooseHint: 'აირჩიეთ ქალაქი',
+      backToMap: 'ყველა ქალაქი',
     },
   };
 
@@ -870,11 +884,17 @@
     return f;
   }
 
+  /* City display name / country in the current language (used by the picker
+     and the chooser map). */
+  const nameOf = (c) => c.names?.[LANG] || c.name;
+  const countryOf = (c) => c.countries?.[LANG] || c.country || '';
+
   /* ── Interactions (re-bound on every render) ─────────────── */
   let observers = [];
   let revealTimers = [];
   let closeCityPicker = null;
   let teardownExpand = null;
+  let teardownMap = null;
 
   function teardown() {
     observers.forEach((o) => o.disconnect());
@@ -888,6 +908,9 @@
     // Drop the overlay's listeners and shut it if a repaint lands mid-open.
     if (teardownExpand) teardownExpand();
     teardownExpand = null;
+    // Drop the chooser map's popup + listeners.
+    if (teardownMap) teardownMap();
+    teardownMap = null;
   }
 
   /* Scroll state. scrollHeight is a layout read, so it is measured once per
@@ -917,6 +940,12 @@
   function bindNav() {
     navEl = document.getElementById('nav');
     barEl = document.getElementById('progressBar');
+    // The brand is "home", and home is now the city chooser. From a guide it
+    // returns to the map; on the map it does nothing.
+    const brand = document.querySelector('.brand');
+    if (brand) brand.addEventListener('click', (e) => {
+      if (MODE === 'guide') { e.preventDefault(); renderMap(true); }
+    });
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', measure, { passive: true });
     // Web fonts land after first paint and change the document height.
@@ -1165,8 +1194,6 @@
     const btn = document.getElementById('citypickBtn');
     const menu = document.getElementById('citypickMenu');
     const label = document.getElementById('citypickCurrent');
-    const nameOf = (c) => c.names?.[LANG] || c.name;
-    const countryOf = (c) => c.countries?.[LANG] || c.country || '';
     label.textContent = current.name;
 
     menu.innerHTML = '';
@@ -1216,6 +1243,200 @@
   /* ── Boot ────────────────────────────────────────────────── */
   let CITIES = [];
   let CREDITS = {};
+  let MODE = 'guide';       // 'map' (the chooser) or 'guide' (a city page)
+
+  /* ── City chooser: a self-hosted world map ───────────────
+     The map SVG (assets/worldmap.svg) is an equirectangular render of
+     public-domain geography — no tiles, no third party. These constants MUST
+     match tools/build-worldmap.js so a pin lands where it should. */
+  const MAP_W = 1000, MAP_LAT_TOP = 83, MAP_SCALE = MAP_W / 360;
+  const MAP_VB_FULL = { x: 0, y: 0, w: 1000, h: 386 };
+  const mapX = (lng) => (lng + 180) * MAP_SCALE;
+  const mapY = (lat) => (MAP_LAT_TOP - lat) * MAP_SCALE;
+  let WORLDMAP = null;                 // cached SVG text
+  let mapFrameView = null;             // frameView(vb) for the current map, for the toggle
+  let mapClosePopup = null;            // close the open city popup, if any
+
+  const geoCities = () => CITIES.filter((c) => typeof c.lat === 'number' && typeof c.lng === 'number');
+
+  /* The window (in map units) that frames every available city with enough
+     surrounding geography to be recognisable. */
+  function cityFrame(cities) {
+    const lons = cities.map((c) => c.lng), lats = cities.map((c) => c.lat);
+    const cx = (Math.min(...lons) + Math.max(...lons)) / 2;
+    const cy = (Math.min(...lats) + Math.max(...lats)) / 2;
+    const spanLon = Math.max(Math.max(...lons) - Math.min(...lons) + 16, 30);
+    const spanLat = Math.max(Math.max(...lats) - Math.min(...lats) + 9, 18);
+    let minLon = cx - spanLon / 2, maxLon = cx + spanLon / 2;
+    let minLat = cy - spanLat / 2, maxLat = cy + spanLat / 2;
+    minLat = Math.max(-56, minLat); maxLat = Math.min(MAP_LAT_TOP, maxLat);
+    return { x: mapX(minLon), y: mapY(maxLat), w: (maxLon - minLon) * MAP_SCALE, h: (maxLat - minLat) * MAP_SCALE };
+  }
+
+  async function renderMap(push) {
+    teardown();
+    MODE = 'map';
+    document.documentElement.classList.add('map-mode');
+    document.title = `${BRAND} — ${t().chooseHint}`;
+    CURRENT_SLUG = null;
+    CURRENT_THEME = {};       // no city palette on the chooser — use the defaults
+    applyThemeVars();
+    if (push) history.pushState({ map: true, lang: LANG }, '', LANG === 'en' ? '/' : `/?lang=${LANG}`);
+
+    const cities = geoCities();
+    app.innerHTML = '';
+    const sec = h('section', 'mapview');
+    const wrap = h('div', 'wrap');
+    const head = h('div', 'map-head reveal');
+    head.append(
+      h('p', 'eyebrow', esc(t().chooseHint)),
+      h('h1', 'map-title', esc(t().chooseTitle)),
+      h('p', 'map-lede', esc(t().chooseLede(cities.length)))
+    );
+    wrap.append(head);
+
+    const stage = h('div', 'map-stage reveal');
+    const canvas = h('div', 'map-canvas');
+    canvas.id = 'mapCanvas';
+    stage.append(canvas);
+
+    const zoom = h('button', 'map-zoom', `<span>🌍</span> ${esc(t().chooseWhole)}`);
+    zoom.type = 'button';
+    stage.append(zoom);
+    wrap.append(stage);
+
+    // An always-usable text list under the map — the accessible / small-screen
+    // path, and a fallback if the SVG fails to load.
+    const list = h('ul', 'map-list reveal');
+    cities.forEach((c) => {
+      const li = h('li');
+      const btn = h('button');
+      btn.type = 'button';
+      btn.dataset.slug = c.slug;
+      btn.style.setProperty('--pin', c.accent || 'var(--accent)');
+      btn.innerHTML = `<i></i><span><b>${esc(nameOf(c))}</b><em>${esc(countryOf(c))}</em></span>`;
+      li.append(btn);
+      list.append(li);
+    });
+    wrap.append(list);
+    sec.append(wrap);
+    app.append(sec);
+
+    // Fetch + inject the map, then drop the pins on it.
+    try {
+      if (!WORLDMAP) WORLDMAP = await fetch('assets/worldmap.svg', { cache: 'force-cache' }).then((r) => r.text());
+      canvas.innerHTML = WORLDMAP;
+    } catch {
+      stage.remove(); // the text list still works, so the page is usable
+    }
+    const svg = canvas.querySelector('svg');
+    const pins = [];
+    if (svg) {
+      cities.forEach((c) => {
+        const pin = h('button', 'map-pin');
+        pin.type = 'button';
+        pin.dataset.slug = c.slug;
+        pin.style.setProperty('--pin', c.accent || 'var(--accent)');
+        pin.setAttribute('aria-label', `${nameOf(c)}, ${countryOf(c)} — ${t().chooseCta(nameOf(c))}`);
+        pin.innerHTML = `<span class="pin-dot"></span><span class="pin-name">${esc(nameOf(c))}</span>`;
+        canvas.append(pin);
+        pins.push({ el: pin, c });
+      });
+      // Position pins as a % of the current view, and keep the canvas at the
+      // view's aspect ratio so the % mapping stays exact through any resize.
+      mapFrameView = (vb) => {
+        svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+        canvas.style.aspectRatio = `${vb.w} / ${vb.h}`;
+        pins.forEach(({ el, c }) => {
+          el.style.left = `${((mapX(c.lng) - vb.x) / vb.w) * 100}%`;
+          el.style.top = `${((mapY(c.lat) - vb.y) / vb.h) * 100}%`;
+        });
+      };
+      mapFrameView(cities.length ? cityFrame(cities) : MAP_VB_FULL);
+    }
+
+    bindMapChooser(stage, canvas, zoom, list, cities);
+    bindReveal();
+  }
+
+  function bindMapChooser(stage, canvas, zoom, list, cities) {
+    let whole = false;
+    zoom.onclick = () => {
+      whole = !whole;
+      if (mapFrameView) mapFrameView(whole ? MAP_VB_FULL : cityFrame(cities));
+      zoom.classList.toggle('is-on', whole);
+      zoom.innerHTML = `<span>${whole ? '🎯' : '🌍'}</span> ${esc(whole ? t().chooseFocus : t().chooseWhole)}`;
+      closePopup();
+    };
+
+    // The popup: a small card anchored to the tapped pin, with a CTA into the guide.
+    let popup = null;
+    const closePopup = () => {
+      if (!popup) return;
+      popup.remove(); popup = null;
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('click', onDocClick, true);
+    };
+    mapClosePopup = closePopup;
+    const onKey = (e) => { if (e.key === 'Escape') closePopup(); };
+    const onDocClick = (e) => { if (popup && !popup.contains(e.target) && !e.target.closest('.map-pin')) closePopup(); };
+
+    const openPopup = (pin, c) => {
+      closePopup();
+      popup = h('div', 'map-popup');
+      popup.style.setProperty('--pin', c.accent || 'var(--accent)');
+      const cta = h('button', 'map-popup-cta', `${esc(t().chooseCta(nameOf(c)))} →`);
+      cta.type = 'button';
+      cta.onclick = () => goToCity(c.slug);
+      popup.innerHTML =
+        `<p class="map-popup-country">${esc(countryOf(c))}</p>` +
+        `<h3 class="map-popup-name">${esc(nameOf(c))}</h3>` +
+        `<p class="map-popup-blurb">${esc((c.blurbs && c.blurbs[LANG]) || c.blurbs?.en || '')}</p>`;
+      popup.append(cta);
+      stage.append(popup);
+      // Anchor above the pin, clamped inside the stage.
+      const sr = stage.getBoundingClientRect(), pr = pin.getBoundingClientRect();
+      const pw = popup.offsetWidth, ph = popup.offsetHeight, M = 10;
+      let left = pr.left - sr.left + pr.width / 2 - pw / 2;
+      left = Math.max(M, Math.min(left, sr.width - pw - M));
+      let top = pr.top - sr.top - ph - 12;
+      if (top < M) top = pr.bottom - sr.top + 12;   // flip below if no room above
+      popup.style.left = `${Math.round(left)}px`;
+      popup.style.top = `${Math.round(top)}px`;
+      requestAnimationFrame(() => {
+        popup.classList.add('show');
+        cta.focus();
+        document.addEventListener('keydown', onKey);
+        document.addEventListener('click', onDocClick, true);
+      });
+    };
+
+    canvas.addEventListener('click', (e) => {
+      const pinEl = e.target.closest('.map-pin');
+      if (!pinEl) return;
+      const c = cities.find((x) => x.slug === pinEl.dataset.slug);
+      if (c) openPopup(pinEl, c);
+    });
+    // The text list goes straight into the guide.
+    list.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-slug]');
+      if (btn) goToCity(btn.dataset.slug);
+    });
+
+    teardownMap = () => {
+      closePopup();
+      mapFrameView = null;
+      mapClosePopup = null;
+    };
+  }
+
+  function goToCity(slug) {
+    if (mapClosePopup) mapClosePopup();
+    document.documentElement.classList.remove('map-mode');
+    MODE = 'guide';
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    load(slug, true);
+  }
 
   function paint(city) {
     teardown();
@@ -1309,6 +1530,10 @@
     }
     if (push) pushUrl(slug);
 
+    MODE = 'guide';
+    document.documentElement.classList.remove('map-mode');
+    CURRENT_SLUG = slug;
+
     // Jump before repainting. scrollTo(0,0) would inherit the smooth
     // scroll-behavior from CSS and animate the full height of the old page.
     if (push) window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1397,8 +1622,15 @@
       /* the URL still carries the choice */
     }
     applyLangChrome();
-    if (push) pushUrl(CURRENT_SLUG);
-    await load(CURRENT_SLUG, false);
+    // On the chooser there is no city to reload — re-render the map so its
+    // title and blurbs switch language; otherwise reload the current guide.
+    if (MODE === 'map') {
+      if (push) history.replaceState({ map: true, lang: LANG }, '', LANG === 'en' ? '/' : `/?lang=${LANG}`);
+      await renderMap(false);
+    } else {
+      if (push) pushUrl(CURRENT_SLUG);
+      await load(CURRENT_SLUG, false);
+    }
   }
 
   function bindLangPicker() {
@@ -1454,17 +1686,17 @@
       return;
     }
 
-    let stored = null;
-    try {
-      stored = localStorage.getItem(STORE_KEY);
-    } catch {
-      /* ignore */
+    // The front door is the city chooser (the world map). A city is only shown
+    // straight away when the URL asks for one — so shared links and the picker
+    // still work, but a first-time visitor gets to choose rather than landing on
+    // whichever city happens to be default.
+    const wantedCity = params.get('city');
+    if (wantedCity && CITIES.some((c) => c.slug === wantedCity)) {
+      CURRENT_SLUG = wantedCity;
+      await load(wantedCity, false);
+    } else {
+      await renderMap(false);
     }
-    const wanted = params.get('city') || stored;
-    const slug = CITIES.some((c) => c.slug === wanted) ? wanted : CITIES[0].slug;
-    CURRENT_SLUG = slug;
-
-    await load(slug, false);
 
     /* Back/forward. Chrome also fires popstate for a same-page #hash jump, so
        this must not repaint unconditionally: doing so tore down the very
@@ -1479,10 +1711,15 @@
         LANG = lang;
         applyLangChrome();
       }
-      const s = q.get('city') || CITIES[0].slug;
-      if (s === CURRENT_SLUG && !langChanged) return; // a hash jump: nothing to rebuild
-      CURRENT_SLUG = s;
-      load(s, false);
+      const city = q.get('city');
+      // No ?city in the URL → the chooser map (the front door).
+      if (!city || !CITIES.some((c) => c.slug === city)) {
+        if (MODE !== 'map' || langChanged) renderMap(false);
+        return;
+      }
+      if (city === CURRENT_SLUG && MODE === 'guide' && !langChanged) return; // a hash jump
+      CURRENT_SLUG = city;
+      load(city, false);
     });
   }
 

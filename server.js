@@ -123,6 +123,7 @@ async function listCities() {
       const city = JSON.parse(await fsp.readFile(cityPath(slug), 'utf8'));
       const names = { en: city.name };
       const countries = { en: city.country || '' };
+      const blurbs = city.blurb ? { en: city.blurb } : {};
 
       // Pick up whatever translations exist beside it.
       for (const lang of LANGS.filter((l) => l !== 'en')) {
@@ -130,6 +131,7 @@ async function listCities() {
           const tr = JSON.parse(await fsp.readFile(cityPath(slug, lang), 'utf8'));
           if (tr.name) names[lang] = tr.name;
           if (tr.country) countries[lang] = tr.country;
+          if (tr.blurb) blurbs[lang] = tr.blurb;
         } catch {
           /* no translation for this city yet — the site falls back to English */
         }
@@ -145,6 +147,11 @@ async function listCities() {
         langs: Object.keys(names),
         accent: city.theme?.accent || '#A93B2B',
         verified: city.verified || '',
+        // Geography for the chooser map (optional; a city without it just
+        // won't get a pin, only a chip).
+        ...(typeof city.lat === 'number' ? { lat: city.lat } : {}),
+        ...(typeof city.lng === 'number' ? { lng: city.lng } : {}),
+        ...(Object.keys(blurbs).length ? { blurbs } : {}),
       });
     } catch (err) {
       console.warn(`  ! skipping ${slug}.json — ${err.message}`);

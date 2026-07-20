@@ -4,6 +4,9 @@
   "localName": "Praha",
   "country": "Czech Republic",
   "verified": "July 2026",
+  "lat": 50.088,
+  "lng": 14.42,
+  "blurb": "Baroque spires and the cheapest great beer in Europe — with a tourist-price gap you can close in a three-minute walk.",
   "currency": {
     "code": "CZK",
     "symbol": "Kč",

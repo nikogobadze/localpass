@@ -18,7 +18,13 @@
         "ka"
       ],
       "accent": "#C25A2B",
-      "verified": "July 2026"
+      "verified": "July 2026",
+      "lat": 46.056,
+      "lng": 14.506,
+      "blurbs": {
+        "en": "A car-free old town wrapped around a green river — small, walkable, and barely touristed.",
+        "ka": "უმანქანო ძველი ქალაქი მწვანე მდინარის გარშემო — პატარა, ფეხით მოსავლელი და თითქმის ტურისტებისგან თავისუფალი."
+      }
     },
     {
       "slug": "prague",
@@ -38,7 +44,13 @@
         "ka"
       ],
       "accent": "#C4402A",
-      "verified": "July 2026"
+      "verified": "July 2026",
+      "lat": 50.088,
+      "lng": 14.42,
+      "blurbs": {
+        "en": "Baroque spires and the cheapest great beer in Europe — with a tourist-price gap you can close in a three-minute walk.",
+        "ka": "ბაროკოს კოშკები და ევროპაში ყველაზე იაფი შესანიშნავი ლუდი — ტურისტული ფასის სხვაობა კი სამწუთიან ფეხით სავალზეა."
+      }
     },
     {
       "slug": "vienna",
@@ -58,7 +70,13 @@
         "ka"
       ],
       "accent": "#A5294A",
-      "verified": "July 2026"
+      "verified": "July 2026",
+      "lat": 48.208,
+      "lng": 16.373,
+      "blurbs": {
+        "en": "Imperial grandeur and coffee-house calm. Pricier than its neighbours, but light on tourist traps.",
+        "ka": "იმპერიული დიდებულება და ყავახანების სიმშვიდე. მეზობლებზე ძვირი, მაგრამ ტურისტულ ხაფანგებს მოკლებული."
+      }
     }
   ]
 }

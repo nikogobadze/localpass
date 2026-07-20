@@ -4,6 +4,9 @@
   "localName": "Ljubljana",
   "country": "Slovenia",
   "verified": "July 2026",
+  "lat": 46.056,
+  "lng": 14.506,
+  "blurb": "A car-free old town wrapped around a green river — small, walkable, and barely touristed.",
   "currency": {
     "code": "EUR",
     "symbol": "€",
