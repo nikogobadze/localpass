@@ -1254,9 +1254,9 @@
   const mapX = (lng) => (lng + 180) * MAP_SCALE;
   const mapY = (lat) => (MAP_LAT_TOP - lat) * MAP_SCALE;
   let WORLDMAP = null;                 // cached SVG text
-  let mapFrameView = null;             // frameView(vb) for the current map, for the toggle
   let mapClosePopup = null;            // close the open city popup, if any
-  let mapResizeOff = null;             // detach the map's resize listener
+  let mapResizeOff = null;             // detach the map's view listeners (resize/pan/zoom)
+  let mapNav = null;                   // pan/zoom controller for the current map
 
   const geoCities = () => CITIES.filter((c) => typeof c.lat === 'number' && typeof c.lng === 'number');
 
@@ -1346,11 +1346,31 @@
       });
       canvas.append(zoom);
 
-      // Size the map to the space the stage actually has (never taller than the
-      // viewport), keeping the view's aspect ratio so the % pin mapping holds.
+      // The display keeps a single aspect ratio (the initial city frame), so
+      // pan and zoom only ever translate/scale the view — no re-fitting, and
+      // the % pin mapping stays exact.
+      const AR = (() => { const f = cities.length ? cityFrame(cities) : MAP_VB_FULL; return f.w / f.h; })();
+      ar = AR;
+      const MIN_W = 40;                         // closest zoom-in (~14° of longitude — a country)
+      const clampN = (v, a, z) => Math.max(a, Math.min(v, z));
+      const clampView = (v) => {
+        v.w = clampN(v.w, MIN_W, 1000);         // never wider than the whole world
+        v.h = v.w / AR;
+        v.x = v.w >= 1000 ? (1000 - v.w) / 2 : clampN(v.x, 0, 1000 - v.w);
+        v.y = v.h >= 386 ? (386 - v.h) / 2 : clampN(v.y, 0, 386 - v.h);
+        return v;
+      };
+      // Expand a lon/lat window to the display aspect (centred), then clamp.
+      const frameToAR = (vb) => {
+        let { x, y, w, h } = vb; const cx = x + w / 2, cy = y + h / 2;
+        if (w / h > AR) h = w / AR; else w = h * AR;
+        return clampView({ x: cx - w / 2, y: cy - h / 2, w, h });
+      };
+      let view = frameToAR(cities.length ? cityFrame(cities) : MAP_VB_FULL);
+
+      // Size the canvas to the space the stage has (never taller than the
+      // viewport). Leave 8px for the hard drop-shadow.
       const fit = () => {
-        // Leave room for the hard drop-shadow (8px) so the map never nudges the
-        // page past one screen.
         const availW = stage.clientWidth - 8, availH = stage.clientHeight - 8;
         if (availW <= 0 || availH <= 0) return;
         let w = availW, hh = w / ar;
@@ -1358,22 +1378,103 @@
         canvas.style.width = `${Math.round(w)}px`;
         canvas.style.height = `${Math.round(hh)}px`;
       };
-      // Position pins as a % of the current view; the aspect drives the fit.
-      mapFrameView = (vb) => {
-        svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
-        ar = vb.w / vb.h;
-        pins.forEach(({ el, c }) => {
-          el.style.left = `${((mapX(c.lng) - vb.x) / vb.w) * 100}%`;
-          el.style.top = `${((mapY(c.lat) - vb.y) / vb.h) * 100}%`;
-        });
-        fit();
+      const positionPins = () => pins.forEach(({ el, c }) => {
+        el.style.left = `${((mapX(c.lng) - view.x) / view.w) * 100}%`;
+        el.style.top = `${((mapY(c.lat) - view.y) / view.h) * 100}%`;
+      });
+      const applyView = () => {
+        svg.setAttribute('viewBox', `${view.x} ${view.y} ${view.w} ${view.h}`);
+        positionPins();
       };
-      mapFrameView(cities.length ? cityFrame(cities) : MAP_VB_FULL);
-      const onResize = () => fit();
-      window.addEventListener('resize', onResize, { passive: true });
-      mapResizeOff = () => window.removeEventListener('resize', onResize);
-      // Fonts/layout settle a frame later; refit so the first paint is exact.
+      fit(); applyView();
       requestAnimationFrame(fit);
+
+      // Zoom around a focal point given as 0..1 fractions of the canvas.
+      const zoomAt = (fx, fy, factor) => {
+        const fmx = view.x + fx * view.w, fmy = view.y + fy * view.h;
+        view.w = clampN(view.w * factor, MIN_W, 1000);
+        view.h = view.w / AR;
+        view.x = fmx - fx * view.w; view.y = fmy - fy * view.h;
+        clampView(view); applyView();
+      };
+
+      // ── Grab to pan, wheel / pinch / double-click to zoom ──
+      const rectOf = () => canvas.getBoundingClientRect();
+      const pointers = new Map();
+      let panStart = null, pinchStart = null, moved = 0;
+
+      const onDown = (e) => {
+        moved = 0;                                  // reset so a following click isn't treated as a drag
+        if (e.target.closest('.map-pin') || e.target.closest('.map-zoom')) return;
+        canvas.setPointerCapture?.(e.pointerId);
+        pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (pointers.size === 1) {
+          panStart = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y };
+          canvas.classList.add('grabbing');
+        } else if (pointers.size === 2) {
+          const p = [...pointers.values()];
+          pinchStart = { d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1, w: view.w, x: view.x, y: view.y,
+            mx: (p[0].x + p[1].x) / 2, my: (p[0].y + p[1].y) / 2 };
+          panStart = null;
+        }
+      };
+      const onMove = (e) => {
+        if (!pointers.has(e.pointerId)) return;
+        pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        const rect = rectOf();
+        if (pointers.size >= 2 && pinchStart) {
+          const p = [...pointers.values()];
+          const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1;
+          const fx = (pinchStart.mx - rect.left) / rect.width, fy = (pinchStart.my - rect.top) / rect.height;
+          view.w = clampN(pinchStart.w * (pinchStart.d / d), MIN_W, 1000); view.h = view.w / AR;
+          const fmx = pinchStart.x + fx * pinchStart.w, fmy = pinchStart.y + fy * (pinchStart.w / AR);
+          view.x = fmx - fx * view.w; view.y = fmy - fy * view.h;
+          clampView(view); applyView(); moved = 20;
+          return;
+        }
+        if (panStart) {
+          const dx = e.clientX - panStart.x, dy = e.clientY - panStart.y;
+          moved = Math.max(moved, Math.abs(dx) + Math.abs(dy));
+          view.x = panStart.vx - dx * (view.w / rect.width);
+          view.y = panStart.vy - dy * (view.h / rect.height);
+          clampView(view); applyView();
+        }
+      };
+      const onUp = (e) => {
+        pointers.delete(e.pointerId);
+        if (pointers.size < 2) pinchStart = null;
+        if (pointers.size === 0) { panStart = null; canvas.classList.remove('grabbing'); }
+      };
+      const onWheel = (e) => {
+        e.preventDefault();
+        const rect = rectOf();
+        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, e.deltaY > 0 ? 1.18 : 1 / 1.18);
+      };
+      const onDbl = (e) => {
+        const rect = rectOf();
+        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, 1 / 1.8);
+      };
+      const onResize = () => fit();
+
+      canvas.addEventListener('pointerdown', onDown);
+      canvas.addEventListener('pointermove', onMove);
+      canvas.addEventListener('pointerup', onUp);
+      canvas.addEventListener('pointercancel', onUp);
+      canvas.addEventListener('wheel', onWheel, { passive: false });
+      canvas.addEventListener('dblclick', onDbl);
+      window.addEventListener('resize', onResize, { passive: true });
+      mapResizeOff = () => {
+        window.removeEventListener('resize', onResize);
+        for (const [t, fn] of [['pointerdown', onDown], ['pointermove', onMove], ['pointerup', onUp],
+          ['pointercancel', onUp], ['wheel', onWheel], ['dblclick', onDbl]]) canvas.removeEventListener(t, fn);
+      };
+
+      mapNav = {
+        world: () => { view = clampView({ x: 0, y: 0, w: 1000, h: 1000 / AR }); applyView(); },
+        cities: () => { view = frameToAR(cityFrame(cities)); applyView(); },
+        // True right after a drag/pinch, so the click that follows doesn't open a popup.
+        dragged: () => moved > 6,
+      };
     }
 
     bindMapChooser(stage, canvas, zoom, list, cities);
@@ -1384,7 +1485,7 @@
     let whole = false;
     zoom.onclick = () => {
       whole = !whole;
-      if (mapFrameView) mapFrameView(whole ? MAP_VB_FULL : cityFrame(cities));
+      if (mapNav) (whole ? mapNav.world() : mapNav.cities());
       zoom.classList.toggle('is-on', whole);
       zoom.innerHTML = `<span>${whole ? '🎯' : '🌍'}</span> ${esc(whole ? t().chooseFocus : t().chooseWhole)}`;
       closePopup();
@@ -1433,6 +1534,7 @@
     };
 
     canvas.addEventListener('click', (e) => {
+      if (mapNav && mapNav.dragged()) return;      // a pan/pinch, not a tap
       const pinEl = e.target.closest('.map-pin');
       if (!pinEl) return;
       const c = cities.find((x) => x.slug === pinEl.dataset.slug);
@@ -1448,7 +1550,7 @@
       closePopup();
       if (mapResizeOff) mapResizeOff();
       mapResizeOff = null;
-      mapFrameView = null;
+      mapNav = null;
       mapClosePopup = null;
     };
   }

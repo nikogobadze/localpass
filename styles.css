@@ -1266,7 +1266,12 @@ html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
   max-width:940px; display:flex; align-items:center; justify-content:center; }
 .map-canvas{ position:relative; border:2px solid var(--ink); border-radius:18px;
   overflow:hidden; background:var(--paper-2);
-  box-shadow:8px 8px 0 color-mix(in srgb, var(--pop) 32%, transparent); }
+  box-shadow:8px 8px 0 color-mix(in srgb, var(--pop) 32%, transparent);
+  /* Grab to pan; touch-action:none lets a finger drag/pinch the map instead of
+     scrolling the page. */
+  cursor:grab; touch-action:none; }
+.map-canvas.grabbing{ cursor:grabbing; }
+.map-pin{ cursor:pointer; }   /* a pin is a tap target, not a grab handle */
 /* Fill the JS-sized canvas exactly (its box already matches the viewBox aspect),
    so there's no height:auto rounding to poke past one screen. */
 .worldmap-svg{ display:block; width:100%; height:100%; }
