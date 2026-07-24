@@ -1257,31 +1257,31 @@ html.map-mode .nav .brand-text{ opacity:1 !important; transform:none !important;
 html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
   backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom-color:var(--ink); }
 
-/* The chooser is a single screen: a fixed-height flex column where the map
-   takes whatever the header and list leave, sized by JS so it never overflows
-   (svh, so a phone's browser chrome is accounted for). */
-.mapview{ height:100svh; min-height:430px; padding:82px 0 12px; display:flex; }
-/* Fade the chooser in without the reveal's downward slide — the slide briefly
-   pushed the tightly-fitted layout ~10px past the fold on desktop, flashing a
-   scrollbar. */
-.mapview .reveal{ transform:none; }
-/* The chooser gets a wider wrap than the rest of the site (global cap is 1260),
-   so the flanked map has more room. */
-.mapview > .wrap{ width:100%; max-width:1500px; height:100%; display:flex; flex-direction:column; min-height:0; }
-.map-head{ flex:none; text-align:center; max-width:660px; margin:0 auto; }
+/* Full-screen chooser: the map fills the whole viewport and the title + city
+   bubbles float over it. */
+.mapview{ position:relative; height:100svh; min-height:430px; width:100%; overflow:hidden; }
+.mapview .reveal{ transform:none; }   /* fade only — nothing slides here */
+.mapview > .wrap{ position:static; width:100%; max-width:none; height:100%; display:block; padding:0; }
+/* A soft top scrim so the title (and the nav) stay legible over the map. */
+.mapview::before{ content:""; position:absolute; inset:0 0 auto 0; height:200px; z-index:2; pointer-events:none;
+  background:linear-gradient(to bottom, color-mix(in srgb, var(--wash) 88%, transparent) 32%, transparent); }
+/* The title floats at the top, over the map; pointer-events off so a drag that
+   begins over it still pans the map. Centred with auto margins, not a transform
+   — .mapview .reveal resets transform, which would undo a translate here. */
+.map-head{ position:absolute; z-index:4; top:78px; left:0; right:0; margin-inline:auto;
+  width:calc(100% - 40px); max-width:640px; text-align:center; pointer-events:none; }
 .map-head .eyebrow{ margin-bottom:8px; }
 .map-title{ font-family:var(--serif); font-weight:500; letter-spacing:-.025em; line-height:1;
   font-size:clamp(1.3rem, 2.8vw, 2.15rem); margin:0 0 4px; color:var(--ink); }
 .map-lede{ color:var(--ink-soft); font-size:clamp(.82rem, .95vw, .92rem); line-height:1.45; margin:0; }
 
-/* The map, flanked by floating city bubbles. The row takes the space the header
-   leaves; a generous gap above it keeps the title from feeling squeezed. */
-.map-choose{ flex:1 1 auto; min-height:0; margin:30px auto 0; width:100%; max-width:1500px;
-  display:flex; align-items:stretch; justify-content:center; gap:20px; }
-.map-side{ list-style:none; margin:0; padding:0; flex:none; width:210px;
-  display:flex; flex-direction:column; justify-content:center; gap:14px; }
-.map-side-left{ align-items:flex-start; }
-.map-side-right{ align-items:flex-end; }
+.map-choose{ position:static; display:block; height:100%; margin:0; max-width:none; }
+/* Bubbles float over the map's left / right edges, vertically centred. */
+.map-side{ position:absolute; z-index:4; top:50%; transform:translateY(-50%);
+  list-style:none; margin:0; padding:0; width:auto;
+  display:flex; flex-direction:column; gap:14px; }
+.map-side-left{ left:22px; align-items:flex-start; }
+.map-side-right{ right:22px; align-items:flex-end; }
 .map-side li{ width:auto; }
 /* Scatter the bubbles so they float rather than sit in a straight line. The
    offset/tilt is on the <li>, so the <button> keeps its own hover transform.
@@ -1293,12 +1293,9 @@ html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
 .map-side-right li:nth-child(3n+2){ transform:translateX(-32px) rotate(-1.2deg); }
 .map-side-right li:nth-child(3n+3){ transform:translateX(-15px) rotate(.7deg); }
 .map-side li:nth-child(even){ margin-block:4px 10px; }   /* uneven vertical rhythm */
-/* The stage is the space left between the bubbles; canvas is JS-sized to it. */
-.map-stage{ position:relative; flex:1 1 auto; min-height:0;
-  display:flex; align-items:center; justify-content:center; }
-.map-canvas{ position:relative; border:2px solid var(--ink); border-radius:18px;
-  overflow:hidden; background:var(--paper-2);
-  box-shadow:8px 8px 0 color-mix(in srgb, var(--pop) 32%, transparent);
+/* The map fills the whole viewport. */
+.map-stage{ position:absolute; inset:0; }
+.map-canvas{ position:absolute; inset:0; width:100%; height:100%; overflow:hidden; background:var(--paper-2);
   /* Grab to pan; touch-action:none lets a finger drag/pinch the map instead of
      scrolling the page. */
   cursor:grab; touch-action:none; }
@@ -1325,12 +1322,17 @@ html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
 .map-pin:hover .pin-dot,
 .map-pin:focus-visible .pin-dot{ transform:scale(1.28); }
 
-.map-zoom{ position:absolute; top:12px; right:12px; z-index:3; cursor:pointer;
-  display:inline-flex; align-items:center; gap:6px;
+/* Floating glass control at the bottom-centre (clear of the nav up top). */
+.map-zoom{ position:absolute; bottom:22px; left:50%; transform:translateX(-50%); top:auto; right:auto; z-index:5;
+  cursor:pointer; display:inline-flex; align-items:center; gap:6px;
   font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
-  background:var(--card); color:var(--ink); border:2px solid var(--ink); border-radius:100px;
-  padding:8px 13px; box-shadow:2px 2px 0 var(--ink); transition:transform .15s, box-shadow .15s; }
-.map-zoom:hover{ transform:translate(-1px,-1px); box-shadow:3px 3px 0 var(--accent); }
+  background:color-mix(in srgb, var(--card) 80%, transparent); color:var(--ink);
+  border:1px solid color-mix(in srgb, var(--ink) 18%, transparent); border-radius:100px;
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  padding:9px 16px; box-shadow:0 5px 16px -6px color-mix(in srgb, var(--ink) 55%, transparent);
+  transition:transform .18s var(--spring), box-shadow .2s, background .25s; }
+.map-zoom:hover{ transform:translateX(-50%) translateY(-1px); background:color-mix(in srgb, var(--card) 95%, transparent);
+  box-shadow:0 9px 22px -7px color-mix(in srgb, var(--ink) 62%, transparent); }
 .map-zoom span{ font-size:13px; }
 
 .map-popup{ position:absolute; z-index:5; width:min(262px, 74vw);
@@ -1364,20 +1366,20 @@ html.map-mode .nav{ background:color-mix(in srgb, var(--wash) 90%, transparent);
 
 /* Narrow screens can't flank the map. Stack the bubbles into two compact rows
    above it (never below), and let the map fill the width beneath. */
-@media (max-width:999px){
-  .map-choose{ flex-direction:column; justify-content:center; gap:14px; margin-top:18px; }
-  .map-side{ width:auto; flex-direction:row; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; }
-  /* The map fills the width and sits right under the bubbles (no fixed-height
-     stage to centre inside, so no big gap above it). */
-  .map-side-left{ order:1; } .map-side-right{ order:2; } .map-stage{ order:3; flex:0 1 auto; }
+/* Phones: side columns don't fit over a narrow map, so float the bubbles as
+   centred rows across the bottom instead, and lift the zoom button above them. */
+@media (max-width:720px){
+  .map-side{ top:auto; transform:none; left:12px; right:12px; width:auto;
+    flex-direction:row; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; }
+  .map-side-left{ bottom:18px; }
+  .map-side-right{ bottom:64px; }        /* stack the two rows */
   .map-side button{ padding:7px 15px 7px 10px; }
   .map-side b{ font-size:.96rem; }
-  /* No scatter in the stacked rows — keep them tidy. */
   .map-side li{ transform:none !important; margin-block:0 !important; }
+  .map-zoom{ bottom:116px; }             /* above the two bubble rows */
 }
 
 @media (max-width:560px){
-  .mapview{ padding:88px 0 44px; }
   .pin-dot{ width:15px; height:15px; }
   /* Labels crowd each other on a narrow map — the dots stay tappable, the
      popup names the city on tap, and the list below names them all. */

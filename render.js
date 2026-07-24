@@ -1341,7 +1341,6 @@
     }
     const svg = canvas.querySelector('svg');
     const pins = [];
-    let ar = 1000 / 386;
     if (svg) {
       cities.forEach((c) => {
         const pin = h('button', 'map-pin');
@@ -1355,11 +1354,10 @@
       });
       canvas.append(zoom);
 
-      // The display keeps a single aspect ratio (the initial city frame), so
-      // pan and zoom only ever translate/scale the view — no re-fitting, and
-      // the % pin mapping stays exact.
-      const AR = (() => { const f = cities.length ? cityFrame(cities) : MAP_VB_FULL; return f.w / f.h; })();
-      ar = AR;
+      // The map fills the viewport, so the view's aspect ratio IS the viewport's
+      // (no letterbox, no re-sizing the canvas). Pan/zoom translate & scale the
+      // view; the aspect only changes on resize, handled by syncAR.
+      let AR = 1000 / 386;
       const MIN_W = 40;                         // closest zoom-in (~14° of longitude — a country)
       const clampN = (v, a, z) => Math.max(a, Math.min(v, z));
       const clampView = (v) => {
@@ -1375,26 +1373,7 @@
         if (w / h > AR) h = w / AR; else w = h * AR;
         return clampView({ x: cx - w / 2, y: cy - h / 2, w, h });
       };
-      let view = frameToAR(cities.length ? cityFrame(cities) : MAP_VB_FULL);
-
-      // Size the canvas to the space the stage has (never taller than the
-      // viewport). Leave 8px for the hard drop-shadow.
-      const fit = () => {
-        const availW = stage.clientWidth - 8, availH = stage.clientHeight - 8;
-        if (availW <= 0) return;
-        // Stacked (mobile) layout: the bubbles sit above, so just fill the width
-        // — the stage isn't a fixed-height box to fit into.
-        if (window.matchMedia('(max-width:999px)').matches) {
-          canvas.style.width = `${Math.round(availW)}px`;
-          canvas.style.height = `${Math.round(availW / ar)}px`;
-          return;
-        }
-        if (availH <= 0) return;
-        let w = availW, hh = w / ar;
-        if (hh > availH) { hh = availH; w = hh * ar; }
-        canvas.style.width = `${Math.round(w)}px`;
-        canvas.style.height = `${Math.round(hh)}px`;
-      };
+      let view = { x: 0, y: 0, w: 1000, h: 1000 / AR };
       const positionPins = () => pins.forEach(({ el, c }) => {
         el.style.left = `${((mapX(c.lng) - view.x) / view.w) * 100}%`;
         el.style.top = `${((mapY(c.lat) - view.y) / view.h) * 100}%`;
@@ -1403,8 +1382,23 @@
         svg.setAttribute('viewBox', `${view.x} ${view.y} ${view.w} ${view.h}`);
         positionPins();
       };
-      fit(); applyView();
-      requestAnimationFrame(fit);
+      // Sync the view aspect to the canvas (which fills the screen). `reframe`
+      // re-centres on the cities; otherwise the current view is kept, its height
+      // adjusted to the new aspect.
+      const syncAR = (reframe) => {
+        const r = canvas.getBoundingClientRect();
+        if (!r.width || !r.height) return;
+        AR = r.width / r.height;
+        if (reframe) view = frameToAR(cities.length ? cityFrame(cities) : MAP_VB_FULL);
+        else {
+          const cx = view.x + view.w / 2, cy = view.y + view.h / 2;
+          view.h = view.w / AR; view.x = cx - view.w / 2; view.y = cy - view.h / 2;
+          clampView(view);
+        }
+        applyView();
+      };
+      syncAR(true);
+      requestAnimationFrame(() => syncAR(true));   // after fonts/layout settle
 
       // Zoom around a focal point given as 0..1 fractions of the canvas.
       const zoomAt = (fx, fy, factor) => {
@@ -1476,7 +1470,7 @@
         const rect = rectOf();
         zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, 1 / 1.5);
       };
-      const onResize = () => fit();
+      const onResize = () => syncAR(false);
 
       canvas.addEventListener('pointerdown', onDown);
       canvas.addEventListener('pointermove', onMove);
