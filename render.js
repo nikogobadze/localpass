@@ -1416,9 +1416,8 @@
       };
 
       // ── Grab to pan, wheel / pinch / double-click to zoom ──
-      // 1:1 grab — the spot under the cursor stays under the cursor, which reads
-      // as the natural, comfortable speed.
-      const PAN_SENS = 1;
+      // Amplified well past 1:1 — a small drag flings the map a long way.
+      const PAN_SENS = 3;
       const rectOf = () => canvas.getBoundingClientRect();
       const pointers = new Map();
       let panStart = null, pinchStart = null, moved = 0;
@@ -1468,10 +1467,10 @@
       const onWheel = (e) => {
         e.preventDefault();
         const rect = rectOf();
-        // Proportional zoom (~13% per notch), clamped so a big trackpad flick
-        // doesn't jump.
+        // Fast proportional zoom (~30% per notch), clamped so a big trackpad
+        // flick doesn't jump the whole way.
         const dy = Math.max(-90, Math.min(90, e.deltaY));
-        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, Math.pow(1.00135, dy));
+        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, Math.pow(1.003, dy));
       };
       const onDbl = (e) => {
         const rect = rectOf();
