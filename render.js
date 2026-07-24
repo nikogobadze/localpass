@@ -1382,9 +1382,27 @@
         svg.setAttribute('viewBox', `${view.x} ${view.y} ${view.w} ${view.h}`);
         positionPins();
       };
+      // Smooth motion: interactions set `target`; the view eases toward it each
+      // frame, so pan/zoom glide and settle instead of snapping.
+      let target = { x: view.x, y: view.y, w: view.w, h: view.h };
+      let raf = 0;
+      const EASE = 0.24;
+      const step = () => {
+        const dx = target.x - view.x, dy = target.y - view.y, dw = target.w - view.w;
+        if (Math.abs(dx) < 0.04 && Math.abs(dy) < 0.04 && Math.abs(dw) < 0.04) {
+          view.x = target.x; view.y = target.y; view.w = target.w; view.h = target.h;
+          applyView(); raf = 0; return;
+        }
+        view.x += dx * EASE; view.y += dy * EASE; view.w += dw * EASE; view.h = view.w / AR;
+        applyView();
+        raf = requestAnimationFrame(step);
+      };
+      const kick = () => { if (!raf) raf = requestAnimationFrame(step); };
+      const setTarget = (v) => { target = v; kick(); };
+
       // Sync the view aspect to the canvas (which fills the screen). `reframe`
       // re-centres on the cities; otherwise the current view is kept, its height
-      // adjusted to the new aspect.
+      // adjusted to the new aspect. Resize is instant (no easing).
       const syncAR = (reframe) => {
         const r = canvas.getBoundingClientRect();
         if (!r.width || !r.height) return;
@@ -1395,23 +1413,26 @@
           view.h = view.w / AR; view.x = cx - view.w / 2; view.y = cy - view.h / 2;
           clampView(view);
         }
+        if (raf) { cancelAnimationFrame(raf); raf = 0; }
+        target = { x: view.x, y: view.y, w: view.w, h: view.h };
         applyView();
       };
       syncAR(true);
       requestAnimationFrame(() => syncAR(true));   // after fonts/layout settle
 
-      // Zoom around a focal point given as 0..1 fractions of the canvas.
+      // Zoom around a focal point given as 0..1 fractions of the canvas. Works
+      // off `target` so successive wheel steps accumulate and glide.
       const zoomAt = (fx, fy, factor) => {
-        const fmx = view.x + fx * view.w, fmy = view.y + fy * view.h;
-        view.w = clampN(view.w * factor, MIN_W, 1000);
-        view.h = view.w / AR;
-        view.x = fmx - fx * view.w; view.y = fmy - fy * view.h;
-        clampView(view); applyView();
+        const fmx = target.x + fx * target.w, fmy = target.y + fy * target.h;
+        target.w = clampN(target.w * factor, MIN_W, 1000);
+        target.h = target.w / AR;
+        target.x = fmx - fx * target.w; target.y = fmy - fy * target.h;
+        clampView(target); kick();
       };
 
       // ── Grab to pan, wheel / pinch / double-click to zoom ──
-      // Amplified well past 1:1 — a small drag flings the map a long way.
-      const PAN_SENS = 3;
+      // A touch past 1:1 so a small drag covers ground, without flinging.
+      const PAN_SENS = 2;
       const rectOf = () => canvas.getBoundingClientRect();
       const pointers = new Map();
       let panStart = null, pinchStart = null, moved = 0;
@@ -1422,11 +1443,11 @@
         canvas.setPointerCapture?.(e.pointerId);
         pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
         if (pointers.size === 1) {
-          panStart = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y };
+          panStart = { x: e.clientX, y: e.clientY, vx: target.x, vy: target.y };
           canvas.classList.add('grabbing');
         } else if (pointers.size === 2) {
           const p = [...pointers.values()];
-          pinchStart = { d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1, w: view.w, x: view.x, y: view.y,
+          pinchStart = { d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1, w: target.w, x: target.x, y: target.y,
             mx: (p[0].x + p[1].x) / 2, my: (p[0].y + p[1].y) / 2 };
           panStart = null;
         }
@@ -1439,18 +1460,18 @@
           const p = [...pointers.values()];
           const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1;
           const fx = (pinchStart.mx - rect.left) / rect.width, fy = (pinchStart.my - rect.top) / rect.height;
-          view.w = clampN(pinchStart.w * (pinchStart.d / d), MIN_W, 1000); view.h = view.w / AR;
+          target.w = clampN(pinchStart.w * (pinchStart.d / d), MIN_W, 1000); target.h = target.w / AR;
           const fmx = pinchStart.x + fx * pinchStart.w, fmy = pinchStart.y + fy * (pinchStart.w / AR);
-          view.x = fmx - fx * view.w; view.y = fmy - fy * view.h;
-          clampView(view); applyView(); moved = 20;
+          target.x = fmx - fx * target.w; target.y = fmy - fy * target.h;
+          clampView(target); kick(); moved = 20;
           return;
         }
         if (panStart) {
           const dx = e.clientX - panStart.x, dy = e.clientY - panStart.y;
           moved = Math.max(moved, Math.abs(dx) + Math.abs(dy));
-          view.x = panStart.vx - dx * (view.w / rect.width) * PAN_SENS;
-          view.y = panStart.vy - dy * (view.h / rect.height) * PAN_SENS;
-          clampView(view); applyView();
+          target.x = panStart.vx - dx * (target.w / rect.width) * PAN_SENS;
+          target.y = panStart.vy - dy * (target.h / rect.height) * PAN_SENS;
+          clampView(target); kick();
         }
       };
       const onUp = (e) => {
@@ -1461,10 +1482,10 @@
       const onWheel = (e) => {
         e.preventDefault();
         const rect = rectOf();
-        // Fast proportional zoom (~30% per notch), clamped so a big trackpad
-        // flick doesn't jump the whole way.
+        // Proportional zoom (~22% per notch), clamped so a big trackpad flick
+        // doesn't jump the whole way. The easing loop smooths the step.
         const dy = Math.max(-90, Math.min(90, e.deltaY));
-        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, Math.pow(1.003, dy));
+        zoomAt((e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height, Math.pow(1.0022, dy));
       };
       const onDbl = (e) => {
         const rect = rectOf();
@@ -1483,11 +1504,12 @@
         window.removeEventListener('resize', onResize);
         for (const [t, fn] of [['pointerdown', onDown], ['pointermove', onMove], ['pointerup', onUp],
           ['pointercancel', onUp], ['wheel', onWheel], ['dblclick', onDbl]]) canvas.removeEventListener(t, fn);
+        if (raf) { cancelAnimationFrame(raf); raf = 0; }   // stop the easing loop
       };
 
       mapNav = {
-        world: () => { view = clampView({ x: 0, y: 0, w: 1000, h: 1000 / AR }); applyView(); },
-        cities: () => { view = frameToAR(cityFrame(cities)); applyView(); },
+        world: () => setTarget(clampView({ x: 0, y: 0, w: 1000, h: 1000 / AR })),
+        cities: () => setTarget(frameToAR(cityFrame(cities))),
         // True right after a drag/pinch, so the click that follows doesn't open a popup.
         dragged: () => moved > 6,
       };
