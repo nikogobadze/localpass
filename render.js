@@ -1359,12 +1359,15 @@
       // view; the aspect only changes on resize, handled by syncAR.
       let AR = 1000 / 386;
       const MIN_W = 40;                         // closest zoom-in (~14° of longitude — a country)
+      // When the whole map is visible vertically, nudge it down: the landmass is
+      // north-heavy, so a mathematically-centred crop reads as sitting too high.
+      const Y_BIAS = 26;
       const clampN = (v, a, z) => Math.max(a, Math.min(v, z));
       const clampView = (v) => {
         v.w = clampN(v.w, MIN_W, 1000);         // never wider than the whole world
         v.h = v.w / AR;
         v.x = v.w >= 1000 ? (1000 - v.w) / 2 : clampN(v.x, 0, 1000 - v.w);
-        v.y = v.h >= 386 ? (386 - v.h) / 2 : clampN(v.y, 0, 386 - v.h);
+        v.y = v.h >= 386 ? (386 - v.h) / 2 - Y_BIAS : clampN(v.y, 0, 386 - v.h);
         return v;
       };
       // Expand a lon/lat window to the display aspect (centred), then clamp.
